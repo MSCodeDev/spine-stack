@@ -52,7 +52,7 @@ useFocusZone({
   <Block class="@container">
     <div
       v-if="loading"
-      class="grid gap-2.5 sm:gap-4 grid-cols-2 @md:grid-cols-3 @xl:grid-cols-5 @4xl:grid-cols-6"
+      class="grid gap-2.5 sm:gap-4 grid-cols-2 @md:grid-cols-3 @xl:grid-cols-5"
     >
       <BookCard
         v-for="b in 30"
@@ -64,7 +64,7 @@ useFocusZone({
     <ul
       v-else-if="books?.data?.length"
       ref="container"
-      class="grid gap-2.5 sm:gap-4 grid-cols-2 @md:grid-cols-3 @xl:grid-cols-5 @4xl:grid-cols-6"
+      class="grid gap-2.5 sm:gap-4 grid-cols-2 @md:grid-cols-3 @xl:grid-cols-5"
     >
       <li v-for="book in books?.data" :key="book.id">
         <BookCard
@@ -111,7 +111,7 @@ useFocusZone({
           id="items-per-page"
           size="small"
           :model-value="size"
-          :options="[10, 20, 30, 40, 50]"
+          :options="[20, 50, 100]"
           :option-text="(v) => $t('pagination.show-n-items', v)"
           @update:model-value="$emit('update:size', $event)"
         />

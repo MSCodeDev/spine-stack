@@ -17,7 +17,7 @@ useHead({ title: () => t('entities.books') })
 
 const size = useRouteQuery('size', '20', {
   mode: 'push',
-  transform: v => safeNumber(v, 20, { min: 10 }),
+  transform: v => safeNumber(v, 20, { min: 20 }),
 })
 const page = useRouteQuery('page', '0', {
   mode: 'push',
