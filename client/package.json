@@ -16,6 +16,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
+    "@ericblade/quagga2": "^1.12.1",
     "@github/markdown-toolbar-element": "2.1.1",
     "@headlessui/vue": "1.7.14",
     "@heroicons/vue": "2.0.18",

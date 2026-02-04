@@ -544,6 +544,16 @@ importer:
   imported-with-failure: There was an error while importing the book
   collection-chooser-header: Choose a collection to import into
   collection-chooser-description: Additional entities will be created automatically
+  scan-barcode: Scan barcode
+
+barcode-scanner:
+  title: Scan ISBN Barcode
+  instructions: Point your camera at the barcode on the back of the book
+  not-supported: Barcode scanning not supported
+  not-supported-description: Your browser does not support barcode detection. Try using Chrome or Edge on a mobile device.
+  error: Camera access error
+  retry: Try again
+  initializing: Starting camera...
 
 books:
   page-count: '{n} page | {n} pages'

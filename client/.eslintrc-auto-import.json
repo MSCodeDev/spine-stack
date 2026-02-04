@@ -446,6 +446,11 @@
     "onWatcherCleanup": true,
     "useId": true,
     "useModel": true,
-    "useTemplateRef": true
+    "useTemplateRef": true,
+    "UseBarcodeSccannerOptions": true,
+    "UseBarcodeSccannerReturn": true,
+    "useBarcodeScanner": true,
+    "UseBarcodeScannerOptions": true,
+    "UseBarcodeScannerReturn": true
   }
 }

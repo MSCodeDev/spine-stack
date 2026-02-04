@@ -15,6 +15,7 @@ const isbn = ref('')
 const isbnDebounced = refDebounced(isbn, 1_000)
 const sources = ref<ImporterSources[] | undefined>()
 const bookToImport = ref<ExternalBookEntity | undefined>()
+const showBarcodeScanner = ref(false)
 
 const rules = {
   isbn: {
@@ -71,6 +72,11 @@ function handleImportBook(book: ImportOneBook) {
     },
   })
 }
+
+function handleBarcodeDetected(barcode: string) {
+  isbn.value = barcode
+  showBarcodeScanner.value = false
+}
 </script>
 
 <route lang="yaml">
@@ -118,10 +124,12 @@ meta:
 
         <Button
           kind="ghost-alt"
-          :title="$t('common-actions.filter')"
+          :title="$t('importer.scan-barcode')"
+          :disabled="isFetching || isImporting"
+          @click="showBarcodeScanner = true"
         >
-          <span class="sr-only">{{ $t('common-actions.filter') }}</span>
-          <FunnelIcon class="w-5 h-5" />
+          <span class="sr-only">{{ $t('importer.scan-barcode') }}</span>
+          <BarcodeIcon class="w-5 h-5" />
         </Button>
       </div>
 
@@ -149,6 +157,12 @@ meta:
       :external-book="bookToImport"
       @close="showCollectionChooserDialog = false"
       @submit="handleImportBook"
+    />
+
+    <BarcodeScannerDialog
+      :is-open="showBarcodeScanner"
+      @close="showBarcodeScanner = false"
+      @detected="handleBarcodeDetected"
     />
   </div>
 </template>

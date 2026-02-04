@@ -131,6 +131,7 @@ declare global {
   const useAsyncState: typeof import('@vueuse/core')['useAsyncState']
   const useAttrs: typeof import('vue')['useAttrs']
   const useAverage: typeof import('@vueuse/math')['useAverage']
+  const useBarcodeScanner: typeof import('./composables/useBarcodeScanner')['useBarcodeScanner']
   const useBase64: typeof import('@vueuse/core')['useBase64']
   const useBattery: typeof import('@vueuse/core')['useBattery']
   const useBeforeUnload: typeof import('./composables/useBeforeUnload')['default']
@@ -447,6 +448,9 @@ declare global {
   export type { UseAnchoredPositionOptions } from './composables/useAnchoredPosition'
   import('./composables/useAnchoredPosition')
   // @ts-ignore
+  export type { UseBarcodeScannerOptions, UseBarcodeScannerReturn } from './composables/useBarcodeScanner'
+  import('./composables/useBarcodeScanner')
+  // @ts-ignore
   export type { UseBeforeUnloadOptions } from './composables/useBeforeUnload'
   import('./composables/useBeforeUnload')
   // @ts-ignore
@@ -590,6 +594,7 @@ declare module 'vue' {
     readonly useAsyncState: UnwrapRef<typeof import('@vueuse/core')['useAsyncState']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useAverage: UnwrapRef<typeof import('@vueuse/math')['useAverage']>
+    readonly useBarcodeScanner: UnwrapRef<typeof import('./composables/useBarcodeScanner')['useBarcodeScanner']>
     readonly useBase64: UnwrapRef<typeof import('@vueuse/core')['useBase64']>
     readonly useBattery: UnwrapRef<typeof import('@vueuse/core')['useBattery']>
     readonly useBeforeUnload: UnwrapRef<typeof import('./composables/useBeforeUnload')['default']>

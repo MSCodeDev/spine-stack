@@ -17,6 +17,8 @@ declare module 'vue' {
     AsideMenu: typeof import('./components/AsideMenu.vue')['default']
     Avatar: typeof import('./components/Avatar.vue')['default']
     Badge: typeof import('./components/Badge.vue')['default']
+    BarcodeIcon: typeof import('./components/icons/BarcodeIcon.vue')['default']
+    BarcodeScannerDialog: typeof import('./components/importer/BarcodeScannerDialog.vue')['default']
     BasicCheckbox: typeof import('./components/form/BasicCheckbox.vue')['default']
     BasicListbox: typeof import('./components/form/BasicListbox.vue')['default']
     BasicSelect: typeof import('./components/form/BasicSelect.vue')['default']
