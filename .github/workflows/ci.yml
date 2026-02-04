@@ -6,12 +6,12 @@ on:
       - 'client/locales/*'
       - '**.md'
       - 'docs/**'
-  push:
-    branches-ignore:
-      - 'dependabot/**'
-    paths-ignore:
-      - 'client/locales/*'
-      - 'docs/**'
+  # push:
+  #   branches-ignore:
+  #     - 'dependabot/**'
+  #   paths-ignore:
+  #     - 'client/locales/*'
+  #     - 'docs/**'
   workflow_dispatch:
 
 env:
