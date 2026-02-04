@@ -59,7 +59,7 @@ onMounted(() => {
         v-if="showImage && kind === 'normal'"
         :src="bannerUrl"
         :alt="alt ?? ''"
-        class="w-full h-full scale-105 object-cover blur"
+        class="w-full h-full object-cover blur-[60px]"
       >
       <div
         v-else-if="showImage && kind === 'repeated'"
@@ -72,17 +72,6 @@ onMounted(() => {
         ]"
         :style="{ '--background': `url('${bannerUrl}')` }"
       />
-      <div v-else class="relative w-full h-full">
-        <img
-          src="@/assets/library-unsplash.jpg"
-          alt=""
-          class="w-full h-full scale-105 object-cover filter blur"
-        >
-        <div
-          aria-hidden="true"
-          class="absolute inset-0 opacity-70 bg-gradient-to-br from-primary-900/80 to-primary-500/80"
-        />
-      </div>
     </FadeTransition>
 
     <div
@@ -92,6 +81,11 @@ onMounted(() => {
         'via-white/70 sm:via-gray-900/60 dark:via-gray-900/60 sm:dark:via-gray-900/60',
         'to-white sm:to-gray-900/20 dark:to-gray-950 sm:dark:to-gray-950/20',
       ]"
+    />
+
+    <div
+      aria-hidden="true"
+      class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white dark:from-gray-950 to-transparent"
     />
   </div>
 </template>
