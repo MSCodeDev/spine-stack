@@ -6,9 +6,9 @@ const { data: metrics } = useMetricsQuery({
     'disk.free',
     'disk.total',
     'process.uptime',
-    'tankobon.books',
-    'tankobon.libraries',
-    'tankobon.users',
+    'spinestack.books',
+    'spinestack.libraries',
+    'spinestack.users',
   ],
   onError: async (error) => {
     await notificator.failure({

@@ -3,7 +3,7 @@ import useVuelidate from '@vuelidate/core'
 import { helpers, required } from '@vuelidate/validators'
 
 import { BookOpenIcon } from '@heroicons/vue/24/solid'
-import type { LibraryCreation } from '@/types/tankobon-library'
+import type { LibraryCreation } from '@/types/spinestack-library'
 
 const userStore = useUserStore()
 const userId = computed(() => userStore.me?.id)

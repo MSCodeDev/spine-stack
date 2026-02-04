@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { SeriesCreation, SeriesLinks } from '@/types/tankobon-series'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { SeriesCreation, SeriesLinks } from '@/types/spinestack-series'
 import type { Cover } from '@/components/series/SeriesCoverForm.vue'
 import SeriesCoverForm from '@/components/series/SeriesCoverForm.vue'
 import SeriesMetadataForm from '@/components/series/SeriesMetadataForm.vue'
 import SeriesAlternativeNamesForm from '@/components/series/SeriesAlternativeNamesForm.vue'
-import type { FormAlternativeName } from '@/types/tankobon-alternative-name'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { FormAlternativeName } from '@/types/spinestack-alternative-name'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
 
 const { t } = useI18n()
@@ -129,7 +129,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('series.created-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

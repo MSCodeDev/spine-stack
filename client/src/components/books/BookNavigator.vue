@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
-import type { BookAttributes } from '@/types/tankobon-book'
-import type { Relationship } from '@/types/tankobon-entity'
+import type { BookAttributes } from '@/types/spinestack-book'
+import type { Relationship } from '@/types/spinestack-entity'
 
 export interface BookNavigatorProps {
   loading?: boolean

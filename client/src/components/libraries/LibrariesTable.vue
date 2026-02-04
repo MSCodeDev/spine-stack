@@ -6,10 +6,10 @@ import { BuildingLibraryIcon } from '@heroicons/vue/24/outline'
 import Badge from '@/components/Badge.vue'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { LibraryEntity, LibrarySort } from '@/types/tankobon-library'
+import type { LibraryEntity, LibrarySort } from '@/types/spinestack-library'
 import { getRelationship } from '@/utils/api'
-import type { PaginatedResponse } from '@/types/tankobon-response'
-import type { Sort } from '@/types/tankobon-api'
+import type { PaginatedResponse } from '@/types/spinestack-response'
+import type { Sort } from '@/types/spinestack-api'
 
 export interface LibrariesTableProps {
   libraries?: PaginatedResponse<LibraryEntity>

@@ -1,6 +1,6 @@
 # Introduction
 
-Tankobon is a free and open source physical book collection manager.
+SpineStack is a free and open source physical book collection manager.
 
 :::warning
 This documentation is under active development. Everything you read
@@ -11,12 +11,12 @@ or TODO comments. Please keep that in mind while using this guide.
 
 ## How it works
 
-1. Install and run Tankobon on a computer.
+1. Install and run SpineStack on a computer.
 2. Add your books manually or by ISBN.
 
 ## Server compatibility
 
-Tankobon can run on any system that can run Java or Docker:
+SpineStack can run on any system that can run Java or Docker:
 
 - Windows
 - macOS

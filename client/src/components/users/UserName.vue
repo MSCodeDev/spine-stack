@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { UserEntity } from '@/types/tankobon-user'
+import type { UserEntity } from '@/types/spinestack-user'
 
 export interface UserNameProps {
   user?: UserEntity | null

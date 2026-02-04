@@ -9,11 +9,11 @@ import Avatar from '../Avatar.vue'
 import Flag from '../Flag.vue'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { Sort } from '@/types/tankobon-api'
+import type { Sort } from '@/types/spinestack-api'
 import { getRelationship } from '@/utils/api'
 import { createImageUrl } from '@/modules/api'
-import type { PaginatedResponse } from '@/types/tankobon-response'
-import type { PersonEntity, PersonSort } from '@/types/tankobon-person'
+import type { PaginatedResponse } from '@/types/spinestack-response'
+import type { PersonEntity, PersonSort } from '@/types/spinestack-person'
 
 export interface PeopleTableProps {
   people?: PaginatedResponse<PersonEntity>

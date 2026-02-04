@@ -1,0 +1,44 @@
+package io.github.mscodedev.spinestack.interfaces.api.rest.dto
+
+import io.github.mscodedev.spinestack.domain.model.Preference
+import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.NotBlank
+
+data class PreferenceEntityDto(
+  @get:Schema(type = "string", format = "")
+  override val id: String,
+  override val attributes: PreferenceAttributesDto,
+  override var relationships: List<RelationDto<ReferenceExpansionPreference>>? = null,
+) : EntityDto<ReferenceExpansionPreference> {
+  @Schema(type = "string", allowableValues = ["PREFERENCE"])
+  override val type = EntityType.PREFERENCE
+}
+
+data class PreferenceAttributesDto(
+  val key: String,
+  val value: String,
+) : EntityAttributesDto()
+
+enum class ReferenceExpansionPreference : ReferenceExpansionEnum {
+  USER,
+}
+
+fun Preference.toDto() = PreferenceEntityDto(
+  id = key,
+  attributes = toAttributesDto(),
+  relationships = listOf(
+    RelationDto(id = userId, type = ReferenceExpansionPreference.USER),
+  ),
+)
+
+fun Preference.toAttributesDto() = PreferenceAttributesDto(
+  key = key,
+  value = value,
+)
+
+data class PreferenceCreationUpdateDto(
+  @get:NotBlank
+  val key: String,
+  @get:NotBlank
+  val value: String,
+)

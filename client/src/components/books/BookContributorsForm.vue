@@ -3,8 +3,8 @@ import Draggable from 'vuedraggable'
 import { PlusIcon } from '@heroicons/vue/20/solid'
 import { helpers } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
-import type { BookContributorCreateUpdate } from '@/types/tankobon-book'
-import type { PersonEntity } from '@/types/tankobon-person'
+import type { BookContributorCreateUpdate } from '@/types/spinestack-book'
+import type { PersonEntity } from '@/types/spinestack-person'
 import { createEmptyPaginatedResponse, getRelationship } from '@/utils/api'
 
 export interface BookContributorsFormProps {

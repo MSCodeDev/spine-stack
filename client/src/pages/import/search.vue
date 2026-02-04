@@ -3,8 +3,8 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import useVuelidate from '@vuelidate/core'
 import { helpers } from '@vuelidate/validators'
 import { FunnelIcon } from '@heroicons/vue/20/solid'
-import type { ExternalBookEntity } from '@/types/tankobon-external-book'
-import type { ImportOneBook, ImporterSources } from '@/types/tankobon-importer-source'
+import type { ExternalBookEntity } from '@/types/spinestack-external-book'
+import type { ImportOneBook, ImporterSources } from '@/types/spinestack-importer-source'
 import { isbn as isValidIsbn } from '@/utils/validation'
 
 const { t } = useI18n()

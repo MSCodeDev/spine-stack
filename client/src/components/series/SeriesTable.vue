@@ -6,15 +6,15 @@ import { MagnifyingGlassIcon, Square2StackIcon } from '@heroicons/vue/24/outline
 import { Square2StackIcon as Square2StackSolidIcon } from '@heroicons/vue/24/solid'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { SeriesEntity, SeriesSort } from '@/types/tankobon-series'
-import type { Sort } from '@/types/tankobon-api'
+import type { SeriesEntity, SeriesSort } from '@/types/spinestack-series'
+import type { Sort } from '@/types/spinestack-api'
 import { getRelationship } from '@/utils/api'
 import Avatar from '@/components/Avatar.vue'
 import { createImageUrl } from '@/modules/api'
 import { getLanguageName } from '@/utils/language'
 import Flag from '@/components/Flag.vue'
-import type { PaginatedResponse } from '@/types/tankobon-response'
-import { getOriginalName } from '@/services/tankobon-series'
+import type { PaginatedResponse } from '@/types/spinestack-response'
+import { getOriginalName } from '@/services/spinestack-series'
 
 export interface SeriesTableProps {
   series?: PaginatedResponse<SeriesEntity>

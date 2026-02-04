@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import { MagnifyingGlassIcon as MagnifyingGlassIconOutline, TagIcon } from '@heroicons/vue/24/outline'
-import type { TagCreation } from '@/types/tankobon-tag'
+import type { TagCreation } from '@/types/spinestack-tag'
 
 const { t } = useI18n()
 const router = useRouter()

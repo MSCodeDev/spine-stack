@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT_DIR"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
+usage() {
+  echo "Usage: $0 <command>"
+  echo ""
+  echo "Commands:"
+  echo "  init            Initialize dependencies (Java, Node.js, pnpm, and install client packages)"
+  echo "  start:backend   Start only the backend server"
+  echo "  start:frontend  Start only the frontend dev server"
+  echo "  start           Start both backend and frontend dev servers"
+  echo ""
+  exit 1
+}
+
+init() {
+  echo "Checking required commands..."
+  command -v java >/dev/null || { echo "Java (JDK 17) is required. Please install it."; exit 1; }
+  command -v node >/dev/null || { echo "Node.js is required. Please install it."; exit 1; }
+
+  if ! command -v pnpm >/dev/null; then
+    if command -v corepack >/dev/null; then
+      echo "Enabling corepack and activating pnpm..."
+      corepack enable
+      corepack prepare pnpm@latest --activate
+    else
+      echo "pnpm not found. Install pnpm: npm i -g pnpm or enable corepack." >&2
+      exit 1
+    fi
+  fi
+
+  echo "Installing client dependencies with pnpm..."
+  pnpm --dir client install
+
+  echo -e "${GREEN}Done. You can run './run start' to start the development servers.${NC}"
+}
+
+start_backend() {
+  echo "Starting backend server..."
+
+  # Ensure JAVA_HOME is valid. If not set or invalid, try to detect from `java`.
+  if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}" ]; then
+    detected_java_home=$(java -XshowSettings:properties -version 2>&1 | sed -n 's/^[ \t]*java.home = //p' || true)
+    if [ -n "$detected_java_home" ] && [ -d "$detected_java_home" ]; then
+      export JAVA_HOME="$detected_java_home"
+      echo "Detected and set JAVA_HOME=$JAVA_HOME"
+    else
+      echo "WARNING: JAVA_HOME is not set or invalid. Gradle may fail to start the backend."
+    fi
+  fi
+
+  # Use --no-daemon to avoid gradle daemon locking issues
+  ./gradlew --no-daemon bootRun --args='--spring.profiles.active=dev,localdb'
+}
+
+start_frontend() {
+  echo "Starting frontend dev server..."
+  pnpm --dir client dev
+}
+
+start() {
+  echo "Starting backend and client dev servers..."
+
+  # Ensure JAVA_HOME is valid. If not set or invalid, try to detect from `java`.
+  if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}" ]; then
+    detected_java_home=$(java -XshowSettings:properties -version 2>&1 | sed -n 's/^[ \t]*java.home = //p' || true)
+    if [ -n "$detected_java_home" ] && [ -d "$detected_java_home" ]; then
+      export JAVA_HOME="$detected_java_home"
+      echo "Detected and set JAVA_HOME=$JAVA_HOME"
+    else
+      echo "WARNING: JAVA_HOME is not set or invalid. Gradle may fail to start the backend."
+    fi
+  fi
+
+  # Start backend
+  # Use --no-daemon to avoid gradle daemon locking issues
+  ./gradlew --no-daemon bootRun --args='--spring.profiles.active=dev,localdb' &
+  BACKEND_PID=$!
+  echo "Backend PID: $BACKEND_PID"
+
+  # Start client
+  pnpm --dir client dev &
+  CLIENT_PID=$!
+  echo "Client PID: $CLIENT_PID"
+
+  cleanup() {
+    echo "Stopping processes..."
+    kill "$BACKEND_PID" "$CLIENT_PID" 2>/dev/null || true
+    wait "$BACKEND_PID" 2>/dev/null || true
+    wait "$CLIENT_PID" 2>/dev/null || true
+    exit 0
+  }
+
+  trap cleanup INT TERM
+
+  wait "$BACKEND_PID" "$CLIENT_PID"
+}
+
+# Main script logic
+if [ $# -eq 0 ]; then
+  usage
+fi
+
+case "$1" in
+  init)
+    init
+    ;;
+  start:backend)
+    start_backend
+    ;;
+  start:frontend)
+    start_frontend
+    ;;
+  start)
+    start
+    ;;
+  *)
+    echo -e "${RED}Unknown command: $1${NC}"
+    echo ""
+    usage
+    ;;
+esac

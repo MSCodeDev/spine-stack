@@ -1,11 +1,11 @@
-tankobon:
+spinestack:
   workspace: localdb
   database:
-    file: \${tankobon.config-dir}/\${tankobon.workspace}.sqlite
+    file: \${spinestack.config-dir}/\${spinestack.workspace}.sqlite
   lucene:
-    data-directory: \${tankobon.config-dir}/lucene/\${tankobon.workspace}
+    data-directory: \${spinestack.config-dir}/lucene/\${spinestack.workspace}
 
 spring:
   artemis:
     embedded:
-      data-directory: \${tankobon.config-dir}/artemis/\${tankobon.workspace}
+      data-directory: \${spinestack.config-dir}/artemis/\${spinestack.workspace}

@@ -3,7 +3,7 @@ import { useVuelidate } from '@vuelidate/core'
 import { email as emailValidator, helpers, required } from '@vuelidate/validators'
 import { ArrowPathIcon } from '@heroicons/vue/20/solid'
 import { emailIsAvailable, emailIsAvailableIfNotSame } from '@/utils/validation'
-import type { UserRole } from '@/types/tankobon-user'
+import type { UserRole } from '@/types/spinestack-user'
 
 export interface UserMetadataFormProps {
   disabled?: boolean

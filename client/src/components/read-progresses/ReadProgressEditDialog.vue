@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
 import ReadProgressForm from './ReadProgressForm.vue'
-import type { ReadProgressEntity, ReadProgressUpdate } from '@/types/tankobon-read-progress'
+import type { ReadProgressEntity, ReadProgressUpdate } from '@/types/spinestack-read-progress'
 
 export interface ReadProgressEditDialogProps {
   isOpen: boolean

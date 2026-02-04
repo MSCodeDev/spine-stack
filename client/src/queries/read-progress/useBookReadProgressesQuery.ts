@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { CollectionResponse, TankobonApiError } from '@/types/tankobon-response'
+import type { CollectionResponse, SpineStackApiError } from '@/types/spinestack-response'
 import type { MaybeRefDeep } from '@/types/reactivity'
-import type { ReadProgressEntity } from '@/types/tankobon-read-progress'
-import type { GetReadProgressesByBookParameters } from '@/services/tankobon-read-progresses'
-import { getReadProgressesByBook } from '@/services/tankobon-read-progresses'
+import type { ReadProgressEntity } from '@/types/spinestack-read-progress'
+import type { GetReadProgressesByBookParameters } from '@/services/spinestack-read-progresses'
+import { getReadProgressesByBook } from '@/services/spinestack-read-progresses'
 
 type UseBookReadProgressesQueryOptions<S = CollectionResponse<ReadProgressEntity>> =
   UseQueryOptions<CollectionResponse<ReadProgressEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetReadProgressesByBookParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useBookReadProgressesQuery<S = CollectionResponse<ReadProgressEntity>>(
   options: UseBookReadProgressesQueryOptions<S>,

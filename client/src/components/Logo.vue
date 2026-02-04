@@ -27,7 +27,7 @@ const supText = computed(() => import.meta.env.DEV ? 'DEV' : null)
       ]"
       aria-hidden="true"
     >
-      Tankobon
+      SpineStack
     </span>
     <sup
       v-if="!iconOnly && supText"

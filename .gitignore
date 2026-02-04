@@ -33,10 +33,6 @@ out/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
-.vscode/
-
-### Tankobon ###
+### SpineStack ###
 /config-dir/
-/scripts/covers/
 

@@ -4,7 +4,7 @@ import { email, helpers, required } from '@vuelidate/validators'
 
 import { EnvelopeIcon, IdentificationIcon, KeyIcon } from '@heroicons/vue/24/outline'
 import { BookOpenIcon } from '@heroicons/vue/24/solid'
-import type { ClaimAdmin } from '@/types/tankobon-claim'
+import type { ClaimAdmin } from '@/types/spinestack-claim'
 
 const notificator = useToaster()
 const { t } = useI18n()

@@ -8,17 +8,17 @@ logging:
       clean-history-on-start: true
       max-file-size: 10MB
   file:
-    name: \${tankobon.config-dir}/logs/tankobon.log
+    name: \${spinestack.config-dir}/logs/spinestack.log
   level:
     org.apache.activemq.audit: WARN
 
-tankobon:
+spinestack:
   database:
-    file: \${tankobon.config-dir}/database.sqlite
+    file: \${spinestack.config-dir}/database.sqlite
   lucene:
-    data-directory: \${tankobon.config-dir}/lucene
-  config-dir: \${user.home}/.tankobon
-  images-dir: \${tankobon.config-dir}/images
+    data-directory: \${spinestack.config-dir}/lucene
+  config-dir: \${user.home}/.spinestack
+  images-dir: \${spinestack.config-dir}/images
   session-timeout: 7d
 
 spring:
@@ -34,15 +34,15 @@ spring:
     broker-url: tcp://localhost:18515
     embedded:
       persistent: true
-      data-directory: \${tankobon.config-dir}/artemis
+      data-directory: \${spinestack.config-dir}/artemis
   web:
     resources:
       add-mappings: false
   config:
     import:
-      - optional:file:\${tankobon.config-dir}/application.yml
-      - optional:file:\${tankobon.config-dir}/application.yaml
-      - optional:file:\${tankobon.config-dir}/application.properties
+      - optional:file:\${spinestack.config-dir}/application.yml
+      - optional:file:\${spinestack.config-dir}/application.yaml
+      - optional:file:\${spinestack.config-dir}/application.properties
   servlet:
     multipart:
       max-file-size: 5MB

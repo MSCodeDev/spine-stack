@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ArrowDownOnSquareIcon, ArrowTopRightOnSquareIcon } from '@heroicons/vue/20/solid'
 import { BookOpenIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline'
-import type { ExternalBookEntity } from '@/types/tankobon-external-book'
+import type { ExternalBookEntity } from '@/types/spinestack-external-book'
 import { getRelationship } from '@/utils/api'
 
 export interface ImporterResultCardProps {

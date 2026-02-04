@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AlternativeName } from '@/types/tankobon-alternative-name'
+import type { AlternativeName } from '@/types/spinestack-alternative-name'
 import { getFlagScriptCode, getRegionCode } from '@/utils/language'
 
 export interface SeriesAlternativeNamesProps {

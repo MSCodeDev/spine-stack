@@ -1,10 +1,10 @@
 # Accessing the web client
 
-Once Tankobon is started, you can access the web client at:
+Once SpineStack is started, you can access the web client at:
 `http://<your-server>:<port>(/baseUrl)`.
 
 :::tip
-If you are running Tankobon locally, `<your-server>` will be `localhost`.
+If you are running SpineStack locally, `<your-server>` will be `localhost`.
 
 The default `<port>` is `8080`.
 :::
@@ -23,4 +23,4 @@ Choose an _name_ and a _description_ (optional), then click on **Create library*
 
 ![First library creation screenshot.](/images/first-library-creation.png "First library creation form.")
 
-After creating the first library, you can start using Tankobon.
+After creating the first library, you can start using SpineStack.

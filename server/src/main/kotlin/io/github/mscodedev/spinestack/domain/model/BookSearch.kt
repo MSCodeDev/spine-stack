@@ -1,0 +1,11 @@
+package io.github.mscodedev.spinestack.domain.model
+
+open class BookSearch(
+  val libraryIds: kotlin.collections.Collection<String>? = null,
+  val seriesIds: kotlin.collections.Collection<String>? = null,
+  val publisherIds: kotlin.collections.Collection<String>? = null,
+  val storeIds: kotlin.collections.Collection<String>? = null,
+  val personIds: kotlin.collections.Collection<String>? = null,
+  val userId: String? = null,
+  val searchTerm: String? = null,
+)

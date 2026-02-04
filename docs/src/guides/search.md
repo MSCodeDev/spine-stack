@@ -1,6 +1,6 @@
 # Searching
 
-Tankobon offers a search palette that is able to search through some
+SpineStack offers a search palette that is able to search through some
 entities in the current selected library. You can open it by the
 **Search** button in the navigation bar or by the [[Ctrl]] + [[K]]
 shortcut in Windows/Linux or by the [[⌘]] + [[K]] shortcut in macOS.
@@ -19,7 +19,7 @@ Within the search palette, you can also navigate by the keyboard.
 
 ## Full Text Search
 
-Tankobon provides a [Full Text Search] (FTS hereafter) to return
+SpineStack provides a [Full Text Search] (FTS hereafter) to return
 relevant results from your libraries. The search is powered by
 [Apache Lucene] and supports any features of Lucene [query syntax].
 

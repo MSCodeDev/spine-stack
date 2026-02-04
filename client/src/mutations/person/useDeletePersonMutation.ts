@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { deleteOnePerson } from '@/services/tankobon-people'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { deleteOnePerson } from '@/services/spinestack-people'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useDeletePersonMutation() {
   const queryClient = useQueryClient()

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { SeriesUpdate } from '@/types/tankobon-series'
-import { updateOneSeries } from '@/services/tankobon-series'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { SeriesUpdate } from '@/types/spinestack-series'
+import { updateOneSeries } from '@/services/spinestack-series'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUpdateSeriesMutation() {
   const queryClient = useQueryClient()

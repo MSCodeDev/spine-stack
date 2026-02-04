@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
-import type { BookLinks, BookUpdate } from '@/types/tankobon-book'
-import type { DimensionsString } from '@/types/tankobon-dimensions'
-import type { MonetaryAmountString } from '@/types/tankobon-monetary'
+import type { BookLinks, BookUpdate } from '@/types/spinestack-book'
+import type { DimensionsString } from '@/types/spinestack-dimensions'
+import type { MonetaryAmountString } from '@/types/spinestack-monetary'
 import BookMetadataForm from '@/components/books/BookMetadataForm.vue'
 import BookOrganizationForm from '@/components/books/BookOrganizationForm.vue'
 import { getRelationship, getRelationships } from '@/utils/api'
@@ -11,11 +11,11 @@ import BookContributorsForm from '@/components/books/BookContributorsForm.vue'
 import type { CoverArt } from '@/components/books/BookCoverArtForm.vue'
 import { createImageUrl } from '@/modules/api'
 import BookCoverArtForm from '@/components/books/BookCoverArtForm.vue'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
-import type { WeightString } from '@/types/tankobon-weight'
-import type { LengthUnit, MassUnit } from '@/types/tankobon-unit'
+import type { WeightString } from '@/types/spinestack-weight'
+import type { LengthUnit, MassUnit } from '@/types/spinestack-unit'
 
 const { t, n } = useI18n()
 const route = useRoute()
@@ -282,7 +282,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('books.edited-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

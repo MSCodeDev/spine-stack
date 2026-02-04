@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { BookmarkIcon, InformationCircleIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import Button from '@/components/form/Button.vue'
-import { isIsbnCode } from '@/types/tankobon-book'
+import { isIsbnCode } from '@/types/spinestack-book'
 import { createEmptyCollectionResponse, getRelationship, getRelationships } from '@/utils/api'
-import type { ReadProgressCreation, ReadProgressEntity, ReadProgressUpdate } from '@/types/tankobon-read-progress'
+import type { ReadProgressCreation, ReadProgressEntity, ReadProgressUpdate } from '@/types/spinestack-read-progress'
 import type { PillTab } from '@/components/PillTabsList.vue'
 import { safeNumber } from '@/utils/route'
 

@@ -4,8 +4,8 @@ import { createColumnHelper } from '@tanstack/vue-table'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { ContributorRoleEntity, ContributorRoleSort } from '@/types/tankobon-contributor-role'
-import type { Sort } from '@/types/tankobon-api'
+import type { ContributorRoleEntity, ContributorRoleSort } from '@/types/spinestack-contributor-role'
+import type { Sort } from '@/types/spinestack-api'
 
 export interface ContributorRolesTableProps {
   libraryId: string

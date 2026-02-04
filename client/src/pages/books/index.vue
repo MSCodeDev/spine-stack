@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ArrowDownOnSquareIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import Button from '@/components/form/Button.vue'
-import type { Sort, SortDirection } from '@/types/tankobon-api'
-import type { BookSort } from '@/types/tankobon-book'
+import type { Sort, SortDirection } from '@/types/spinestack-api'
+import type { BookSort } from '@/types/spinestack-book'
 import { safeNumber } from '@/utils/route'
 
 const libraryStore = useLibraryStore()

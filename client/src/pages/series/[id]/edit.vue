@@ -4,14 +4,14 @@ import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
 import { v4 as uuid } from 'uuid'
 import { getRelationship } from '@/utils/api'
 import { createImageUrl } from '@/modules/api'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { SeriesLinks, SeriesUpdate } from '@/types/tankobon-series'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { SeriesLinks, SeriesUpdate } from '@/types/spinestack-series'
 import type { Cover } from '@/components/series/SeriesCoverForm.vue'
 import SeriesCoverForm from '@/components/series/SeriesCoverForm.vue'
 import SeriesMetadataForm from '@/components/series/SeriesMetadataForm.vue'
 import SeriesAlternativeNamesForm from '@/components/series/SeriesAlternativeNamesForm.vue'
-import type { FormAlternativeName } from '@/types/tankobon-alternative-name'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { FormAlternativeName } from '@/types/spinestack-alternative-name'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
 
 const { t } = useI18n()
@@ -174,7 +174,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('series.edited-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

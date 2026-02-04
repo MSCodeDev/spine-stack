@@ -17,7 +17,7 @@ import YouTubeIcon from '@/components/icons/YouTubeIcon.vue'
 import StoreIcon from '@/components/icons/StoreIcon.vue'
 import PixivIcon from '@/components/icons/PixivIcon.vue'
 import DeviantArtIcon from '@/components/icons/DeviantArtIcon.vue'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 
 export interface EntityExternalLinksProps {
   links?: Record<string, string | null>

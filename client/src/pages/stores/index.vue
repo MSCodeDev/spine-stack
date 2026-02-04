@@ -3,10 +3,10 @@ import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import type { ColumnOrderState, SortDirection } from '@tanstack/vue-table'
 import type { SortPropertyOption } from '@/components/SortControls.vue'
 import type { TableColumn } from '@/components/TableColumnsControls.vue'
-import type { Sort } from '@/types/tankobon-api'
-import type { PublisherSort } from '@/types/tankobon-publisher'
+import type { Sort } from '@/types/spinestack-api'
+import type { PublisherSort } from '@/types/spinestack-publisher'
 import { safeNumber } from '@/utils/route'
-import type { StoreSort } from '@/types/tankobon-store'
+import type { StoreSort } from '@/types/spinestack-store'
 
 const libraryStore = useLibraryStore()
 const libraryId = computed(() => libraryStore.library!.id)

@@ -2,9 +2,9 @@
 import type { ColumnOrderState, SortDirection } from '@tanstack/vue-table'
 import type { SortPropertyOption } from '../SortControls.vue'
 import type { TableColumn } from '../TableColumnsControls.vue'
-import type { PaginatedResponse } from '@/types/tankobon-response'
-import type { Sort } from '@/types/tankobon-api'
-import type { AuthenticationActivityEntity, AuthenticationActivitySort } from '@/types/tankobon-authentication-activity'
+import type { PaginatedResponse } from '@/types/spinestack-response'
+import type { Sort } from '@/types/spinestack-api'
+import type { AuthenticationActivityEntity, AuthenticationActivitySort } from '@/types/spinestack-authentication-activity'
 
 export interface LibrariesListViewerProps {
   authenticationActivity?: PaginatedResponse<AuthenticationActivityEntity>

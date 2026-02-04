@@ -4,9 +4,9 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import type { TableColumn } from '../TableColumnsControls.vue'
 import type { SortPropertyOption } from '../SortControls.vue'
 import type { ViewMode } from '@/components/ViewModeSelector.vue'
-import type { PaginatedResponse } from '@/types/tankobon-response'
-import type { BookEntity, BookSort } from '@/types/tankobon-book'
-import type { Sort, SortDirection } from '@/types/tankobon-api'
+import type { PaginatedResponse } from '@/types/spinestack-response'
+import type { BookEntity, BookSort } from '@/types/spinestack-book'
+import type { Sort, SortDirection } from '@/types/spinestack-api'
 
 export interface BooksListViewerProps {
   books?: PaginatedResponse<BookEntity>

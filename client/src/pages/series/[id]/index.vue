@@ -5,8 +5,8 @@ import { BookOpenIcon, InformationCircleIcon } from '@heroicons/vue/20/solid'
 import { getRelationship } from '@/utils/api'
 import Button from '@/components/form/Button.vue'
 import type { PillTab } from '@/components/PillTabsList.vue'
-import type { Sort } from '@/types/tankobon-api'
-import type { BookSort } from '@/types/tankobon-book'
+import type { Sort } from '@/types/spinestack-api'
+import type { BookSort } from '@/types/spinestack-book'
 import { safeNumber } from '@/utils/route'
 
 const { t } = useI18n()

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { type UploadPublisherPictureOptions, uploadPublisherPicture } from '@/services/tankobon-publishers'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { type UploadPublisherPictureOptions, uploadPublisherPicture } from '@/services/spinestack-publishers'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUploadPublisherPictureMutation() {
   const queryClient = useQueryClient()

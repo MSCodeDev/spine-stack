@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { deleteOneSeries } from '@/services/tankobon-series'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { deleteOneSeries } from '@/services/spinestack-series'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useDeleteSeriesMutation() {
   const queryClient = useQueryClient()

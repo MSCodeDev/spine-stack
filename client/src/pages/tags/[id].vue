@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
-import type { TagUpdate } from '@/types/tankobon-tag'
+import type { TagUpdate } from '@/types/spinestack-tag'
 
 const { t } = useI18n()
 const router = useRouter()

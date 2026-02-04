@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { BookmarkSquareIcon } from '@heroicons/vue/24/outline'
 import { PlusIcon } from '@heroicons/vue/20/solid'
-import type { BookEntity } from '@/types/tankobon-book'
-import type { ReadProgressEntity } from '@/types/tankobon-read-progress'
+import type { BookEntity } from '@/types/spinestack-book'
+import type { ReadProgressEntity } from '@/types/spinestack-read-progress'
 
 export interface BookReadProgressesProps {
   book: BookEntity | null | undefined

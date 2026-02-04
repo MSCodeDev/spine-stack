@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { createImageUrl } from '@/modules/api'
-import type { ImageDetailsAttributes } from '@/types/tankobon-image-details'
+import type { ImageDetailsAttributes } from '@/types/spinestack-image-details'
 
 export interface ImageBannerProps {
   alt: string | undefined

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { StoreEntity } from '@/types/tankobon-store'
+import type { StoreEntity } from '@/types/spinestack-store'
 
 export interface StoreNameProps {
   store?: StoreEntity | null

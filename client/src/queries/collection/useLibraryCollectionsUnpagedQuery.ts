@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { CollectionEntity } from '@/types/tankobon-collection'
-import type { GetAllCollectionsByLibraryParameters } from '@/services/tankobon-collections'
-import { getAllCollectionsByLibrary } from '@/services/tankobon-collections'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { CollectionEntity } from '@/types/spinestack-collection'
+import type { GetAllCollectionsByLibraryParameters } from '@/services/spinestack-collections'
+import { getAllCollectionsByLibrary } from '@/services/spinestack-collections'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseLibraryCollectionsQueryOptions<S = CollectionEntity[]> =
   UseQueryOptions<CollectionEntity[], ErrorResponse, S> &
   MaybeRefDeep<Omit<GetAllCollectionsByLibraryParameters, 'unpaged'>>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibraryCollectionsUnpagedQuery<S = CollectionEntity[]>(
   options: UseLibraryCollectionsQueryOptions<S>,

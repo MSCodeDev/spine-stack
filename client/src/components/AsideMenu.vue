@@ -195,8 +195,8 @@ const isDev = import.meta.env.DEV
 const isNightly = import.meta.env.NIGHTLY
 
 const versionString = (isDev || isNightly) ? gitShortHash : `v${appVersion}`
-const commitLink = `https://github.com/alessandrojean/tankobon/commit/${gitShortHash}`
-const releaseLink = `https://github.com/alessandrojean/tankobon/releases/tag/v${appVersion}`
+const commitLink = `https://github.com/mscodedev/spinestack/commit/${gitShortHash}`
+const releaseLink = `https://github.com/mscodedev/spinestack/releases/tag/v${appVersion}`
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 const lgAndLarger = breakpoints.greaterOrEqual('lg')
@@ -298,7 +298,7 @@ const lgAndLarger = breakpoints.greaterOrEqual('lg')
           <span>{{ versionString }}</span>
           <ArrowTopRightOnSquareIcon class="w-3 h-3" />
         </a>
-        <p>&copy; 2023 Alessandro Jean</p>
+        <p>&copy; MSCode</p>
       </div>
     </div>
   </aside>

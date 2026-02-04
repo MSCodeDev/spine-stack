@@ -1,0 +1,218 @@
+package io.github.mscodedev.spinestack.interfaces.api.rest
+
+import io.github.mscodedev.spinestack.domain.model.IdDoesNotExistException
+import io.github.mscodedev.spinestack.domain.model.Preference
+import io.github.mscodedev.spinestack.domain.model.ROLE_ADMIN
+import io.github.mscodedev.spinestack.domain.model.RelationIdDoesNotExistException
+import io.github.mscodedev.spinestack.domain.persistence.PreferenceRepository
+import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
+import io.github.mscodedev.spinestack.infrastructure.security.SpineStackPrincipal
+import io.github.mscodedev.spinestack.interfaces.api.rest.dto.PreferenceCreationUpdateDto
+import io.github.mscodedev.spinestack.interfaces.api.rest.dto.PreferenceEntityDto
+import io.github.mscodedev.spinestack.interfaces.api.rest.dto.SuccessCollectionResponseDto
+import io.github.mscodedev.spinestack.interfaces.api.rest.dto.SuccessEntityResponseDto
+import io.github.mscodedev.spinestack.interfaces.api.rest.dto.toDto
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.media.Schema
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotEmpty
+import org.hibernate.validator.constraints.UUID
+import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.bind.annotation.RestController
+import io.swagger.v3.oas.annotations.tags.Tag as SwaggerTag
+
+@Validated
+@RestController
+@RequestMapping("api", produces = [MediaType.APPLICATION_JSON_VALUE])
+@SwaggerTag(name = "Preference", description = "Operations user preferences")
+class PreferenceController(
+  private val userRepository: SpineStackUserRepository,
+  private val preferenceRepository: PreferenceRepository,
+) {
+
+  @GetMapping("v1/users/me/preferences")
+  @Operation(
+    summary = "Get all preferences from the current authenticated user",
+    security = [SecurityRequirement(name = "Basic Auth")],
+  )
+  fun getAllMePreferences(
+    @AuthenticationPrincipal principal: SpineStackPrincipal,
+  ): SuccessCollectionResponseDto<PreferenceEntityDto> {
+    val preferences = preferenceRepository
+      .findAllByUser(principal.user.id)
+      .map { it.toDto() }
+
+    return SuccessCollectionResponseDto(preferences)
+  }
+
+  @GetMapping("v1/users/{userId}/preferences")
+  @PreAuthorize("hasRole('$ROLE_ADMIN') or authentication.principal.user.id == #userId")
+  @Operation(summary = "Get all preferences from a user", security = [SecurityRequirement(name = "Basic Auth")])
+  fun getAllPreferencesByUser(
+    @PathVariable("userId")
+    @UUID(version = [4])
+    @Schema(format = "uuid")
+    userId: String,
+  ): SuccessCollectionResponseDto<PreferenceEntityDto> {
+    val user = userRepository.findByIdOrNull(userId)
+      ?: throw IdDoesNotExistException("User not found")
+
+    val preferences = preferenceRepository
+      .findAllByUser(user.id)
+      .map { it.toDto() }
+
+    return SuccessCollectionResponseDto(preferences)
+  }
+
+  @PostMapping("v1/users/me/preferences")
+  @Operation(
+    summary = "Set a preference value by key to the current authenticated user",
+    security = [SecurityRequirement(name = "Basic Auth")],
+  )
+  fun setMePreferenceValueByKey(
+    @AuthenticationPrincipal principal: SpineStackPrincipal,
+    @Valid @RequestBody
+    preference: PreferenceCreationUpdateDto,
+  ): SuccessEntityResponseDto<PreferenceEntityDto> {
+    val exists = preferenceRepository.existsByKeyFromUser(preference.key, principal.user.id)
+    val preferenceDomain = Preference(
+      userId = principal.user.id,
+      key = preference.key,
+      value = preference.value,
+    )
+
+    if (exists) {
+      preferenceRepository.update(preferenceDomain)
+    } else {
+      preferenceRepository.insert(preferenceDomain)
+    }
+
+    return SuccessEntityResponseDto(preferenceDomain.toDto())
+  }
+
+  @PostMapping("v1/users/{userId}/preferences")
+  @PreAuthorize("hasRole('$ROLE_ADMIN') or authentication.principal.user.id == #userId")
+  @Operation(summary = "Set a preference value by key to a user", security = [SecurityRequirement(name = "Basic Auth")])
+  fun setPreferenceValueByKey(
+    @PathVariable("userId")
+    @UUID(version = [4])
+    @Schema(format = "uuid")
+    userId: String,
+    @Valid @RequestBody
+    preference: PreferenceCreationUpdateDto,
+  ): SuccessEntityResponseDto<PreferenceEntityDto> {
+    val user = userRepository.findByIdOrNull(userId)
+      ?: throw RelationIdDoesNotExistException("User not found")
+
+    val preferenceDomain = Preference(
+      userId = user.id,
+      key = preference.key,
+      value = preference.value,
+    )
+
+    preferenceRepository.insertOrUpdate(preferenceDomain)
+
+    return SuccessEntityResponseDto(preferenceDomain.toDto())
+  }
+
+  @PostMapping("v1/users/me/preferences/batch")
+  @Operation(
+    summary = "Set multiple preference values by keys to the current authenticated user",
+    security = [SecurityRequirement(name = "Basic Auth")],
+  )
+  fun setMePreferencesValuesByKeys(
+    @AuthenticationPrincipal principal: SpineStackPrincipal,
+    @NotEmpty @RequestBody
+    preferences: Map<@NotBlank String, @NotBlank String>,
+  ): SuccessCollectionResponseDto<PreferenceEntityDto> {
+    preferenceRepository.insertOrUpdate(
+      preferences = preferences.map { Preference(principal.user.id, it.key, it.value) },
+      userId = principal.user.id,
+    )
+
+    val createdOrUpdated = preferenceRepository.findByKeysFromUser(
+      keys = preferences.keys,
+      userId = principal.user.id,
+    )
+
+    return SuccessCollectionResponseDto(createdOrUpdated.map { it.toDto() })
+  }
+
+  @PostMapping("v1/users/{userId}/preferences/batch")
+  @PreAuthorize("hasRole('$ROLE_ADMIN') or authentication.principal.user.id == #userId")
+  @Operation(summary = "Set multiple preference values by keys to a user", security = [SecurityRequirement(name = "Basic Auth")])
+  fun setPreferencesValuesByKeys(
+    @PathVariable("userId")
+    @UUID(version = [4])
+    @Schema(format = "uuid")
+    userId: String,
+    @NotEmpty @RequestBody
+    preferences: Map<@NotBlank String, @NotBlank String>,
+  ): SuccessCollectionResponseDto<PreferenceEntityDto> {
+    val user = userRepository.findByIdOrNull(userId)
+      ?: throw RelationIdDoesNotExistException("User not found")
+
+    preferenceRepository.insertOrUpdate(
+      preferences = preferences.map { Preference(user.id, it.key, it.value) },
+      userId = user.id,
+    )
+
+    val createdOrUpdated = preferenceRepository.findByKeysFromUser(
+      keys = preferences.keys,
+      userId = user.id,
+    )
+
+    return SuccessCollectionResponseDto(createdOrUpdated.map { it.toDto() })
+  }
+
+  @DeleteMapping("v1/users/me/preferences/{preferenceKey:.+}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(
+    summary = "Delete a preference by key from the current authenticated user",
+    security = [SecurityRequirement(name = "Basic Auth")],
+  )
+  fun deletePreferenceByKeyFromMe(
+    @AuthenticationPrincipal principal: SpineStackPrincipal,
+    @PathVariable preferenceKey: String,
+  ) {
+    if (!preferenceRepository.existsByKeyFromUser(preferenceKey, principal.user.id)) {
+      throw IdDoesNotExistException("Preference not found")
+    }
+
+    preferenceRepository.delete(preferenceKey, principal.user.id)
+  }
+
+  @DeleteMapping("v1/users/{userId}/preferences/{preferenceKey:.+}")
+  @PreAuthorize("hasRole('$ROLE_ADMIN') or authentication.principal.user.id == #userId")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(summary = "Delete a preference by key from a user", security = [SecurityRequirement(name = "Basic Auth")])
+  fun deletePreferenceByKeyFromUser(
+    @PathVariable("userId")
+    @UUID(version = [4])
+    @Schema(format = "uuid")
+    userId: String,
+    @PathVariable("preferenceKey") preferenceKey: String,
+  ) {
+    val user = userRepository.findByIdOrNull(userId)
+      ?: throw IdDoesNotExistException("User not found")
+
+    if (!preferenceRepository.existsByKeyFromUser(preferenceKey, user.id)) {
+      throw IdDoesNotExistException("Preference not found")
+    }
+
+    preferenceRepository.delete(preferenceKey, user.id)
+  }
+}

@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
 import type { MaybeRef } from '@vueuse/core'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { getOneTag } from '@/services/tankobon-tags'
-import type { TagEntity, TagIncludes } from '@/types/tankobon-tag'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { getOneTag } from '@/services/spinestack-tags'
+import type { TagEntity, TagIncludes } from '@/types/spinestack-tag'
 
 interface UseTagQueryOptions<S = TagEntity> extends UseQueryOptions<TagEntity, ErrorResponse, S> {
   tagId: MaybeRef<string>
   includes?: MaybeRef<TagIncludes[]>
 }
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useTagQuery<S = TagEntity>(
   options: UseTagQueryOptions<S>,

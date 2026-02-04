@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
-import type { LibraryEntity, LibraryUpdate } from '@/types/tankobon-library'
+import type { LibraryEntity, LibraryUpdate } from '@/types/spinestack-library'
 import LibraryForm from '@/components/libraries/LibraryForm.vue'
 
 export interface LibraryEditDialogProps {

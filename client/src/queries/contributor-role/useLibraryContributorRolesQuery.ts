@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { ContributorRoleEntity } from '@/types/tankobon-contributor-role'
-import type { GetAllContributorRolesByLibraryParameters } from '@/services/tankobon-contributor-roles'
-import { getAllContributorRolesByLibrary } from '@/services/tankobon-contributor-roles'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { ContributorRoleEntity } from '@/types/spinestack-contributor-role'
+import type { GetAllContributorRolesByLibraryParameters } from '@/services/spinestack-contributor-roles'
+import { getAllContributorRolesByLibrary } from '@/services/spinestack-contributor-roles'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseLibraryContributorRolesQueryOptions<S = PaginatedResponse<ContributorRoleEntity>> =
   UseQueryOptions<PaginatedResponse<ContributorRoleEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetAllContributorRolesByLibraryParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibraryContributorRolesQuery<S = PaginatedResponse<ContributorRoleEntity>>(
   options: UseLibraryContributorRolesQueryOptions<S>,

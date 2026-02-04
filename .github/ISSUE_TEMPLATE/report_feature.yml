@@ -1,5 +1,5 @@
 name: ⭐ Feature request
-description: Suggest a feature to improve Tankobon
+description: Suggest a feature to improve SpineStack
 labels:
   - triage
 body:
@@ -8,7 +8,7 @@ body:
     id: feature-description
     attributes:
       label: Describe your suggested feature
-      description: How can Tankobon be improved?
+      description: How can SpineStack be improved?
       placeholder: |
         Example:
           "It should have this feature..."

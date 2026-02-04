@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { deleteStorePicture } from '@/services/tankobon-stores'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { deleteStorePicture } from '@/services/spinestack-stores'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useDeleteStorePictureMutation() {
   const queryClient = useQueryClient()

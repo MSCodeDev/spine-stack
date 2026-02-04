@@ -1,5 +1,5 @@
 import type { LengthUnits, MassUnits } from 'convert-units'
-import type { LengthUnit, MassUnit } from '@/types/tankobon-unit'
+import type { LengthUnit, MassUnit } from '@/types/spinestack-unit'
 
 export const unitAbbreviation: Record<MassUnit | LengthUnit, string> = {
   CENTIMETER: 'cm',

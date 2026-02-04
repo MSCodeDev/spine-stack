@@ -2,12 +2,12 @@
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, required } from '@vuelidate/validators'
 import MonetaryAmountInput from '../form/MonetaryAmountInput.vue'
-import type { MonetaryAmountString } from '@/types/tankobon-monetary'
+import type { MonetaryAmountString } from '@/types/spinestack-monetary'
 import { convertLocalTimeZoneToUtc, convertUtcToLocalTimeZone } from '@/utils/date'
 import { positiveDecimal } from '@/utils/validation'
-import type { StoreAttributes, StoreEntity } from '@/types/tankobon-store'
+import type { StoreAttributes, StoreEntity } from '@/types/spinestack-store'
 import { createEmptyPaginatedResponse } from '@/utils/api'
-import type { TagEntity } from '@/types/tankobon-tag'
+import type { TagEntity } from '@/types/spinestack-tag'
 
 export interface BookMetadataFormProps {
   collection: string

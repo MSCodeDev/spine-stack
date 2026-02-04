@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { addOneContributorRole } from '@/services/tankobon-contributor-roles'
-import type { ContributorRoleCreation, ContributorRoleEntity } from '@/types/tankobon-contributor-role'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import { addOneContributorRole } from '@/services/spinestack-contributor-roles'
+import type { ContributorRoleCreation, ContributorRoleEntity } from '@/types/spinestack-contributor-role'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreateContributorRoleMutation() {
   const queryClient = useQueryClient()

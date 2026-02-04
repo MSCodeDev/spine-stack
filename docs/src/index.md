@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Tankobon"
+  name: "SpineStack"
   text: "Physical book collection manager"
   actions:
     - theme: brand

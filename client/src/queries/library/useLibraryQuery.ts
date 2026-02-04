@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
 import type { MaybeRef } from '@vueuse/core'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { LibraryEntity, LibraryIncludes } from '@/types/tankobon-library'
-import { getOneLibrary } from '@/services/tankobon-libraries'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { LibraryEntity, LibraryIncludes } from '@/types/spinestack-library'
+import { getOneLibrary } from '@/services/spinestack-libraries'
 
 interface UseLibraryQueryOptions<S = LibraryEntity> extends UseQueryOptions<LibraryEntity, ErrorResponse, S> {
   libraryId: MaybeRef<string>
   includes?: MaybeRef<LibraryIncludes[]>
 }
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibraryQuery<S = LibraryEntity>(
   options: UseLibraryQueryOptions<S>,

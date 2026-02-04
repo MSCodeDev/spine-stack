@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
-import type { ExternalBookEntity } from '@/types/tankobon-external-book'
-import type { ImportOneBook } from '@/types/tankobon-importer-source'
+import type { ExternalBookEntity } from '@/types/spinestack-external-book'
+import type { ImportOneBook } from '@/types/spinestack-importer-source'
 import { getRelationship } from '@/utils/api'
 
 export interface PersonCreateDialogProps {

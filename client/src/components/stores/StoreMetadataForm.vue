@@ -2,7 +2,7 @@
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, required } from '@vuelidate/validators'
 import { countries as regions } from 'countries-list'
-import type { StoreType } from '@/types/tankobon-store'
+import type { StoreType } from '@/types/spinestack-store'
 
 export interface StoreMetadataFormProps {
   name: string

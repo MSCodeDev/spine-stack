@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { claimAdmin } from '@/services/tankobon-claim'
-import type { UserEntity } from '@/types/tankobon-user'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { ClaimAdmin } from '@/types/tankobon-claim'
+import { claimAdmin } from '@/services/spinestack-claim'
+import type { UserEntity } from '@/types/spinestack-user'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { ClaimAdmin } from '@/types/spinestack-claim'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useClaimServerMutation() {
   const queryClient = useQueryClient()

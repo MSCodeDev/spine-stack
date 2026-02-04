@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { deleteOnePublisher } from '@/services/tankobon-publishers'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { deleteOnePublisher } from '@/services/spinestack-publishers'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useDeletePublisherMutation() {
   const queryClient = useQueryClient()

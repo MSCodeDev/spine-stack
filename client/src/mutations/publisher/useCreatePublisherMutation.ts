@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { addOnePublisher } from '@/services/tankobon-publishers'
-import type { PublisherCreation, PublisherEntity } from '@/types/tankobon-publisher'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import { addOnePublisher } from '@/services/spinestack-publishers'
+import type { PublisherCreation, PublisherEntity } from '@/types/spinestack-publisher'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreatePublisherMutation() {
   const queryClient = useQueryClient()

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { FocusKeys } from '@primer/behaviors'
-import type { Relationship } from '@/types/tankobon-entity'
-import type { TagAttributes } from '@/types/tankobon-tag'
+import type { Relationship } from '@/types/spinestack-entity'
+import type { TagAttributes } from '@/types/spinestack-tag'
 
 export interface BookTagsProps {
   group?: boolean

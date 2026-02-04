@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BookEntity } from '@/types/tankobon-book'
+import type { BookEntity } from '@/types/spinestack-book'
 import { getRelationship } from '@/utils/api'
 
 export interface BookCardProps {

@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import { getMe, getMeWithAuth, signOut } from '@/services/tankobon-users'
-import type { UserEntity } from '@/types/tankobon-user'
+import { getMe, getMeWithAuth, signOut } from '@/services/spinestack-users'
+import type { UserEntity } from '@/types/spinestack-user'
 import { getRelationship } from '@/utils/api'
 
 export const useUserStore = defineStore('user', {

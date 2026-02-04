@@ -2,14 +2,14 @@
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, integer, minValue, required } from '@vuelidate/validators'
 import { BuildingOffice2Icon, XMarkIcon } from '@heroicons/vue/20/solid'
-import type { DimensionsString } from '@/types/tankobon-dimensions'
+import type { DimensionsString } from '@/types/spinestack-dimensions'
 import { positiveDecimal } from '@/utils/validation'
 import { createEmptyPaginatedResponse, getRelationship } from '@/utils/api'
-import type { SeriesEntity, SeriesLinks } from '@/types/tankobon-series'
-import type { PublisherEntity } from '@/types/tankobon-publisher'
+import type { SeriesEntity, SeriesLinks } from '@/types/spinestack-series'
+import type { PublisherEntity } from '@/types/spinestack-publisher'
 import { createImageUrl } from '@/modules/api'
-import type { WeightString } from '@/types/tankobon-weight'
-import type { MassUnit } from '@/types/tankobon-unit'
+import type { WeightString } from '@/types/spinestack-weight'
+import type { MassUnit } from '@/types/spinestack-unit'
 
 export interface BookMetadataFormProps {
   disabled?: boolean

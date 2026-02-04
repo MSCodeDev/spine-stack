@@ -4,7 +4,7 @@ import { PlusIcon } from '@heroicons/vue/20/solid'
 import { helpers } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import { v4 as uuid } from 'uuid'
-import type { AlternativeName, FormAlternativeName } from '@/types/tankobon-alternative-name'
+import type { AlternativeName, FormAlternativeName } from '@/types/spinestack-alternative-name'
 import { BCP47_OPTIONS } from '@/utils/language'
 
 export interface SeriesAlternativeNamesFormProps {

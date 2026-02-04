@@ -5,9 +5,9 @@ import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import { getRelationship } from '@/utils/api'
 import type { PillTab } from '@/components/PillTabsList.vue'
 import { safeNumber } from '@/utils/route'
-import type { LibrarySort } from '@/types/tankobon-library'
-import type { Sort } from '@/types/tankobon-api'
-import type { AuthenticationActivitySort } from '@/types/tankobon-authentication-activity'
+import type { LibrarySort } from '@/types/spinestack-library'
+import type { Sort } from '@/types/spinestack-api'
+import type { AuthenticationActivitySort } from '@/types/spinestack-authentication-activity'
 
 const { t } = useI18n()
 const route = useRoute()

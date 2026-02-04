@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { TagUpdate } from '@/types/tankobon-tag'
-import { updateOneTag } from '@/services/tankobon-tags'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { TagUpdate } from '@/types/spinestack-tag'
+import { updateOneTag } from '@/services/spinestack-tags'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUpdateTagMutation() {
   const queryClient = useQueryClient()

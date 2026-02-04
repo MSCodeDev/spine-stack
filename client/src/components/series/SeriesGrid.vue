@@ -2,8 +2,8 @@
 import { PlusIcon } from '@heroicons/vue/20/solid'
 import { BookOpenIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { FocusKeys } from '@primer/behaviors'
-import type { SeriesEntity } from '@/types/tankobon-series'
-import type { PaginatedResponse } from '@/types/tankobon-response'
+import type { SeriesEntity } from '@/types/spinestack-series'
+import type { PaginatedResponse } from '@/types/spinestack-response'
 
 export interface BooksGridProps {
   series?: PaginatedResponse<SeriesEntity>

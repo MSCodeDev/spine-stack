@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { SeriesEntity } from '@/types/tankobon-series'
-import type { GetAllSeriesByLibraryParameters } from '@/services/tankobon-series'
-import { getAllSeriesByLibrary } from '@/services/tankobon-series'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { SeriesEntity } from '@/types/spinestack-series'
+import type { GetAllSeriesByLibraryParameters } from '@/services/spinestack-series'
+import { getAllSeriesByLibrary } from '@/services/spinestack-series'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseLibrarySeriesQueryOptions<S = PaginatedResponse<SeriesEntity>> =
   UseQueryOptions<PaginatedResponse<SeriesEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetAllSeriesByLibraryParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibrarySeriesQuery<S = PaginatedResponse<SeriesEntity>>(
   options: UseLibrarySeriesQueryOptions<S>,

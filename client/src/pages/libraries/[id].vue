@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
-import type { LibraryUpdate } from '@/types/tankobon-library'
+import type { LibraryUpdate } from '@/types/spinestack-library'
 import { createEmptyPaginatedResponse } from '@/utils/api';
 
 const { t } = useI18n()

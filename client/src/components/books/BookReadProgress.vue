@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { BookmarkIcon, CheckCircleIcon, PencilIcon, PlayIcon, TrashIcon } from '@heroicons/vue/20/solid'
-import type { ReadProgressEntity } from '@/types/tankobon-read-progress'
+import type { ReadProgressEntity } from '@/types/spinestack-read-progress'
 
 export interface BookReadProgressProps {
   deleting: boolean

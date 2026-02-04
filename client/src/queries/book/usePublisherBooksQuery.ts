@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { BookEntity } from '@/types/tankobon-book'
-import type { GetAllBooksByPublisherParameters } from '@/services/tankobon-books'
-import { getAllBooksByPublisher } from '@/services/tankobon-books'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { BookEntity } from '@/types/spinestack-book'
+import type { GetAllBooksByPublisherParameters } from '@/services/spinestack-books'
+import { getAllBooksByPublisher } from '@/services/spinestack-books'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UsePublisherBooksQueryOptions<S = PaginatedResponse<BookEntity>> =
   UseQueryOptions<PaginatedResponse<BookEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetAllBooksByPublisherParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useSeriesBooksQuery<S = PaginatedResponse<BookEntity>>(
   options: UsePublisherBooksQueryOptions<S>,

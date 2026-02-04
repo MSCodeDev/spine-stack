@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { SeriesEntity } from '@/types/tankobon-series'
+import type { SeriesEntity } from '@/types/spinestack-series'
 import { getLanguageName } from '@/utils/language'
 
 export interface SeriesAttributesProps {

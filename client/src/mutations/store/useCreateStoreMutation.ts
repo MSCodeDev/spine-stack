@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { addOneStore } from '@/services/tankobon-stores'
-import type { StoreCreation, StoreEntity } from '@/types/tankobon-store'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import { addOneStore } from '@/services/spinestack-stores'
+import type { StoreCreation, StoreEntity } from '@/types/spinestack-store'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreateStoreMutation() {
   const queryClient = useQueryClient()

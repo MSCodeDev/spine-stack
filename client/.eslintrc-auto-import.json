@@ -431,6 +431,21 @@
     "usePersonBooksQuery": true,
     "useSearchQuery": true,
     "useLuceneQueryParser": true,
-    "useLuceneQuery": true
+    "useLuceneQuery": true,
+    "DirectiveBinding": true,
+    "ExtractDefaultPropTypes": true,
+    "ExtractPropTypes": true,
+    "ExtractPublicPropTypes": true,
+    "MaybeRefOrGetter": true,
+    "MetricMap": true,
+    "UseAnchoredPositionOptions": true,
+    "UseBeforeUnloadOptions": true,
+    "UseFocusZoneOptions": true,
+    "UseMarkdownOptions": true,
+    "WritableComputedRef": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }

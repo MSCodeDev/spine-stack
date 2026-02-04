@@ -4,7 +4,7 @@ import {
   TrashIcon,
 } from '@heroicons/vue/24/solid'
 
-import type { BookEntity } from '@/types/tankobon-book'
+import type { BookEntity } from '@/types/spinestack-book'
 
 export interface BookButtonsProps {
   book?: BookEntity | null

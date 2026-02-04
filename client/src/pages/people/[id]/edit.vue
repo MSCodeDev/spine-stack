@@ -3,13 +3,13 @@ import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
 import { getRelationship } from '@/utils/api'
 import { createImageUrl } from '@/modules/api'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 import type { Picture } from '@/components/people/PersonPictureForm.vue'
 import PersonPictureForm from '@/components/people/PersonPictureForm.vue'
 import PersonMetadataForm from '@/components/people/PersonMetadataForm.vue'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
-import type { PersonLinks, PersonUpdate } from '@/types/tankobon-person'
+import type { PersonLinks, PersonUpdate } from '@/types/spinestack-person'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -160,7 +160,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('people.edited-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

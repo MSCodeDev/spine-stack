@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { TagEntity } from '@/types/tankobon-tag'
-import type { GetAllTagsByLibraryParameters } from '@/services/tankobon-tags'
-import { getAllTagsByLibrary } from '@/services/tankobon-tags'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { TagEntity } from '@/types/spinestack-tag'
+import type { GetAllTagsByLibraryParameters } from '@/services/spinestack-tags'
+import { getAllTagsByLibrary } from '@/services/spinestack-tags'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseLibraryTagsQueryOptions<S = PaginatedResponse<TagEntity>> =
   UseQueryOptions<PaginatedResponse<TagEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetAllTagsByLibraryParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibraryTagsQuery<S = PaginatedResponse<TagEntity>>(
   options: UseLibraryTagsQueryOptions<S>,

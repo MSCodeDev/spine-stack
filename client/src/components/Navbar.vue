@@ -47,7 +47,7 @@ const showSearchPalette = injectStrict(ShowSearchPaletteKey)
 
         <Logo
           class="ml-1 lg:hidden"
-          label="Tankobon"
+          label="SpineStack"
           dark
           icon-only
         />

@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { deleteOneReadProgress } from '@/services/tankobon-read-progresses'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { deleteOneReadProgress } from '@/services/spinestack-read-progresses'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useDeleteReadProgressMutation() {
   const queryClient = useQueryClient()

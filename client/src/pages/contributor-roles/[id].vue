@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
-import type { ContributorRoleUpdate } from '@/types/tankobon-contributor-role'
+import type { ContributorRoleUpdate } from '@/types/spinestack-contributor-role'
 
 const { t } = useI18n()
 const router = useRouter()

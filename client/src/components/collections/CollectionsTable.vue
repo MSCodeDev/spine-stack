@@ -4,8 +4,8 @@ import { createColumnHelper } from '@tanstack/vue-table'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { CollectionEntity, CollectionSort } from '@/types/tankobon-collection'
-import type { Sort } from '@/types/tankobon-api'
+import type { CollectionEntity, CollectionSort } from '@/types/spinestack-collection'
+import type { Sort } from '@/types/spinestack-api'
 
 export interface CollectionsTableProps {
   libraryId: string

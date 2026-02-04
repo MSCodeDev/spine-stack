@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Unit } from '@/components/StatisticCard.vue'
-import type { Metric } from '@/types/tankobon-metrics'
+import type { Metric } from '@/types/spinestack-metrics'
 
 export interface MetricCardProps {
   measurement?: number

@@ -2,7 +2,7 @@
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
 import { countries as regions } from 'countries-list'
 import { getLanguageName, getRegionCode } from '@/utils/language'
-import type { LengthUnit, MassUnit } from '@/types/tankobon-unit'
+import type { LengthUnit, MassUnit } from '@/types/spinestack-unit'
 import { isMassUnit, unitAbbreviation } from '@/utils/unit'
 import type { Theme } from '@/App.vue'
 

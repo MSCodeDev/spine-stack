@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
 import TagForm from '@/components/tags/TagForm.vue'
-import type { TagCreation } from '@/types/tankobon-tag'
+import type { TagCreation } from '@/types/spinestack-tag'
 
 export interface TagCreateDialogProps {
   libraryId: string

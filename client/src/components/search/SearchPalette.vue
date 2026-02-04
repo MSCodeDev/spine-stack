@@ -2,8 +2,8 @@
 import { ComboboxInput, Dialog as HeadlessUiDialog } from '@headlessui/vue'
 import { ArchiveBoxIcon, BookOpenIcon, BuildingOffice2Icon, BuildingStorefrontIcon, MagnifyingGlassIcon, PaintBrushIcon, Square2StackIcon, TagIcon } from '@heroicons/vue/24/outline'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
-import type { SearchObject } from '@/types/tankobon-search'
-import type { Entity, EntityType } from '@/types/tankobon-entity'
+import type { SearchObject } from '@/types/spinestack-search'
+import type { Entity, EntityType } from '@/types/spinestack-entity'
 import useLuceneQuery from '@/composables/useLuceneQuery'
 
 export interface SearchPaletteProps {

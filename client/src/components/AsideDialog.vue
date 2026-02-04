@@ -69,7 +69,7 @@ export default { inheritAttrs: false }
             >
               <template #logo>
                 <DialogTitle>
-                  <Logo label="Tankobon" />
+                  <Logo label="SpineStack" />
                 </DialogTitle>
               </template>
 

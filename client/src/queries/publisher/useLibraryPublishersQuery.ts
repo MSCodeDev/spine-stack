@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { PublisherEntity } from '@/types/tankobon-publisher'
-import type { GetAllPublishersByLibraryParameters } from '@/services/tankobon-publishers'
-import { getAllPublishersByLibrary } from '@/services/tankobon-publishers'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { PublisherEntity } from '@/types/spinestack-publisher'
+import type { GetAllPublishersByLibraryParameters } from '@/services/spinestack-publishers'
+import { getAllPublishersByLibrary } from '@/services/spinestack-publishers'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseLibraryPublishersQueryOptions<S = PaginatedResponse<PublisherEntity>> =
   UseQueryOptions<PaginatedResponse<PublisherEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetAllPublishersByLibraryParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibraryPublishersQuery<S = PaginatedResponse<PublisherEntity>>(
   options: UseLibraryPublishersQueryOptions<S>,

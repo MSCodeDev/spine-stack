@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
 import type { MaybeRef } from '@vueuse/core'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { ReadProgressEntity, ReadProgressIncludes } from '@/types/tankobon-read-progress'
-import { getOneReadProgress } from '@/services/tankobon-read-progresses'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { ReadProgressEntity, ReadProgressIncludes } from '@/types/spinestack-read-progress'
+import { getOneReadProgress } from '@/services/spinestack-read-progresses'
 
 interface UseReadProgressQueryOptions<S = ReadProgressEntity> extends UseQueryOptions<ReadProgressEntity, ErrorResponse, S> {
   readProgressId: MaybeRef<string>
   includes?: MaybeRef<ReadProgressIncludes[]>
 }
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useReadProgressQuery<S = ReadProgressEntity>(
   options: UseReadProgressQueryOptions<S>,

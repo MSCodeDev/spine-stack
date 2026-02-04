@@ -2,15 +2,15 @@
 import { createColumnHelper } from '@tanstack/vue-table'
 import type { ColumnOrderState, PaginationState, SortingState } from '@tanstack/vue-table'
 import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
-import type { UserEntity, UserSort } from '@/types/tankobon-user'
-import type { Sort } from '@/types/tankobon-api'
+import type { UserEntity, UserSort } from '@/types/spinestack-user'
+import type { Sort } from '@/types/spinestack-api'
 import { createImageUrl } from '@/modules/api'
 import Avatar from '@/components/Avatar.vue'
 import Badge from '@/components/Badge.vue'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
 import { getRelationship } from '@/utils/api'
-import type { PaginatedResponse } from '@/types/tankobon-response'
+import type { PaginatedResponse } from '@/types/spinestack-response'
 
 export interface UsersTableProps {
   users?: PaginatedResponse<UserEntity>

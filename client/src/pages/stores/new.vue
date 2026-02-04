@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 import type { Picture } from '@/components/stores/StorePictureForm.vue'
 import StorePictureForm from '@/components/stores/StorePictureForm.vue'
 import StoreMetadataForm from '@/components/stores/StoreMetadataForm.vue'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
-import type { StoreCreation, StoreLinks } from '@/types/tankobon-store'
+import type { StoreCreation, StoreLinks } from '@/types/spinestack-store'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -107,7 +107,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('stores.created-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

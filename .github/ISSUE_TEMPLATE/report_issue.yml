@@ -1,5 +1,5 @@
 name: 🐞 Issue report
-description: Report an issue in Tankobon
+description: Report an issue in SpineStack
 labels:
   - triage
 body:
@@ -48,10 +48,10 @@ body:
         You can paste the logs in pure text or upload it as an attachment.
 
   - type: input
-    id: tankobon-version
+    id: spinestack-version
     attributes:
-      label: Tankobon version
-      description: You can find your Tankobon version at the bottom of the sidebar.
+      label: SpineStack version
+      description: You can find your SpineStack version at the bottom of the sidebar.
       placeholder: |
         Example: "v0.0.1"
     validations:

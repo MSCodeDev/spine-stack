@@ -3,9 +3,9 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
 import { helpers, required } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import { createImageUrl } from '@/modules/api'
-import type { ContributorRoleEntity } from '@/types/tankobon-contributor-role'
-import type { ImageDetailsAttributes } from '@/types/tankobon-image-details'
-import type { PersonEntity } from '@/types/tankobon-person'
+import type { ContributorRoleEntity } from '@/types/spinestack-contributor-role'
+import type { ImageDetailsAttributes } from '@/types/spinestack-image-details'
+import type { PersonEntity } from '@/types/spinestack-person'
 import { getRelationship } from '@/utils/api'
 
 export interface BookContributorFormCardProps {

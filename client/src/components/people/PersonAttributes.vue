@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { differenceInYears, parseISO, startOfDay } from 'date-fns'
-import type { PersonEntity } from '@/types/tankobon-person'
+import type { PersonEntity } from '@/types/spinestack-person'
 
 export interface PersonAttributesProps {
   person?: PersonEntity | null

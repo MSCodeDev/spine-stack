@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 import type { Picture } from '@/components/publishers/PublisherPictureForm.vue'
 import PublisherPictureForm from '@/components/publishers/PublisherPictureForm.vue'
 import PublisherMetadataForm from '@/components/publishers/PublisherMetadataForm.vue'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
-import type { PublisherCreation, PublisherLinks } from '@/types/tankobon-publisher'
+import type { PublisherCreation, PublisherLinks } from '@/types/spinestack-publisher'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -118,7 +118,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('publishers.created-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

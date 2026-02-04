@@ -1,5 +1,5 @@
 import { email, helpers, url } from '@vuelidate/validators'
-import { checkEmailAvailability } from '@/services/tankobon-users'
+import { checkEmailAvailability } from '@/services/spinestack-users'
 
 export const positiveDecimal = helpers.regex(/^\d+([,.]\d+)?$/)
 

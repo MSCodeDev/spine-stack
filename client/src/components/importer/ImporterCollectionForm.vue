@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { CollectionEntity } from '@/types/tankobon-collection'
-import type { LibraryEntity } from '@/types/tankobon-library'
+import type { CollectionEntity } from '@/types/spinestack-collection'
+import type { LibraryEntity } from '@/types/spinestack-library'
 import { createEmptyPaginatedResponse } from '@/utils/api'
 
 export interface ImporterCollectionFormProps {

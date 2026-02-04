@@ -1,4 +1,4 @@
-tankobon:
+spinestack:
   database:
     file: ':memory:'
   cors.allowed-origins:
@@ -8,7 +8,7 @@ tankobon:
 logging:
   level:
     org.apache.activemq.audit.message: WARN
-    io.github.alessandrojean.tankobon: DEBUG
+    io.github.mscodedev.spinestack: DEBUG
   logback:
     rollingpolicy:
       max-history: 1

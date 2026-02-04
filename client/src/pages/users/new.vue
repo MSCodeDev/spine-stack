@@ -2,11 +2,11 @@
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
 import * as password from 'secure-random-password'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 import UserMetadataForm from '@/components/users/UserMetadataForm.vue'
 import type { Avatar } from '@/components/users/UserAvatarForm.vue'
 import UserAvatarForm from '@/components/users/UserAvatarForm.vue'
-import type { UserCreation } from '@/types/tankobon-user'
+import type { UserCreation } from '@/types/spinestack-user'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -88,7 +88,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('users.created-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { BookEntity, BookUpdate } from '@/types/tankobon-book'
-import { addOneBook } from '@/services/tankobon-books'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { BookEntity, BookUpdate } from '@/types/spinestack-book'
+import { addOneBook } from '@/services/spinestack-books'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreateBookMutation() {
   const queryClient = useQueryClient()

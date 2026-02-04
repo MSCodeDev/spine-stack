@@ -1,0 +1,28 @@
+package io.github.mscodedev.spinestack.domain.persistence
+
+import io.github.mscodedev.spinestack.domain.model.ReadProgress
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
+
+interface ReadProgressRepository {
+  fun findById(readProgressId: String): ReadProgress
+  fun findByIdOrNull(readProgressId: String): ReadProgress?
+  fun findByBookId(bookId: String): Collection<ReadProgress>
+  fun findByBookAndUserId(bookId: String, userId: String): Collection<ReadProgress>
+  fun findByBookAndUserId(bookId: String, userId: String, sort: Sort): Collection<ReadProgress>
+  fun findByLibraryId(libraryId: String): Collection<ReadProgress>
+  fun findByUserId(userId: String): Collection<ReadProgress>
+  fun findByUserId(userId: String, pageable: Pageable): Page<ReadProgress>
+
+  fun findAll(): Collection<ReadProgress>
+  fun findAllByIds(readProgressIds: Collection<String>): Collection<ReadProgress>
+
+  fun insert(readProgress: ReadProgress)
+  fun update(readProgress: ReadProgress)
+
+  fun delete(readProgressId: String)
+  fun deleteAll()
+
+  fun count(): Long
+}

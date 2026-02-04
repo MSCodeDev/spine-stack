@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { BuildingLibraryIcon } from '@heroicons/vue/24/outline'
 import Button from '@/components/form/Button.vue'
-import type { LibraryEntity } from '@/types/tankobon-library'
+import type { LibraryEntity } from '@/types/spinestack-library'
 import { createEmptyPaginatedResponse, getRelationship } from '@/utils/api'
 
 defineProps<{

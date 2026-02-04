@@ -1,4 +1,4 @@
-FROM ubuntu:kinetic AS tankobon-base
+FROM ubuntu:kinetic AS spinestack-base
 RUN apt update
 RUN apt install git gnupg ca-certificates curl -y
 RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
@@ -12,7 +12,7 @@ ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="${PATH}:${PNPM_HOME}"
 RUN npm install --global pnpm
 
-FROM tankobon-base AS tankobon-build
+FROM spinestack-base AS spinestack-build
 ARG NIGHTLY=false
 ENV DOCKER_PIPELINE=true
 ENV DOCKER_NIGHTLY=$NIGHTLY
@@ -20,7 +20,7 @@ WORKDIR /build
 COPY . ./
 RUN ./gradlew copyWebDist bootJar
 
-FROM azul/zulu-openjdk-alpine:17-jre-latest AS tankobon-deploy
+FROM azul/zulu-openjdk-alpine:17-jre-latest AS spinestack-deploy
 WORKDIR /deploy
-COPY --from=tankobon-build /build/server/build/libs/tankobon.jar .
-CMD ["java", "-jar", "tankobon.jar"]
+COPY --from=spinestack-build /build/server/build/libs/spinestack.jar .
+CMD ["java", "-jar", "spinestack.jar"]

@@ -136,7 +136,7 @@ jobs:
             type=raw,value=nightly
             type=sha,prefix=,format=short
           labels: |
-            org.opencontainers.image.title=Tankobon
+            org.opencontainers.image.title=SpineStack
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v4

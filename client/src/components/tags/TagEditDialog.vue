@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
-import type { TagEntity, TagUpdate } from '@/types/tankobon-tag'
+import type { TagEntity, TagUpdate } from '@/types/spinestack-tag'
 import TagForm from '@/components/tags/TagForm.vue'
 
 export interface TagEditDialogProps {

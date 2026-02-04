@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { FocusKeys } from '@primer/behaviors'
 import { createImageUrl } from '@/modules/api'
-import type { ContributorEntity } from '@/types/tankobon-contributor'
+import type { ContributorEntity } from '@/types/spinestack-contributor'
 import { getRelationship } from '@/utils/api'
 
 export interface BookAttributesProps {

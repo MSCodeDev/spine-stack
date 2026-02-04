@@ -6,10 +6,10 @@ import mdKbd from 'markdown-it-kbd'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'en-US',
-  title: 'Tankobon',
+  title: 'SpineStack',
   description: 'Self-hosted physical book collection manager',
 
-  base: '/tankobon/',
+  base: '/spinestack/',
 
   srcDir: './src',
 
@@ -31,7 +31,7 @@ export default defineConfig({
     ['link', {
       rel: 'icon',
       type: 'image/svg+xml',
-      href: '/tankobon/logo.svg',
+      href: '/spinestack/logo.svg',
     }],
   ],
 
@@ -45,8 +45,8 @@ export default defineConfig({
     ],
 
     footer: {
-      message: 'Released under the <a href="https://github.com/alessandrojean/tankobon/blob/main/LICENSE" target="_blank">MIT license</a>.',
-      copyright: 'Copyright © 2023-present <a href="https://alessandrojean.github.io" target="_blank">Alessandro Jean</a>',
+      message: 'Released under the <a href="https://github.com/mscodedev/spinestack/blob/main/LICENSE" target="_blank">MIT license</a>.',
+      copyright: 'Copyright © <a href="https://mscode.co.za" target="_blank">MSCode</a>',
     },
 
     search: {
@@ -54,7 +54,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/alessandrojean/tankobon/edit/main/docs/:path',
+      pattern: 'https://github.com/mscodedev/spinestack/edit/main/docs/:path',
     },
 
     outline: [2, 3],
@@ -105,7 +105,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/alessandrojean/tankobon' }
+      { icon: 'github', link: 'https://github.com/mscodedev/spinestack' }
     ],
   }
 })

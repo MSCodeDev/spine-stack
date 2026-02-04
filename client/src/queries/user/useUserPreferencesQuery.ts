@@ -1,9 +1,9 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import { getMyPreferences } from '@/services/tankobon-preferences'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { Preferences } from '@/types/tankobon-preference'
+import { getMyPreferences } from '@/services/spinestack-preferences'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { Preferences } from '@/types/spinestack-preference'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUserPreferencesQuery<Select = Preferences>(
   options?: UseQueryOptions<Preferences, ErrorResponse, Select>,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowsUpDownIcon, Bars3BottomLeftIcon, BarsArrowDownIcon, BarsArrowUpIcon } from '@heroicons/vue/20/solid'
 import Button from '@/components/form/Button.vue'
-import type { SortDirection } from '@/types/tankobon-api'
+import type { SortDirection } from '@/types/spinestack-api'
 
 export interface SortPropertyOption {
   property: string

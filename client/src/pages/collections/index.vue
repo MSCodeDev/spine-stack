@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import { ArchiveBoxIcon, MagnifyingGlassIcon as MagnifyingGlassIconOutline } from '@heroicons/vue/24/outline'
-import type { CollectionCreation } from '@/types/tankobon-collection'
+import type { CollectionCreation } from '@/types/spinestack-collection'
 
 const { t } = useI18n()
 const router = useRouter()

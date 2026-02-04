@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { PlusIcon } from '@heroicons/vue/20/solid'
 import type { ColumnOrderState, SortDirection } from '@tanstack/vue-table'
-import type { UserSort } from '@/types/tankobon-user'
+import type { UserSort } from '@/types/spinestack-user'
 import { safeNumber } from '@/utils/route'
-import type { Sort } from '@/types/tankobon-api'
+import type { Sort } from '@/types/spinestack-api'
 import type { SortPropertyOption } from '@/components/SortControls.vue'
 import type { TableColumn } from '@/components/TableColumnsControls.vue'
 

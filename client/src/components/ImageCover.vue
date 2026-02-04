@@ -6,7 +6,7 @@ import {
   MagnifyingGlassPlusIcon,
 } from '@heroicons/vue/24/outline'
 import { createImageUrl } from '@/modules/api'
-import type { ImageDetailsAttributes } from '@/types/tankobon-image-details'
+import type { ImageDetailsAttributes } from '@/types/spinestack-image-details'
 
 export interface ImageCoverProps {
   alt: string

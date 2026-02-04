@@ -2,13 +2,13 @@
 import type { ColumnOrderState, PaginationState, SortingState } from '@tanstack/vue-table'
 import { createColumnHelper } from '@tanstack/vue-table'
 import { IdentificationIcon } from '@heroicons/vue/24/outline'
-import type { Sort } from '@/types/tankobon-api'
+import type { Sort } from '@/types/spinestack-api'
 import Badge from '@/components/Badge.vue'
 import type {
   AuthenticationActivityEntity,
   AuthenticationActivitySort,
-} from '@/types/tankobon-authentication-activity'
-import type { PaginatedResponse } from '@/types/tankobon-response'
+} from '@/types/spinestack-authentication-activity'
+import type { PaginatedResponse } from '@/types/spinestack-response'
 
 export interface UserAuthenticationActivityTableProps {
   authenticationActivity?: PaginatedResponse<AuthenticationActivityEntity>

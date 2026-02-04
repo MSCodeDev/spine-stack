@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { PersonEntity } from '@/types/tankobon-person'
-import type { GetAllPeopleByLibraryParameters } from '@/services/tankobon-people'
-import { getAllPeopleByLibrary } from '@/services/tankobon-people'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { PersonEntity } from '@/types/spinestack-person'
+import type { GetAllPeopleByLibraryParameters } from '@/services/spinestack-people'
+import { getAllPeopleByLibrary } from '@/services/spinestack-people'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseLibraryPeopleQueryOptions<S = PaginatedResponse<PersonEntity>> =
   UseQueryOptions<PaginatedResponse<PersonEntity>, ErrorResponse, S> &
   MaybeRefDeep<GetAllPeopleByLibraryParameters>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useLibraryPeopleQuery<S = PaginatedResponse<PersonEntity>>(
   options: UseLibraryPeopleQueryOptions<S>,

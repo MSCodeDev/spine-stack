@@ -8,11 +8,11 @@ import Avatar from '../Avatar.vue'
 import Flag from '../Flag.vue'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { PublisherEntity, PublisherSort } from '@/types/tankobon-publisher'
-import type { Sort } from '@/types/tankobon-api'
+import type { PublisherEntity, PublisherSort } from '@/types/spinestack-publisher'
+import type { Sort } from '@/types/spinestack-api'
 import { getRelationship } from '@/utils/api'
 import { createImageUrl } from '@/modules/api'
-import type { PaginatedResponse } from '@/types/tankobon-response'
+import type { PaginatedResponse } from '@/types/spinestack-response'
 
 export interface PublishersTableProps {
   publishers?: PaginatedResponse<PublisherEntity>

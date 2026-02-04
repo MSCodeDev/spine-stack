@@ -10,11 +10,11 @@ import Badge from '@/components/Badge.vue'
 import Flag from '@/components/Flag.vue'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
-import type { Sort } from '@/types/tankobon-api'
+import type { Sort } from '@/types/spinestack-api'
 import { getRelationship } from '@/utils/api'
 import { createImageUrl } from '@/modules/api'
-import type { PaginatedResponse } from '@/types/tankobon-response'
-import type { StoreEntity, StoreSort, StoreType } from '@/types/tankobon-store'
+import type { PaginatedResponse } from '@/types/spinestack-response'
+import type { StoreEntity, StoreSort, StoreType } from '@/types/spinestack-store'
 
 export interface PublishersTableProps {
   stores?: PaginatedResponse<StoreEntity>

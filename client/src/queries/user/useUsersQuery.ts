@@ -1,14 +1,14 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import { type GetAllUsersOptions, getAllUsers } from '@/services/tankobon-users'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
-import type { UserEntity } from '@/types/tankobon-user'
+import { type GetAllUsersOptions, getAllUsers } from '@/services/spinestack-users'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
+import type { UserEntity } from '@/types/spinestack-user'
 import type { MaybeRefDeep } from '@/types/reactivity'
 
 type UseUsersQueryOptions<S = PaginatedResponse<UserEntity>> =
   UseQueryOptions<PaginatedResponse<UserEntity>, ErrorResponse, S>
   & MaybeRefDeep<GetAllUsersOptions>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUsersQuery<S = PaginatedResponse<UserEntity>>(
   options?: UseUsersQueryOptions<S>,

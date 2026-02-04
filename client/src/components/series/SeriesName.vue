@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { SeriesEntity } from '@/types/tankobon-series'
-import { getOriginalName } from '@/services/tankobon-series'
+import type { SeriesEntity } from '@/types/spinestack-series'
+import { getOriginalName } from '@/services/spinestack-series'
 
 export interface SeriesNameProps {
   series?: SeriesEntity | null

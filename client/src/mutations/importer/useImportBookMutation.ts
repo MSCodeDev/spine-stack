@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { importOneBook } from '@/services/tankobon-importer'
-import type { BookEntity } from '@/types/tankobon-book'
-import type { ImportOneBook } from '@/types/tankobon-importer-source'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { importOneBook } from '@/services/spinestack-importer'
+import type { BookEntity } from '@/types/spinestack-book'
+import type { ImportOneBook } from '@/types/spinestack-importer-source'
 import { getRelationship } from '@/utils/api'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useImportBookMutation() {
   const queryClient = useQueryClient()

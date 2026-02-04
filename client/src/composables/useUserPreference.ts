@@ -1,7 +1,7 @@
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 
 interface UseUserPreferenceOptions {
-  onError?: (error: Error | TankobonApiError) => void
+  onError?: (error: Error | SpineStackApiError) => void
 }
 
 export default function useUserPreference<PValue>(key: string, defaultValue: PValue, options: UseUserPreferenceOptions = {}) {

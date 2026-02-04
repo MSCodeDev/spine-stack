@@ -1,15 +1,15 @@
 # REST API
 
-Tankobon offers a REST API, which you can browse using Swagger or Redoc.
+SpineStack offers a REST API, which you can browse using Swagger or Redoc.
 It's available at `/docs/swagger-ui.html` and `/docs/redoc.html`, respectively.
 
-Under the hoods, Tankobon uses [springdoc-openapi] for semi-automated Open API
+Under the hoods, SpineStack uses [springdoc-openapi] for semi-automated Open API
 specification generation. If you find any issues or inconsistencies with the
 API options available while using the Swagger UI or Redoc, please open an
 [issue] outlining the problem.
 
 [springdoc-openapi]: https://springdoc.org/
-[issue]: https://github.com/alessandrojean/tankobon/issues/new/choose
+[issue]: https://github.com/mscodedev/spinestack/issues/new/choose
 
 ## Authenticating
 

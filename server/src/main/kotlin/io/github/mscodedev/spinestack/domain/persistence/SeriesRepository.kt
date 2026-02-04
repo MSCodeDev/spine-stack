@@ -1,0 +1,34 @@
+package io.github.mscodedev.spinestack.domain.persistence
+
+import io.github.mscodedev.spinestack.domain.model.Series
+import io.github.mscodedev.spinestack.domain.model.SeriesAlternativeName
+import io.github.mscodedev.spinestack.domain.model.SeriesSearch
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+
+interface SeriesRepository {
+  fun findAlternativeNamesById(seriesId: String): Collection<SeriesAlternativeName>
+  fun findAlternativeNamesByIds(seriesIds: Collection<String>): Map<String, List<SeriesAlternativeName>>
+
+  fun findById(seriesId: String): Series
+  fun findByIdOrNull(seriesId: String): Series?
+  fun findByIds(seriesIds: Collection<String>): Collection<Series>
+  fun findByLibraryId(libraryId: String): Collection<Series>
+
+  fun findAll(): Collection<Series>
+  fun findAll(search: SeriesSearch, pageable: Pageable): Page<Series>
+  fun findAllByIds(seriesIds: Collection<String>): Collection<Series>
+  fun findAllByIds(seriesIds: Collection<String>, libraryId: String): Collection<Series>
+
+  fun existsByNameInLibrary(name: String, libraryId: String): Boolean
+
+  fun getLibraryIdOrNull(seriesId: String): String?
+
+  fun insert(series: Series)
+  fun update(series: Series)
+
+  fun delete(seriesId: String)
+  fun deleteAll()
+
+  fun count(): Long
+}

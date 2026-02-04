@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
 import type { MaybeRef } from '@vueuse/core'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { getOneBook } from '@/services/tankobon-books'
-import type { BookEntity, BookIncludes } from '@/types/tankobon-book'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { getOneBook } from '@/services/spinestack-books'
+import type { BookEntity, BookIncludes } from '@/types/spinestack-book'
 
 interface UseBookQueryOptions<S = BookEntity> extends UseQueryOptions<BookEntity, ErrorResponse, S> {
   bookId: MaybeRef<string>
   includes?: MaybeRef<BookIncludes[]>
 }
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useBookQuery<S = BookEntity>(
   options: UseBookQueryOptions<S>,

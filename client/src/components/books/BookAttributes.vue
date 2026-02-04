@@ -5,12 +5,12 @@ import {
   ExclamationTriangleIcon,
 } from '@heroicons/vue/20/solid'
 import configureMeasurements, { length, mass } from 'convert-units'
-import type { BookEntity } from '@/types/tankobon-book'
-import { isIsbnCode } from '@/types/tankobon-book'
-import type { MonetaryAmount } from '@/types/tankobon-monetary'
+import type { BookEntity } from '@/types/spinestack-book'
+import { isIsbnCode } from '@/types/spinestack-book'
+import type { MonetaryAmount } from '@/types/spinestack-monetary'
 import { getRelationship, getRelationships } from '@/utils/api'
 import { isMassUnit, lengthUnitMap, massUnitMap, unitAbbreviation } from '@/utils/unit'
-import type { LengthUnit, MassUnit } from '@/types/tankobon-unit'
+import type { LengthUnit, MassUnit } from '@/types/spinestack-unit'
 
 export interface BookAttributesProps {
   book?: BookEntity | null

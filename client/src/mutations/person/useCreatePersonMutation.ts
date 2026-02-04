@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { addOnePerson } from '@/services/tankobon-people'
-import type { PersonCreation, PersonEntity } from '@/types/tankobon-person'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import { addOnePerson } from '@/services/spinestack-people'
+import type { PersonCreation, PersonEntity } from '@/types/spinestack-person'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreatePersonMutation() {
   const queryClient = useQueryClient()

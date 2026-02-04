@@ -15,7 +15,7 @@ plugins {
   id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
 }
 
-group = "io.github.alessandrojean"
+group = "io.github.mscodedev"
 
 java {
   sourceCompatibility = JavaVersion.VERSION_17
@@ -126,7 +126,7 @@ tasks {
     }
 
     bootJar.configure {
-      archiveFileName.set("tankobon.jar")
+      archiveFileName.set("spinestack.jar")
     }
   }
 
@@ -220,7 +220,7 @@ jooq {
             name = "org.jooq.meta.sqlite.SQLiteDatabase"
           }
           target.apply {
-            packageName = "io.github.alessandrojean.tankobon.jooq"
+            packageName = "io.github.mscodedev.spinestack.jooq"
           }
         }
       }

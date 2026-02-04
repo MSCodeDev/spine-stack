@@ -1,9 +1,9 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import { getClaimStatus } from '@/services/tankobon-claim'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { ClaimStatus } from '@/types/tankobon-claim'
+import { getClaimStatus } from '@/services/spinestack-claim'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { ClaimStatus } from '@/types/spinestack-claim'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useServerClaimStatusQuery(options?: UseQueryOptions<ClaimStatus, ErrorResponse>) {
   return useQuery<ClaimStatus, ErrorResponse>({

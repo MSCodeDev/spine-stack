@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { PlusIcon } from '@heroicons/vue/20/solid'
 import type { SortDirection } from '@tanstack/vue-table'
-import type { LibraryCreation, LibrarySort } from '@/types/tankobon-library'
+import type { LibraryCreation, LibrarySort } from '@/types/spinestack-library'
 import { safeNumber } from '@/utils/route'
-import type { Sort } from '@/types/tankobon-api'
+import type { Sort } from '@/types/spinestack-api'
 
 const userStore = useUserStore()
 const userId = computed(() => userStore.me?.id)

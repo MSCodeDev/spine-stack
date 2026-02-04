@@ -1,6 +1,6 @@
 # Contributing
 
-If you're interested in supporting Tankobon's development, and you know
+If you're interested in supporting SpineStack's development, and you know
 how to code, follow the steps outlined in the [developer guide]
 for information about setting up your development environment.
 
@@ -13,7 +13,7 @@ Contributions are encouraged and welcome! Be sure to review the
 
 ### Setup the development environment
 
-Here are some basic instructions on how you can start developing Tankobon.
+Here are some basic instructions on how you can start developing SpineStack.
 
 1. Install [pnpm], [Node.js] and [JDK 17].
 2. Run the server:
@@ -42,7 +42,7 @@ If you use IntelliJ IDEA, you can use some run configurations provided with
 the project that will make easier to run the server within specific
 Spring profiles such as `localdb`, `noclaim` and `dev`.
 
-[CONTRIBUTING.md]: https://github.com/alessandrojean/tankobon/blob/main/CONTRIBUTING.md
+[CONTRIBUTING.md]: https://github.com/mscodedev/spinestack/blob/main/CONTRIBUTING.md
 [pnpm]: https://pnpm.io/
 [Node.js]: https://nodejs.org/
 [JDK 17]: https://openjdk.org/projects/jdk/17/
@@ -52,7 +52,7 @@ Spring profiles such as `localdb`, `noclaim` and `dev`.
 
 ## Notes and tips
 
-Tankobon code architecture ended up being large and complex. Here are
+SpineStack code architecture ended up being large and complex. Here are
 some few notes and tips to help you get started.
 
 ### Where to start?
@@ -69,12 +69,12 @@ In general, some good places to start might be:
 - Docker build optimizations and caching strategies.
 - CI pipelines and workflows.
 
-[issues]: https://github.com/alessandrojean/tankobon/issues
-[project]: https://github.com/users/alessandrojean/projects/1
+[issues]: https://github.com/mscodedev/spinestack/issues
+[project]: https://github.com/users/mscodedev/projects/1
 
 ### Spring profiles
 
-Tankobon uses Spring Profiles extensively.
+SpineStack uses Spring Profiles extensively.
 
 `dev`
 : Add more logging, in-memory database, and enable CORS from `localhost:8081`.
@@ -96,7 +96,7 @@ Tankobon uses Spring Profiles extensively.
 
 ### Code style, formatting, and linting
 
-Tankobon is developed using [Kotlin] and [TypeScript].
+SpineStack is developed using [Kotlin] and [TypeScript].
 
 For the server code in Kotlin, [ktlint] is used for formatting and linting.
 For TypeScript, [ESLint] with [@antfu/eslint-config] is used for formatting
@@ -144,7 +144,7 @@ what it's addressing.
 
 ### Developer resources
 
-Below is a list of resources that are useful for the Tankobon development.
+Below is a list of resources that are useful for the SpineStack development.
 
 - [Kotlin website](https://kotlinlang.org/)
 - [Spring Boot website](https://spring.io/projects/spring-boot/)
@@ -154,7 +154,7 @@ Below is a list of resources that are useful for the Tankobon development.
 
 ## Translation
 
-Tankobon is a work in progress and is subject to a lot of changes yet.
+SpineStack is a work in progress and is subject to a lot of changes yet.
 For that reason, we don't recommend translating the resources to other
 languages yet, as they will be outdated pretty quickly.
 
@@ -163,5 +163,5 @@ languages yet, as they will be outdated pretty quickly.
 If you'd like to support the project financially, you can do so
 using any of the following platforms.
 
-- [GitHub Sponsors](https://github.com/sponsors/alessandrojean)
-- [Ko-fi](https://ko-fi.com/alessandrojean)
+- [GitHub Sponsors](https://github.com/sponsors/mscodedev)
+- [Ko-fi](https://ko-fi.com/mscodedev)

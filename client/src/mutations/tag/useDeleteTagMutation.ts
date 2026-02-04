@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { deleteOneTag } from '@/services/tankobon-tags'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { deleteOneTag } from '@/services/spinestack-tags'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useDeleteTagMutation() {
   const queryClient = useQueryClient()

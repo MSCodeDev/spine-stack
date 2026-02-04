@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { CheckIcon, ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
-import type { BookLinks, BookUpdate } from '@/types/tankobon-book'
-import type { DimensionsString } from '@/types/tankobon-dimensions'
-import type { MonetaryAmountString } from '@/types/tankobon-monetary'
+import type { BookLinks, BookUpdate } from '@/types/spinestack-book'
+import type { DimensionsString } from '@/types/spinestack-dimensions'
+import type { MonetaryAmountString } from '@/types/spinestack-monetary'
 import BookMetadataForm from '@/components/books/BookMetadataForm.vue'
 import BookOrganizationForm from '@/components/books/BookOrganizationForm.vue'
 import BookContributorsForm from '@/components/books/BookContributorsForm.vue'
 import type { CoverArt } from '@/components/books/BookCoverArtForm.vue'
 import BookCoverArtForm from '@/components/books/BookCoverArtForm.vue'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 import EntityExternalLinksForm from '@/components/entity/EntityExternalLinksForm.vue'
-import type { FormExternalLink } from '@/types/tankobon-external-link'
-import type { WeightString } from '@/types/tankobon-weight'
-import type { LengthUnit, MassUnit } from '@/types/tankobon-unit'
+import type { FormExternalLink } from '@/types/spinestack-external-link'
+import type { WeightString } from '@/types/spinestack-weight'
+import type { LengthUnit, MassUnit } from '@/types/spinestack-unit'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -195,7 +195,7 @@ async function handleSubmit() {
   } catch (error) {
     await notificator.failure({
       title: t('books.created-with-failure'),
-      body: (error as TankobonApiError | Error).message,
+      body: (error as SpineStackApiError | Error).message,
     })
   }
 }

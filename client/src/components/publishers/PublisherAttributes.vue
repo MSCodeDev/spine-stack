@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PublisherAttributes, PublisherEntity } from '@/types/tankobon-publisher'
+import type { PublisherAttributes, PublisherEntity } from '@/types/spinestack-publisher'
 
 export interface SeriesAttributesProps {
   publisher?: PublisherEntity | null

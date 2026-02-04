@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
 import type { MaybeRef } from '@vueuse/core'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { getOneSeries } from '@/services/tankobon-series'
-import type { SeriesEntity, SeriesIncludes } from '@/types/tankobon-series'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { getOneSeries } from '@/services/spinestack-series'
+import type { SeriesEntity, SeriesIncludes } from '@/types/spinestack-series'
 
 interface UseSeriesQueryOptions<S = SeriesEntity> extends UseQueryOptions<SeriesEntity, ErrorResponse, S> {
   seriesId: MaybeRef<string>
   includes?: MaybeRef<SeriesIncludes[]>
 }
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useSeriesQuery<S = SeriesEntity>(
   options: UseSeriesQueryOptions<S>,

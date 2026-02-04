@@ -1,19 +1,19 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
 import type {
   GetAuthenticationActivityFromUserOptions,
-} from '@/services/tankobon-users'
+} from '@/services/spinestack-users'
 import {
   getAuthenticationActivityFromUser,
-} from '@/services/tankobon-users'
-import type { PaginatedResponse, TankobonApiError } from '@/types/tankobon-response'
+} from '@/services/spinestack-users'
+import type { PaginatedResponse, SpineStackApiError } from '@/types/spinestack-response'
 import type { MaybeRefDeep } from '@/types/reactivity'
-import type { AuthenticationActivityEntity } from '@/types/tankobon-authentication-activity'
+import type { AuthenticationActivityEntity } from '@/types/spinestack-authentication-activity'
 
 type UseUserAuthenticationActivityQueryOptions<S = PaginatedResponse<AuthenticationActivityEntity>> =
   UseQueryOptions<PaginatedResponse<AuthenticationActivityEntity>, ErrorResponse, S>
   & MaybeRefDeep<GetAuthenticationActivityFromUserOptions>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUserAuthenticationActivityQuery<S = PaginatedResponse<AuthenticationActivityEntity>>(
   options: UseUserAuthenticationActivityQueryOptions<S>,

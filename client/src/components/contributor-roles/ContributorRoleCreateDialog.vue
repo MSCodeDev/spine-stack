@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
 import ContributorRoleForm from '@/components/contributor-roles/ContributorRoleForm.vue'
-import type { ContributorRoleCreation } from '@/types/tankobon-contributor-role'
+import type { ContributorRoleCreation } from '@/types/spinestack-contributor-role'
 
 export interface ContributorRoleCreateDialogProps {
   libraryId: string

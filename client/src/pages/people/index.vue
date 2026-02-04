@@ -3,9 +3,9 @@ import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import type { ColumnOrderState, SortDirection } from '@tanstack/vue-table'
 import type { SortPropertyOption } from '@/components/SortControls.vue'
 import type { TableColumn } from '@/components/TableColumnsControls.vue'
-import type { Sort } from '@/types/tankobon-api'
+import type { Sort } from '@/types/spinestack-api'
 import { safeNumber } from '@/utils/route'
-import type { PersonSort } from '@/types/tankobon-person'
+import type { PersonSort } from '@/types/spinestack-person'
 
 const libraryStore = useLibraryStore()
 const libraryId = computed(() => libraryStore.library!.id)

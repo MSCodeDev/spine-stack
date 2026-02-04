@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
-import type { LibraryEntity } from '@/types/tankobon-library'
-import { getAllLibrariesByUser } from '@/services/tankobon-libraries'
+import type { LibraryEntity } from '@/types/spinestack-library'
+import { getAllLibrariesByUser } from '@/services/spinestack-libraries'
 
 export const useLibraryStore = defineStore('library', {
   state: () => ({

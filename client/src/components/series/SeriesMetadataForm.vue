@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useVuelidate } from '@vuelidate/core'
 import { helpers, required } from '@vuelidate/validators'
-import type { AlternativeName } from '@/types/tankobon-alternative-name'
-import type { SeriesType } from '@/types/tankobon-series'
+import type { AlternativeName } from '@/types/spinestack-alternative-name'
+import type { SeriesType } from '@/types/spinestack-series'
 import { BCP47_OPTIONS, getLanguageName, getRegionCode } from '@/utils/language'
 
 export interface SeriesMetadataFormProps {

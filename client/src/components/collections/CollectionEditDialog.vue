@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
-import type { CollectionEntity, CollectionUpdate } from '@/types/tankobon-collection'
+import type { CollectionEntity, CollectionUpdate } from '@/types/spinestack-collection'
 import CollectionForm from '@/components/collections/CollectionForm.vue'
 
 export interface CollectionEditDialogProps {

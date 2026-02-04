@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { ReadProgressCreation, ReadProgressEntity } from '@/types/tankobon-read-progress'
-import { addOneReadProgress } from '@/services/tankobon-read-progresses'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { ReadProgressCreation, ReadProgressEntity } from '@/types/spinestack-read-progress'
+import { addOneReadProgress } from '@/services/spinestack-read-progresses'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreateReadProgressMutation() {
   const queryClient = useQueryClient()

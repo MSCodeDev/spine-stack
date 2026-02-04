@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
-import type { ContributorRoleEntity, ContributorRoleUpdate } from '@/types/tankobon-contributor-role'
+import type { ContributorRoleEntity, ContributorRoleUpdate } from '@/types/spinestack-contributor-role'
 import ContributorRoleForm from '@/components/contributor-roles/ContributorRoleForm.vue'
 
 export interface ContributorRoleEditDialogProps {

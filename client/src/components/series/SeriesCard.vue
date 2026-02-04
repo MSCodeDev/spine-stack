@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Square2StackIcon } from '@heroicons/vue/24/outline'
-import type { SeriesEntity } from '@/types/tankobon-series'
+import type { SeriesEntity } from '@/types/spinestack-series'
 import { getRelationship } from '@/utils/api'
 
 export interface SeriesCardProps {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
 import CollectionForm from '@/components/collections/CollectionForm.vue'
-import type { CollectionCreation } from '@/types/tankobon-collection'
+import type { CollectionCreation } from '@/types/spinestack-collection'
 
 export interface CollectionCreateDialogProps {
   libraryId: string

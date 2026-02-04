@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import type { UploadBookCoverOptions } from '@/services/tankobon-books'
-import { uploadBookCover } from '@/services/tankobon-books'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import type { UploadBookCoverOptions } from '@/services/spinestack-books'
+import { uploadBookCover } from '@/services/spinestack-books'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useUploadBookCoverMutation() {
   const queryClient = useQueryClient()

@@ -1,15 +1,15 @@
 import { type UseQueryOptions, useQuery } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 import type { MaybeRefDeep } from '@/types/reactivity'
-import type { ExternalBookEntity } from '@/types/tankobon-external-book'
-import type { SearchByIsbnOptions } from '@/services/tankobon-importer'
-import { searchByIsbn } from '@/services/tankobon-importer'
+import type { ExternalBookEntity } from '@/types/spinestack-external-book'
+import type { SearchByIsbnOptions } from '@/services/spinestack-importer'
+import { searchByIsbn } from '@/services/spinestack-importer'
 
 type UseImporterSearchQueryOptions<S = ExternalBookEntity[]> =
   UseQueryOptions<ExternalBookEntity[], ErrorResponse, S> &
   MaybeRefDeep<SearchByIsbnOptions>
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useImporterSearchQuery<S = ExternalBookEntity[]>(
   options: UseImporterSearchQueryOptions<S>,

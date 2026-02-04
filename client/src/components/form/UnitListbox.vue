@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="Unit extends LengthUnit | MassUnit">
 import Button from './Button.vue'
-import type { LengthUnit, MassUnit } from '@/types/tankobon-unit'
+import type { LengthUnit, MassUnit } from '@/types/spinestack-unit'
 import { isMassUnit, unitAbbreviation } from '@/utils/unit'
 
 const props = defineProps<{

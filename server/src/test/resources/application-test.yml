@@ -1,6 +1,6 @@
 application.version: TESTING
 
-tankobon:
+spinestack:
   database:
     file: ":memory:"
 
@@ -13,4 +13,4 @@ spring:
 
 logging:
   level:
-    io.github.alessandrojean.tankobon: DEBUG
+    io.github.mscodedev.spinestack: DEBUG

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import InputMask from 'inputmask'
 import type { ErrorObject } from '@vuelidate/core'
-import type { DimensionsString } from '@/types/tankobon-dimensions'
-import type { LengthUnit } from '@/types/tankobon-unit'
+import type { DimensionsString } from '@/types/spinestack-dimensions'
+import type { LengthUnit } from '@/types/spinestack-unit'
 
 export interface DimensionsInputProps {
   errorsWidth?: ErrorObject[]

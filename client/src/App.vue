@@ -120,7 +120,7 @@ async function showToast(toast: Toast): Promise<void> {
 provide(ShowToastKey, showToast)
 
 useHead({
-  titleTemplate: (title?: string) => !title ? 'Tankobon' : `${title} | Tankobon`,
+  titleTemplate: (title?: string) => !title ? 'SpineStack' : `${title} | SpineStack`,
 })
 </script>
 

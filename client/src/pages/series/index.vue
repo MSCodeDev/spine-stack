@@ -4,8 +4,8 @@ import type { ColumnOrderState } from '@tanstack/vue-table'
 import type { SortPropertyOption } from '@/components/SortControls.vue'
 import type { TableColumn } from '@/components/TableColumnsControls.vue'
 import type { ViewMode } from '@/components/ViewModeSelector.vue'
-import type { Sort, SortDirection } from '@/types/tankobon-api'
-import type { SeriesSort } from '@/types/tankobon-series'
+import type { Sort, SortDirection } from '@/types/spinestack-api'
+import type { SeriesSort } from '@/types/spinestack-series'
 import { safeNumber } from '@/utils/route'
 
 const libraryStore = useLibraryStore()

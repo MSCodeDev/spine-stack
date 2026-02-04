@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { CheckIcon } from '@heroicons/vue/20/solid'
 import LibraryForm from '@/components/libraries/LibraryForm.vue'
-import type { LibraryCreation } from '@/types/tankobon-library'
+import type { LibraryCreation } from '@/types/spinestack-library'
 
 export interface LibraryCreateDialogProps {
   isOpen: boolean

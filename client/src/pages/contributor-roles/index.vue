@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import { MagnifyingGlassIcon as MagnifyingGlassIconOutline, QueueListIcon } from '@heroicons/vue/24/outline'
-import type { ContributorRoleCreation } from '@/types/tankobon-contributor-role'
+import type { ContributorRoleCreation } from '@/types/spinestack-contributor-role'
 
 const { t } = useI18n()
 const router = useRouter()

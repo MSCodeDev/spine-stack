@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import type { TankobonApiError } from '@/types/tankobon-response'
-import { setMyPreferencesValuesByKeys } from '@/services/tankobon-preferences'
-import type { Preferences } from '@/types/tankobon-preference'
+import type { SpineStackApiError } from '@/types/spinestack-response'
+import { setMyPreferencesValuesByKeys } from '@/services/spinestack-preferences'
+import type { Preferences } from '@/types/spinestack-preference'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useSetPreferencesMutation() {
   const queryClient = useQueryClient()

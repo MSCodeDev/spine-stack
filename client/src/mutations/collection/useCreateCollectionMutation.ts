@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/vue-query'
-import { addOneCollection } from '@/services/tankobon-collections'
-import type { CollectionCreation, CollectionEntity } from '@/types/tankobon-collection'
-import type { TankobonApiError } from '@/types/tankobon-response'
+import { addOneCollection } from '@/services/spinestack-collections'
+import type { CollectionCreation, CollectionEntity } from '@/types/spinestack-collection'
+import type { SpineStackApiError } from '@/types/spinestack-response'
 
-type ErrorResponse = TankobonApiError | Error
+type ErrorResponse = SpineStackApiError | Error
 
 export default function useCreateCollectionMutation() {
   const queryClient = useQueryClient()
