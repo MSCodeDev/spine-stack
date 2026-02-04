@@ -9,13 +9,13 @@ import {
   BuildingOffice2Icon,
   BuildingStorefrontIcon,
   ChevronDoubleLeftIcon,
+  ChevronRightIcon,
   HomeIcon,
   PaintBrushIcon,
-  PresentationChartLineIcon,
   QueueListIcon,
-  ServerStackIcon,
   Square2StackIcon,
   TagIcon,
+  UserGroupIcon,
   UsersIcon,
 } from '@heroicons/vue/24/outline'
 import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/20/solid'
@@ -30,6 +30,20 @@ export interface Item {
   external?: boolean
   active?: (() => boolean) | ComputedRef<boolean>
   isAdminOnly?: boolean
+}
+
+export interface ItemGroup {
+  key: string
+  label: string
+  icon?: FunctionalComponent
+  children: Item[]
+  isAdminOnly?: boolean
+}
+
+export type MenuItem = Item | ItemGroup
+
+function isItemGroup(item: MenuItem): item is ItemGroup {
+  return 'children' in item
 }
 
 export interface AsideMenuProps {
@@ -50,28 +64,13 @@ const { isAdmin } = toRefs(props)
 const { t } = useI18n({ useScope: 'global' })
 const router = useRouter()
 
-const items = computed<Item[]>(() => [
+const items = computed<MenuItem[]>(() => [
   {
     key: 'dashboard',
     label: t('dashboard.title'),
     icon: HomeIcon,
     to: { name: 'index' },
     exact: true,
-  },
-  {
-    key: 'statistics',
-    label: t('statistics.title'),
-    icon: PresentationChartLineIcon,
-    to: { name: 'statistics' },
-  },
-  {
-    key: 'libraries',
-    label: t('entities.libraries'),
-    icon: BuildingLibraryIcon,
-    to: { name: 'libraries' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('libraries')
-    }),
   },
   {
     key: 'books',
@@ -84,84 +83,107 @@ const items = computed<Item[]>(() => [
     }),
   },
   {
-    key: 'collections',
-    label: t('entities.collections'),
+    key: 'organization',
+    label: t('aside-menu.organization'),
     icon: ArchiveBoxIcon,
-    to: { name: 'collections' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('collections')
-    }),
+    children: [
+      {
+        key: 'collections',
+        label: t('entities.collections'),
+        icon: ArchiveBoxIcon,
+        to: { name: 'collections' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('collections')
+        }),
+      },
+      {
+        key: 'series',
+        label: t('entities.series'),
+        icon: Square2StackIcon,
+        to: { name: 'series' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('series')
+        }),
+      },
+      {
+        key: 'tags',
+        label: t('entities.tags'),
+        icon: TagIcon,
+        to: { name: 'tags' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('tags')
+        }),
+      },
+    ],
   },
   {
-    key: 'series',
-    label: t('entities.series'),
-    icon: Square2StackIcon,
-    to: { name: 'series' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('series')
-    }),
+    key: 'places',
+    label: t('aside-menu.places'),
+    icon: BuildingLibraryIcon,
+    children: [
+      {
+        key: 'libraries',
+        label: t('entities.libraries'),
+        icon: BuildingLibraryIcon,
+        to: { name: 'libraries' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('libraries')
+        }),
+      },
+      {
+        key: 'publishers',
+        label: t('entities.publishers'),
+        icon: BuildingOffice2Icon,
+        to: { name: 'publishers' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('publishers')
+        }),
+      },
+      {
+        key: 'stores',
+        label: t('entities.stores'),
+        icon: BuildingStorefrontIcon,
+        to: { name: 'stores' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('stores')
+        }),
+      },
+    ],
   },
   {
-    key: 'publishers',
-    label: t('entities.publishers'),
-    icon: BuildingOffice2Icon,
-    to: { name: 'publishers' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('publishers')
-    }),
-  },
-  {
-    key: 'stores',
-    label: t('entities.stores'),
-    icon: BuildingStorefrontIcon,
-    to: { name: 'stores' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('stores')
-    }),
-  },
-  {
-    key: 'people',
-    label: t('entities.people'),
-    icon: PaintBrushIcon,
-    to: { name: 'people' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('people')
-    }),
-  },
-  {
-    key: 'contributor-roles',
-    label: t('entities.contributor-roles'),
-    icon: QueueListIcon,
-    to: { name: 'contributor-roles' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('contributor-roles')
-    }),
-  },
-  {
-    key: 'tags',
-    label: t('entities.tags'),
-    icon: TagIcon,
-    to: { name: 'tags' },
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('tags')
-    }),
-  },
-  {
-    key: 'users',
-    label: t('entities.users'),
-    icon: UsersIcon,
-    to: { name: 'users' },
-    isAdminOnly: true,
-    active: computed(() => {
-      return String(router.currentRoute.value.name).includes('users')
-    }),
-  },
-  {
-    key: 'metrics',
-    label: t('metrics.header'),
-    icon: ServerStackIcon,
-    to: { name: 'metrics' },
-    isAdminOnly: true,
+    key: 'people-group',
+    label: t('aside-menu.people'),
+    icon: UserGroupIcon,
+    children: [
+      {
+        key: 'people',
+        label: t('entities.people'),
+        icon: PaintBrushIcon,
+        to: { name: 'people' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('people')
+        }),
+      },
+      {
+        key: 'contributor-roles',
+        label: t('entities.contributor-roles'),
+        icon: QueueListIcon,
+        to: { name: 'contributor-roles' },
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('contributor-roles')
+        }),
+      },
+      {
+        key: 'users',
+        label: t('entities.users'),
+        icon: UsersIcon,
+        to: { name: 'users' },
+        isAdminOnly: true,
+        active: computed(() => {
+          return String(router.currentRoute.value.name).includes('users')
+        }),
+      },
+    ],
   },
 ])
 
@@ -184,9 +206,44 @@ async function handleNavigation(route: RouteLocation, event: MouseEvent) {
 }
 
 const collapsed = useLocalStorage('aside-collapsed', false)
+const expandedGroups = useLocalStorage<string[]>('aside-expanded-groups', [])
+
+function toggleGroup(key: string) {
+  const index = expandedGroups.value.indexOf(key)
+  if (index === -1) {
+    expandedGroups.value.push(key)
+  } else {
+    expandedGroups.value.splice(index, 1)
+  }
+}
+
+function isGroupExpanded(key: string): boolean {
+  return expandedGroups.value.includes(key)
+}
+
+function isGroupActive(group: ItemGroup): boolean {
+  return group.children.some((child) => {
+    if (child.active) {
+      return typeof child.active === 'function' ? child.active() : child.active.value
+    }
+    return false
+  })
+}
+
+function filterItems(item: MenuItem): boolean {
+  if (isItemGroup(item)) {
+    const filteredChildren = item.children.filter(child => child.isAdminOnly ? isAdmin.value : true)
+    return filteredChildren.length > 0 && (item.isAdminOnly ? isAdmin.value : true)
+  }
+  return item.isAdminOnly ? isAdmin.value : true
+}
+
+function filterGroupChildren(group: ItemGroup): Item[] {
+  return group.children.filter(child => child.isAdminOnly ? isAdmin.value : true)
+}
 
 const allowedItems = computed(() => {
-  return items.value.filter(item => item.isAdminOnly ? isAdmin.value : true)
+  return items.value.filter(filterItems)
 })
 
 const appVersion = import.meta.env.APP_VERSION
@@ -249,27 +306,107 @@ const lgAndLarger = breakpoints.greaterOrEqual('lg')
               collapsed && lgAndLarger ? 'flex flex-col items-center' : '',
             ]"
           >
-            <li v-for="item in allowedItems" :key="item.key" class="w-full">
-              <RouterLink
-                v-slot="{ href, isActive, isExactActive, navigate, route }"
-                custom
-                :to="item.to"
-              >
-                <AsideButton
-                  :item="item"
-                  :href="href"
-                  :target="item.external ? '_blank' : undefined"
-                  :active="
-                    active(item.active, item.exact, isExactActive, isActive)
-                  "
-                  @click="
-                    item.external
-                      ? navigate($event)
-                      : handleNavigation(route, $event)
-                  "
-                />
-              </RouterLink>
-            </li>
+            <template v-for="item in allowedItems" :key="item.key">
+              <!-- Regular menu item -->
+              <li v-if="!isItemGroup(item)" class="w-full">
+                <RouterLink
+                  v-slot="{ href, isActive, isExactActive, navigate, route }"
+                  custom
+                  :to="item.to"
+                >
+                  <AsideButton
+                    :item="item"
+                    :href="href"
+                    :target="item.external ? '_blank' : undefined"
+                    :active="
+                      active(item.active, item.exact, isExactActive, isActive)
+                    "
+                    @click="
+                      item.external
+                        ? navigate($event)
+                        : handleNavigation(route, $event)
+                    "
+                  />
+                </RouterLink>
+              </li>
+
+              <!-- Group with sub-menu -->
+              <li v-else class="w-full">
+                <button
+                  type="button"
+                  :class="[
+                    'group flex items-center flex-nowrap text-sm rounded-lg w-full',
+                    'font-medium dark:focus-visible:ring-white/90 focus:outline-none',
+                    'focus-visible:ring-2 focus-visible:ring-black h-10',
+                    isGroupActive(item)
+                      ? 'bg-primary-100 text-primary-900 dark:text-gray-100 dark:bg-primary-400/10'
+                      : 'text-gray-700 dark:text-gray-300 hocus:bg-gray-200 hocus:text-gray-800 dark:hocus:text-gray-100 dark:hocus:bg-gray-800',
+                  ]"
+                  :title="item.label"
+                  @click="toggleGroup(item.key)"
+                >
+                  <div
+                    v-if="item.icon"
+                    class="shrink-0 w-10 h-10 flex items-center justify-center motion-safe:transition-colors"
+                  >
+                    <Component
+                      :is="item.icon"
+                      class="w-6 h-6 motion-safe:transition-colors"
+                      :class="[
+                        isGroupActive(item)
+                          ? 'text-primary-600 dark:text-primary-500'
+                          : 'text-gray-500 dark:text-gray-400 group-hocus:text-gray-600 dark:group-hocus:text-gray-300',
+                      ]"
+                    />
+                  </div>
+                  <span
+                    class="shrink-0 pl-3 box-border truncate motion-safe:transition-all flex-1 text-left"
+                    :class="[item.icon ? 'w-[11.5rem]' : 'w-full']"
+                  >
+                    {{ item.label }}
+                  </span>
+                  <div class="shrink-0 w-10 h-10 flex items-center justify-center">
+                    <ChevronRightIcon
+                      class="w-4 h-4 motion-safe:transition-transform duration-200"
+                      :class="[
+                        isGroupExpanded(item.key) ? 'rotate-90' : '',
+                        isGroupActive(item)
+                          ? 'text-primary-600 dark:text-primary-500'
+                          : 'text-gray-400 dark:text-gray-500',
+                      ]"
+                    />
+                  </div>
+                </button>
+
+                <!-- Sub-menu items -->
+                <ul
+                  v-show="isGroupExpanded(item.key)"
+                  class="mt-1 ml-4 space-y-1 border-l border-gray-200 dark:border-gray-700 pl-2"
+                >
+                  <li v-for="child in filterGroupChildren(item)" :key="child.key" class="w-full">
+                    <RouterLink
+                      v-slot="{ href, isActive, isExactActive, navigate, route }"
+                      custom
+                      :to="child.to"
+                    >
+                      <AsideButton
+                        :item="child"
+                        :href="href"
+                        :target="child.external ? '_blank' : undefined"
+                        :active="
+                          active(child.active, child.exact, isExactActive, isActive)
+                        "
+                        @click="
+                          child.external
+                            ? navigate($event)
+                            : handleNavigation(route, $event)
+                        "
+                      />
+                    </RouterLink>
+                  </li>
+                </ul>
+              </li>
+            </template>
           </ul>
         </nav>
       </div>

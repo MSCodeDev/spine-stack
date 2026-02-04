@@ -245,6 +245,14 @@ libraries:
 
 dashboard:
   title: Dashboard
+  total-books: Total Books
+  total-collections: Collections
+  total-series: Series
+  recent-books: Recently Added
+  view-all-books: View all books
+  no-books-title: No books yet
+  no-books-description: Start building your library by adding your first book
+  fetch-failure: Failed to load dashboard data
 
 settings:
   title: Settings
@@ -630,6 +638,9 @@ aside-menu:
   release-link: Release on GitHub
   commit-link: Commit on GitHub
   mit-licensed: MIT licensed
+  organization: Organization
+  places: Places
+  people: People
 
 searchable-combobox:
   no-results-found: No results found
