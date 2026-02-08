@@ -30,7 +30,7 @@ const sort = computed({
     const [property, direction] = sortQuery.value?.split(':') ?? []
 
     if (!property && !direction) {
-      return null
+      return { property: 'title', direction: 'asc' } satisfies Sort<BookSort>
     }
 
     return {
