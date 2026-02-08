@@ -1,20 +1,23 @@
 <script setup lang="ts">
 import useVuelidate from '@vuelidate/core'
 import { helpers } from '@vuelidate/validators'
-import { TrashIcon } from '@heroicons/vue/20/solid'
+import { MagnifyingGlassIcon, TrashIcon } from '@heroicons/vue/20/solid'
 import { BookOpenIcon } from '@heroicons/vue/24/outline'
 import { maxFileSize } from '@/utils/validation'
 import { ACCEPTED_IMAGE_FORMATS } from '@/utils/api'
+import CoverSearchDialog from './CoverSearchDialog.vue'
 
 export interface BookCoverArtFormProps {
   currentImageUrl?: string | undefined | null
   coverArt: CoverArt
   disabled?: boolean
+  title?: string
 }
 
 export interface CoverArt {
   removeExisting: boolean
   file: File | null
+  externalUrl?: string | null
 }
 
 export interface BookCoverArtFormEmits {
@@ -24,13 +27,16 @@ export interface BookCoverArtFormEmits {
 const props = withDefaults(defineProps<BookCoverArtFormProps>(), {
   currentImageUrl: undefined,
   disabled: false,
+  title: '',
 })
 
 const emit = defineEmits<BookCoverArtFormEmits>()
 
-const { coverArt, currentImageUrl } = toRefs(props)
+const { coverArt, currentImageUrl, title } = toRefs(props)
 
 const { t } = useI18n()
+
+const showCoverSearchDialog = ref(false)
 
 const rules = computed(() => {
   const messageMaxFileSize = helpers.withMessage(
@@ -56,6 +62,7 @@ const uploadingBlobUrl = computed(() => {
 function handleUpload(files: FileList) {
   const copy = structuredClone(toRaw(coverArt.value))
   copy.file = files[0]
+  copy.externalUrl = null
 
   emit('update:cover-art', copy)
   v$.value.coverArt.file.$touch()
@@ -64,8 +71,9 @@ function handleUpload(files: FileList) {
 function handleRemove() {
   const copy = structuredClone(toRaw(coverArt.value))
 
-  if (uploadingBlobUrl.value) {
+  if (uploadingBlobUrl.value || copy.externalUrl) {
     copy.file = null
+    copy.externalUrl = null
   } else if (currentImageUrl.value) {
     copy.removeExisting = true
   }
@@ -73,7 +81,19 @@ function handleRemove() {
   emit('update:cover-art', copy)
 }
 
+function handleCoverSelected(coverUrl: string) {
+  const copy = structuredClone(toRaw(coverArt.value))
+  copy.externalUrl = coverUrl
+  copy.file = null
+  copy.removeExisting = false
+
+  emit('update:cover-art', copy)
+}
+
 const previewUrl = computed(() => {
+  if (coverArt.value.externalUrl) {
+    return coverArt.value.externalUrl
+  }
   return coverArt.value.removeExisting ? null : currentImageUrl.value
 })
 </script>
@@ -97,14 +117,25 @@ const previewUrl = computed(() => {
           class="w-2/3 sm:w-full rounded-xl shadow-md ring-1 ring-black/5"
         >
       </FadeTransition>
-      <Button
-        class="w-fit sm:w-full"
-        :disabled="!previewUrl && !uploadingBlobUrl"
-        @click="handleRemove"
-      >
-        <TrashIcon class="w-5 h-5" />
-        <span>{{ $t('common-actions.remove') }}</span>
-      </Button>
+      <div class="flex flex-col gap-2 w-fit sm:w-full">
+        <Button
+          type="button"
+          class="w-full"
+          @click="showCoverSearchDialog = true"
+        >
+          <MagnifyingGlassIcon class="w-5 h-5" />
+          <span>{{ $t('cover-search.search-online') }}</span>
+        </Button>
+        <Button
+          type="button"
+          class="w-full"
+          :disabled="!previewUrl && !uploadingBlobUrl"
+          @click="handleRemove"
+        >
+          <TrashIcon class="w-5 h-5" />
+          <span>{{ $t('common-actions.remove') }}</span>
+        </Button>
+      </div>
     </div>
     <div class="sm:col-span-3 xl:col-span-4">
       <FileInput
@@ -117,4 +148,11 @@ const previewUrl = computed(() => {
       />
     </div>
   </fieldset>
+
+  <CoverSearchDialog
+    :is-open="showCoverSearchDialog"
+    :initial-title="title"
+    @close="showCoverSearchDialog = false"
+    @select="handleCoverSelected"
+  />
 </template>

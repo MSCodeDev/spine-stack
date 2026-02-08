@@ -22,8 +22,9 @@ const notificator = useToaster()
 
 const { mutateAsync: createBook, isLoading: isCreatingBook } = useCreateBookMutation()
 const { mutateAsync: uploadCover, isLoading: isUploadingCover } = useUploadBookCoverMutation()
+const { mutateAsync: downloadCover, isLoading: isDownloadingCover } = useDownloadBookCoverMutation()
 
-const isCreating = logicOr(isCreatingBook, isUploadingCover)
+const isCreating = logicOr(isCreatingBook, isUploadingCover, isDownloadingCover)
 
 const metadataForm = ref<InstanceType<typeof BookMetadataForm>>()
 const contributorsForm = ref<InstanceType<typeof BookContributorsForm>>()
@@ -110,6 +111,7 @@ const newBook = reactive<CustomBookUpdate>({
 const coverArt = ref<CoverArt>({
   removeExisting: false,
   file: null,
+  externalUrl: null,
 })
 
 const activeTab = ref(tabs[0])
@@ -188,6 +190,8 @@ async function handleSubmit() {
 
     if (coverArt.value.file) {
       await uploadCover({ bookId: id, cover: coverArt.value.file })
+    } else if (coverArt.value.externalUrl) {
+      await downloadCover({ bookId: id, coverUrl: coverArt.value.externalUrl })
     }
 
     notificator.success({ title: t('books.created-with-success') })
@@ -309,6 +313,7 @@ useBeforeUnload({
             <BookCoverArtForm
               ref="coverArtForm"
               v-model:cover-art="coverArt"
+              :title="newBook.title"
               :disabled="isCreating"
             />
           </TabPanel>

@@ -243,6 +243,27 @@ export async function uploadBookCover(options: UploadBookCoverOptions): Promise<
   }
 }
 
+export interface DownloadBookCoverOptions {
+  bookId: string
+  coverUrl: string
+}
+
+export async function downloadBookCover(options: DownloadBookCoverOptions): Promise<void> {
+  try {
+    await api.post(`books/${options.bookId}/cover/download`, null, {
+      params: {
+        url: options.coverUrl,
+      },
+    })
+  } catch (e) {
+    if (isAxiosError<ErrorResponse>(e) && e.response?.data) {
+      throw new SpineStackApiError(e.response.data)
+    }
+
+    throw e
+  }
+}
+
 export async function updateOneBook(book: BookUpdate): Promise<void> {
   try {
     await api.put(`books/${book.id}`, book)

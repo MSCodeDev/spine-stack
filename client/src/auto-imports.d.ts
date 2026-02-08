@@ -198,6 +198,7 @@ declare global {
   const useDevicesList: typeof import('@vueuse/core')['useDevicesList']
   const useDisplayMedia: typeof import('@vueuse/core')['useDisplayMedia']
   const useDocumentVisibility: typeof import('@vueuse/core')['useDocumentVisibility']
+  const useDownloadBookCoverMutation: typeof import('./mutations/book/useDownloadBookCoverMutation')['default']
   const useDraggable: typeof import('@vueuse/core')['useDraggable']
   const useDropZone: typeof import('@vueuse/core')['useDropZone']
   const useElementBounding: typeof import('@vueuse/core')['useElementBounding']
@@ -232,6 +233,7 @@ declare global {
   const useImageLazyLoader: typeof import('./composables/useImageLazyLoader')['default']
   const useImageLoader: typeof import('./composables/useImageLoader')['default']
   const useImportBookMutation: typeof import('./mutations/importer/useImportBookMutation')['default']
+  const useImporterQuerySearchQuery: typeof import('./queries/importer/useImporterQuerySearchQuery')['default']
   const useImporterSearchQuery: typeof import('./queries/importer/useImporterSearchQuery')['default']
   const useInfiniteScroll: typeof import('@vueuse/core')['useInfiniteScroll']
   const useIntersectionObserver: typeof import('@vueuse/core')['useIntersectionObserver']
@@ -661,6 +663,7 @@ declare module 'vue' {
     readonly useDevicesList: UnwrapRef<typeof import('@vueuse/core')['useDevicesList']>
     readonly useDisplayMedia: UnwrapRef<typeof import('@vueuse/core')['useDisplayMedia']>
     readonly useDocumentVisibility: UnwrapRef<typeof import('@vueuse/core')['useDocumentVisibility']>
+    readonly useDownloadBookCoverMutation: UnwrapRef<typeof import('./mutations/book/useDownloadBookCoverMutation')['default']>
     readonly useDraggable: UnwrapRef<typeof import('@vueuse/core')['useDraggable']>
     readonly useDropZone: UnwrapRef<typeof import('@vueuse/core')['useDropZone']>
     readonly useElementBounding: UnwrapRef<typeof import('@vueuse/core')['useElementBounding']>
@@ -695,6 +698,7 @@ declare module 'vue' {
     readonly useImageLazyLoader: UnwrapRef<typeof import('./composables/useImageLazyLoader')['default']>
     readonly useImageLoader: UnwrapRef<typeof import('./composables/useImageLoader')['default']>
     readonly useImportBookMutation: UnwrapRef<typeof import('./mutations/importer/useImportBookMutation')['default']>
+    readonly useImporterQuerySearchQuery: UnwrapRef<typeof import('./queries/importer/useImporterQuerySearchQuery')['default']>
     readonly useImporterSearchQuery: UnwrapRef<typeof import('./queries/importer/useImporterSearchQuery')['default']>
     readonly useInfiniteScroll: UnwrapRef<typeof import('@vueuse/core')['useInfiniteScroll']>
     readonly useIntersectionObserver: UnwrapRef<typeof import('@vueuse/core')['useIntersectionObserver']>

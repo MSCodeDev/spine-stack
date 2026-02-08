@@ -475,6 +475,28 @@ class BookController(
     bookCoverLifecycle.createImage(bookId, coverFile.bytes)
   }
 
+  @PostMapping("v1/books/{bookId}/cover/download")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @Operation(summary = "Download a cover from a URL and set it as the book cover", security = [SecurityRequirement(name = "Basic Auth")])
+  suspend fun downloadBookCover(
+    @AuthenticationPrincipal principal: SpineStackPrincipal,
+    @PathVariable
+    @UUID(version = [4])
+    @Schema(format = "uuid")
+    bookId: String,
+    @RequestParam("url") coverUrl: String,
+  ) {
+    val libraryId = bookRepository.getLibraryIdOrNull(bookId)
+      ?: throw IdDoesNotExistException("Book not found")
+    val library = libraryRepository.findById(libraryId)
+
+    if (!principal.user.canAccessLibrary(library)) {
+      throw UserDoesNotHaveAccessException()
+    }
+
+    bookCoverLifecycle.downloadCover(bookId, coverUrl)
+  }
+
   @PutMapping("v1/books/{bookId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @Operation(summary = "Modify a book by its id", security = [SecurityRequirement(name = "Basic Auth")])

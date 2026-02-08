@@ -26,8 +26,9 @@ const bookId = computed(() => route.params.id as string)
 const { mutateAsync: editBook, isLoading: isEditingBook } = useUpdateBookMutation()
 const { mutateAsync: uploadCover, isLoading: isUploadingCover } = useUploadBookCoverMutation()
 const { mutateAsync: deleteCover, isLoading: isDeletingCover } = useDeleteBookCoverMutation()
+const { mutateAsync: downloadCover, isLoading: isDownloadingCover } = useDownloadBookCoverMutation()
 
-const isEditing = logicOr(isEditingBook, isUploadingCover, isDeletingCover)
+const isEditing = logicOr(isEditingBook, isUploadingCover, isDeletingCover, isDownloadingCover)
 
 const { data: book, isLoading } = useBookQuery({
   bookId,
@@ -191,6 +192,7 @@ whenever(book, (loadedBook) => {
 const coverArt = ref<CoverArt>({
   removeExisting: false,
   file: null,
+  externalUrl: null,
 })
 
 const activeTab = ref(tabs[0])
@@ -273,6 +275,8 @@ async function handleSubmit() {
 
     if (coverArt.value.file) {
       await uploadCover({ bookId: updatedBook.id, cover: coverArt.value.file })
+    } else if (coverArt.value.externalUrl) {
+      await downloadCover({ bookId: updatedBook.id, coverUrl: coverArt.value.externalUrl })
     } else if (coverArt.value.removeExisting) {
       await deleteCover(updatedBook.id)
     }
@@ -412,6 +416,7 @@ const bookCover = computed(() => getRelationship(book.value, 'COVER_ART'))
                   timeHex: bookCover?.attributes?.timeHex,
                 })
               "
+              :title="updatedBook.title"
               :disabled="isLoading || isEditing"
             />
           </TabPanel>
