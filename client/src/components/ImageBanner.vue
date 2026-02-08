@@ -52,7 +52,7 @@ onMounted(() => {
 <template>
   <div
     aria-hidden="true"
-    class="h-72 sm:h-80 w-full overflow-hidden relative bg-primary-300 dark:bg-gray-950"
+    class="h-72 sm:h-80 w-full overflow-hidden relative bg-primary-900 dark:bg-gray-950"
   >
     <FadeTransition>
       <img
@@ -77,9 +77,9 @@ onMounted(() => {
     <div
       :class="[
         'absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r',
-        'from-white/40 sm:from-gray-900/80 dark:from-gray-800 sm:dark:from-gray-900/80',
-        'via-white/70 sm:via-gray-900/60 dark:via-gray-900/60 sm:dark:via-gray-900/60',
-        'to-white sm:to-gray-900/20 dark:to-gray-950 sm:dark:to-gray-950/20',
+        'from-white/40 sm:from-gray-100/80 dark:from-gray-800 sm:dark:from-gray-900/80',
+        'via-white/70 sm:via-gray-100/60 dark:via-gray-900/60 sm:dark:via-gray-900/60',
+        'to-white sm:to-gray-100/20 dark:to-gray-950 sm:dark:to-gray-950/20',
       ]"
     />
 

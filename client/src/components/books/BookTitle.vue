@@ -68,7 +68,7 @@ const peopleMap = computed(() => {
           v-if="part.type === 'element'"
           :key="`${idx}-router-link`"
           :to="{ name: 'people-id', params: { id: peopleMap[part.value].attributes?.person?.id } }"
-          class="author"
+          class="author text-black dark:text-white"
           :title="t('common-actions.go-to-page', [peopleMap[part.value].attributes?.person?.name])"
         >
           {{ peopleMap[part.value].attributes?.person?.name }}
@@ -88,7 +88,7 @@ const peopleMap = computed(() => {
 
 <style lang="postcss" scoped>
 .author {
-  @apply font-medium hocus:text-white relative sm:text-white/95 rounded-sm
+  @apply font-medium relative rounded-sm
     hocus:underline hocus:underline-offset-2 hocus:decoration-2
     hocus:decoration-white/70 focus:outline-none focus-visible:outline
     focus-visible:outline-white/80 focus-visible:outline-2;

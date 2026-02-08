@@ -23,7 +23,7 @@ const showSearchPalette = injectStrict(ShowSearchPaletteKey)
 
 <template>
   <nav
-    class="z-20 bg-gray-900 supports-[backdrop-filter]:bg-gray-900/95 backdrop-blur sm:backdrop-filter-none md:backdrop-blur transition duration-300 ease-in-out sm:left-16 md:left-0 dark:border-b dark:border-gray-800 motion-safe:transition-colors motion-safe:duration-300"
+    class="z-20 dark:supports-[backdrop-filter]:bg-gray-900/95 backdrop-blur sm:backdrop-filter-none md:backdrop-blur transition duration-300 ease-in-out sm:left-16 md:left-0 dark:border-b dark:border-gray-800 motion-safe:transition-colors motion-safe:duration-300"
     :class="[
       transparent && !isScrolling
         ? '!bg-transparent !backdrop-blur-none !border-transparent'
