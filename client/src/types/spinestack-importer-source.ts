@@ -1,4 +1,5 @@
 import type { Entity } from './spinestack-entity'
+import type { Dimensions } from './spinestack-dimensions'
 
 export type ImporterSourceEntity = Entity<ImporterSourceAttributes> & {
   type: 'IMPORTER_SOURCE'
@@ -18,4 +19,13 @@ export interface ImportOneBook {
   isbn: string
   collection: string
   source: Uppercase<ImporterSources>
+  // Book data to import directly without re-fetching
+  title?: string
+  contributors?: Array<{ name: string; role: string }>
+  publisher?: string
+  synopsis?: string
+  dimensions?: Dimensions
+  coverUrl?: string
+  pageCount?: number
+  url?: string
 }

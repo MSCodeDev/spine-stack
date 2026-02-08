@@ -51,6 +51,38 @@ export async function searchByIsbn(options: SearchByIsbnOptions): Promise<Extern
   }
 }
 
+export interface SearchByQueryOptions {
+  title?: string
+  author?: string
+  language?: string
+  sources?: ImporterSources[]
+  includes?: ExternalBookIncludes[]
+}
+
+export async function searchByQuery(options: SearchByQueryOptions): Promise<ExternalBookEntity[]> {
+  const { sources, includes, title, author, language } = options
+
+  try {
+    const { data: results } = await api.get<ExternalBookCollection>('importer/search', {
+      params: {
+        title,
+        author,
+        language,
+        sources: sources?.join(','),
+        includes: includes?.join(','),
+      },
+    })
+
+    return results.data
+  } catch (e) {
+    if (isAxiosError<ErrorResponse>(e) && e.response?.data) {
+      throw new SpineStackApiError(e.response.data)
+    }
+
+    throw e
+  }
+}
+
 export async function importOneBook(book: ImportOneBook): Promise<BookEntity> {
   try {
     const { data } = await api.post<BookSingle>('importer/import', book)

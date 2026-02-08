@@ -42,6 +42,8 @@ class OpenLibraryImporterProvider(
 
   override val language: String = "all"
 
+  override val supportsQuerySearch: Boolean = true
+
   override suspend fun searchByIsbn(isbn: String): Collection<ImporterBookResult> {
     val bibKey = "ISBN:$isbn"
 
@@ -75,6 +77,60 @@ class OpenLibraryImporterProvider(
     }
 
     return listOf(results[bibKey]!!.toDomain(details.getOrNull()))
+  }
+
+  override suspend fun searchByQuery(title: String?, author: String?, language: String?): Collection<ImporterBookResult> {
+    if (title.isNullOrBlank() && author.isNullOrBlank()) {
+      return emptyList()
+    }
+
+    // Always filter by English for consistent results
+    val langCode = "eng"
+
+    val results = webClient.get()
+      .uri("$baseUrl/search.json") {
+        it.queryParam("limit", 12)
+        it.queryParam("fields", SEARCH_FIELDS)
+        it.queryParam("language", langCode)
+        if (!title.isNullOrBlank()) {
+          it.queryParam("title", title)
+        }
+        if (!author.isNullOrBlank()) {
+          it.queryParam("author", author)
+        }
+        it.build()
+      }
+      .headers {
+        it[HttpHeaders.ACCEPT] = MediaType.APPLICATION_JSON_VALUE
+        it[HttpHeaders.USER_AGENT] = "SpineStack/${buildProperties.version}"
+      }
+      .retrieve()
+      .awaitBodyOrNull<OpenLibrarySearchResultDto>()
+
+    return results?.docs
+      ?.filter { !it.isbn.isNullOrEmpty() }
+      ?.map { it.toDomain() }
+      .orEmpty()
+  }
+
+  private fun OpenLibrarySearchDocDto.toDomain(): ImporterBookResult {
+    val isbn13 = isbn?.firstOrNull { it.length == 13 }
+    val isbn10 = isbn?.firstOrNull { it.length == 10 }
+    val selectedIsbn = isbn13 ?: isbn10 ?: isbn?.firstOrNull().orEmpty()
+
+    return ImporterBookResult(
+      id = key.removePrefix("/works/"),
+      isbn = selectedIsbn,
+      title = title.trim(),
+      contributors = authorName.orEmpty().map { ImporterBookContributor(it, "Author") },
+      publisher = publisher?.firstOrNull().orEmpty(),
+      synopsis = "",
+      pageCount = pageCount ?: 0,
+      coverUrl = coverId?.let { "https://covers.openlibrary.org/b/id/$it-L.jpg" },
+      url = this@OpenLibraryImporterProvider.url + key,
+      links = BookLinksDto(openLibrary = this@OpenLibraryImporterProvider.url + key),
+      provider = ImporterSource.OPEN_LIBRARY,
+    )
   }
 
   private fun OpenLibraryBookDto.toDomain(details: OpenLibraryBookDetailsDto?): ImporterBookResult {
@@ -112,5 +168,41 @@ class OpenLibraryImporterProvider(
 
   companion object {
     private val UNIT_REGEX = "\\s(?:centimeters|inches)$".toRegex()
+    private const val SEARCH_FIELDS = "key,title,author_name,isbn,publisher,number_of_pages_median,cover_i,first_publish_year"
+
+    // Map ISO 639-1 codes to Open Library's ISO 639-2/B codes
+    private val iso639_1ToOpenLibrary = mapOf(
+      "en" to "eng",
+      "es" to "spa",
+      "fr" to "fre",
+      "de" to "ger",
+      "it" to "ita",
+      "pt" to "por",
+      "ru" to "rus",
+      "ja" to "jpn",
+      "zh" to "chi",
+      "ko" to "kor",
+      "ar" to "ara",
+      "nl" to "dut",
+      "pl" to "pol",
+      "sv" to "swe",
+      "da" to "dan",
+      "no" to "nor",
+      "fi" to "fin",
+      "cs" to "cze",
+      "hu" to "hun",
+      "tr" to "tur",
+      "he" to "heb",
+      "el" to "gre",
+      "th" to "tha",
+      "vi" to "vie",
+      "id" to "ind",
+      "uk" to "ukr",
+      "ro" to "rum",
+      "bg" to "bul",
+      "hr" to "hrv",
+      "sk" to "slo",
+      "ca" to "cat",
+    )
   }
 }

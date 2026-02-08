@@ -48,6 +48,7 @@ common-fields:
   weight: Weight
   modified-at: Modified at
   location: Location
+  author: Author
   legal-name: Legal name
   founding-year: Founding year
   dissolution-year: Dissolution year
@@ -536,15 +537,27 @@ stores-types:
   retail-chain: Retail chain
 
 importer:
-  header: Import by ISBN
+  header: Import book
   results: Results
   view-page: View book on {0}
-  fetch-failure: There was an error while searching by ISBN
+  fetch-failure: There was an error while searching
   imported-with-success: Book imported with success
   imported-with-failure: There was an error while importing the book
   collection-chooser-header: Choose a collection to import into
   collection-chooser-description: Additional entities will be created automatically
   scan-barcode: Scan barcode
+  title-placeholder: Search by Title...
+  author-placeholder: Search by Author...
+
+cover-search:
+  title: Search for cover art
+  description: Search for book covers from online sources
+  search-label: Search
+  search-placeholder: Enter book title to search...
+  fetch-failure: There was an error while searching for covers
+  no-results: No covers found for your search
+  empty-state: Enter a book title to search for covers
+  search-online: Search online
 
 barcode-scanner:
   title: Scan ISBN Barcode

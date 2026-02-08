@@ -5,6 +5,7 @@ import io.github.mscodedev.spinestack.domain.model.RelationIdDoesNotExistExcepti
 import io.github.mscodedev.spinestack.domain.model.UserDoesNotHaveAccessException
 import io.github.mscodedev.spinestack.domain.persistence.CollectionRepository
 import io.github.mscodedev.spinestack.domain.persistence.LibraryRepository
+import io.github.mscodedev.spinestack.infrastructure.importer.ImporterBookResult
 import io.github.mscodedev.spinestack.infrastructure.importer.ImporterLifecycle
 import io.github.mscodedev.spinestack.infrastructure.importer.ImporterProvider
 import io.github.mscodedev.spinestack.infrastructure.importer.ImporterSource
@@ -138,6 +139,53 @@ class ImporterController(
     return SuccessCollectionResponseDto(expanded)
   }
 
+  @GetMapping("v1/importer/search")
+  @Operation(
+    summary = "Search a book by title and/or author in the external sources",
+    security = [SecurityRequirement(name = "Basic Auth")],
+  )
+  suspend fun searchByQuery(
+    @RequestParam(required = false)
+    @Parameter(description = "The book title to search for")
+    title: String?,
+    @RequestParam(required = false)
+    @Parameter(description = "The author name to search for")
+    author: String?,
+    @RequestParam(required = false)
+    @Parameter(description = "BCP-47 language tag to filter results (e.g., en-US, pt-BR)")
+    language: String?,
+    @RequestParam(required = false, defaultValue = "") sources: Set<ImporterSource>,
+    @RequestParam(required = false, defaultValue = "") includes: Set<ReferenceExpansionImporter>,
+  ): SuccessCollectionResponseDto<ImporterEntityDto> {
+    if (title.isNullOrBlank() && author.isNullOrBlank()) {
+      return SuccessCollectionResponseDto(emptyList())
+    }
+
+    val results = coroutineScope {
+      importerProviders
+        .filter { it.supportsQuerySearch }
+        .filter { it.key in sources }
+        .ifEmpty { importerProviders.filter { it.supportsQuerySearch } }
+        .map { source ->
+          async(Dispatchers.IO) {
+            runCatching { source.searchByQuery(title, author, language) }
+          }
+        }
+        .awaitAll()
+        .flatMap { it.getOrElse { emptyList() } }
+    }
+
+    val expanded = if (includes.contains(ReferenceExpansionImporter.IMPORTER_SOURCE)) {
+      results.map { book ->
+        book.toDto(importerProviders.first { it.key == book.provider }.toAttributesDto())
+      }
+    } else {
+      results.map { it.toDto() }
+    }
+
+    return SuccessCollectionResponseDto(expanded)
+  }
+
   @PostMapping("v1/importer/import")
   @Operation(
     summary = "Import an external book into a collection",
@@ -155,20 +203,50 @@ class ImporterController(
       throw UserDoesNotHaveAccessException()
     }
 
-    val result = coroutineScope {
-      runCatching {
-        importerProviders.first { it.key == import.source }
-          .searchByIsbn(import.isbn)
-          .firstOrNull { it.id == import.id }
+    val provider = importerProviders.first { it.key == import.source }
+
+    // If book data is provided in the request, use it directly (for title/author search)
+    // Otherwise, fetch from the source by ISBN (for ISBN search backward compatibility)
+    val bookResult = if (import.title != null && import.contributors != null && import.publisher != null) {
+      ImporterBookResult(
+        id = import.id,
+        provider = import.source,
+        isbn = import.isbn,
+        title = import.title,
+        contributors = import.contributors.map {
+          io.github.mscodedev.spinestack.infrastructure.importer.ImporterBookContributor(it.name, it.role)
+        },
+        publisher = import.publisher,
+        synopsis = import.synopsis.orEmpty(),
+        dimensions = import.dimensions?.let {
+          io.github.mscodedev.spinestack.domain.model.Dimensions(
+            width = it.width,
+            height = it.height,
+            depth = it.depth,
+            unit = it.unit,
+          )
+        },
+        coverUrl = import.coverUrl,
+        pageCount = import.pageCount ?: 0,
+        url = import.url,
+      )
+    } else {
+      // Fallback to fetching from source
+      val result = coroutineScope {
+        runCatching {
+          provider.searchByIsbn(import.isbn)
+        }
       }
-    }
 
-    if (result.isFailure) {
-      throw result.exceptionOrNull()!!
-    }
+      if (result.isFailure) {
+        throw result.exceptionOrNull()!!
+      }
 
-    val bookResult = result.getOrNull()
-      ?: throw IdDoesNotExistException("Book not found in the source")
+      result.getOrNull()
+        ?.firstOrNull { it.id == import.id }
+        ?: result.getOrNull()?.firstOrNull()
+        ?: throw IdDoesNotExistException("Book not found in the source")
+    }
 
     val book = importerLifecycle.importToCollection(
       collectionId = import.collection,

@@ -38,6 +38,23 @@ data class OpenLibraryPublisherDto(val name: String)
 
 data class OpenLibraryCoverDto(val large: String? = "")
 
+// Search API DTOs
+data class OpenLibrarySearchResultDto(
+  val docs: List<OpenLibrarySearchDocDto> = emptyList(),
+  val numFound: Int = 0,
+)
+
+data class OpenLibrarySearchDocDto(
+  val key: String,
+  val title: String,
+  @field:JsonProperty("author_name") val authorName: List<String>? = emptyList(),
+  val isbn: List<String>? = emptyList(),
+  val publisher: List<String>? = emptyList(),
+  @field:JsonProperty("number_of_pages_median") val pageCount: Int? = 0,
+  @field:JsonProperty("cover_i") val coverId: Int? = null,
+  @field:JsonProperty("first_publish_year") val firstPublishYear: Int? = null,
+)
+
 class OpenLibraryTextDeserializer : JsonDeserializer<OpenLibraryTextDto>() {
   override fun deserialize(p: JsonParser, ctxt: DeserializationContext): OpenLibraryTextDto? {
     return when (p.currentToken) {

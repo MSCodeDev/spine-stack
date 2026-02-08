@@ -46,6 +46,8 @@ class CblImporterProvider(
 
   override val language: String = "pt-BR"
 
+  override val supportsQuerySearch: Boolean = false
+
   override suspend fun searchByIsbn(isbn: String): Collection<ImporterBookResult> {
     val properIsbn = isbn.removeDashes()
     val isbn13 = if (properIsbn.length == 10) isbn.toIsbn13() else isbn
@@ -88,6 +90,11 @@ class CblImporterProvider(
     }
 
     return results.map { it.copy(coverUrl = covers[it.isbn]) }
+  }
+
+  override suspend fun searchByQuery(title: String?, author: String?, language: String?): Collection<ImporterBookResult> {
+    // CBL does not support title/author search, only ISBN search
+    return emptyList()
   }
 
   private fun CblSearchResultDto.toDomain(): List<ImporterBookResult> = value.map { it.toDomain() }

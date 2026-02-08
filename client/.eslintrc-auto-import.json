@@ -451,6 +451,8 @@
     "UseBarcodeSccannerReturn": true,
     "useBarcodeScanner": true,
     "UseBarcodeScannerOptions": true,
-    "UseBarcodeScannerReturn": true
+    "UseBarcodeScannerReturn": true,
+    "useImporterQuerySearchQuery": true,
+    "useDownloadBookCoverMutation": true
   }
 }

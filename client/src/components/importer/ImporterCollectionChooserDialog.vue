@@ -27,14 +27,32 @@ const importData = reactive<CustomImport>({
   isbn: '',
   collection: undefined,
   source: 'OPEN_LIBRARY',
+  title: undefined,
+  contributors: undefined,
+  publisher: undefined,
+  synopsis: undefined,
+  dimensions: undefined,
+  coverUrl: undefined,
+  pageCount: undefined,
+  url: undefined,
 })
 
 whenever(isOpen, async () => {
+  const attrs = externalBook.value.attributes
   Object.assign(importData, {
     id: externalBook.value.id,
-    isbn: externalBook.value.attributes.isbn,
+    isbn: attrs.isbn,
     collection: undefined,
     source: source.value!.id as CustomImport['source'],
+    // Include full book data to avoid re-fetching (ensures correct edition is imported)
+    title: attrs.title,
+    contributors: attrs.contributors,
+    publisher: attrs.publisher,
+    synopsis: attrs.synopsis,
+    dimensions: attrs.dimensions,
+    coverUrl: attrs.coverUrl,
+    pageCount: attrs.pageCount,
+    url: attrs.url,
   } satisfies CustomImport)
 }, { immediate: true })
 

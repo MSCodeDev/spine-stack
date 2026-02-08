@@ -38,6 +38,8 @@ class SkoobImporterProvider(
 
   override val language: String = "pt-BR"
 
+  override val supportsQuerySearch: Boolean = false
+
   override suspend fun searchByIsbn(isbn: String): Collection<ImporterBookResult> {
     return webClient.get()
       .uri(baseUrl) {
@@ -61,6 +63,11 @@ class SkoobImporterProvider(
       .awaitBodyOrNull<SkoobResponseDto<List<SkoobBookDto>>>()
       ?.toDomain()
       .orEmpty()
+  }
+
+  override suspend fun searchByQuery(title: String?, author: String?, language: String?): Collection<ImporterBookResult> {
+    // Skoob does not support title/author search, only ISBN search
+    return emptyList()
   }
 
   private fun SkoobResponseDto<List<SkoobBookDto>>.toDomain(): List<ImporterBookResult> {

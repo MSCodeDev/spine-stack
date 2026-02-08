@@ -126,4 +126,13 @@ data class ImportDto(
   @get:UUID(version = [4])
   @get:Schema(format = "uuid")
   val collection: String,
+  // Optional book data - if provided, use directly instead of re-fetching
+  val title: String? = null,
+  val contributors: List<ImporterContributorDto>? = null,
+  val publisher: String? = null,
+  val synopsis: String? = null,
+  val dimensions: DimensionsDto? = null,
+  val coverUrl: String? = null,
+  val pageCount: Int? = null,
+  val url: String? = null,
 )
