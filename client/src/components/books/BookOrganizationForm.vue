@@ -115,6 +115,13 @@ const { data: collections } = useLibraryCollectionsQuery({
   },
 })
 
+// Default to the first collection when creating a new book
+watch(collections, (newCollections) => {
+  if (props.mode === 'creation' && !collection.value && newCollections && newCollections.length > 0) {
+    emit('update:collection', newCollections[0].id)
+  }
+}, { immediate: true })
+
 const { data: libraryTags } = useLibraryTagsQuery({
   libraryId,
   sort: [{ property: 'name', direction: 'asc' }],
