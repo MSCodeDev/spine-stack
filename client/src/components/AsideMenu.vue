@@ -5,6 +5,7 @@ import type { RouteLocation, RouteLocationRaw } from 'vue-router'
 import {
   ArchiveBoxIcon,
   BookOpenIcon,
+  BookmarkSquareIcon,
   BuildingLibraryIcon,
   BuildingOffice2Icon,
   BuildingStorefrontIcon,
@@ -13,6 +14,7 @@ import {
   HomeIcon,
   PaintBrushIcon,
   QueueListIcon,
+  RectangleStackIcon,
   Square2StackIcon,
   TagIcon,
   UserGroupIcon,
@@ -90,7 +92,7 @@ const items = computed<MenuItem[]>(() => [
       {
         key: 'collections',
         label: t('entities.collections'),
-        icon: ArchiveBoxIcon,
+        icon: RectangleStackIcon,
         to: { name: 'collections' },
         active: computed(() => {
           return String(router.currentRoute.value.name).includes('collections')
@@ -124,7 +126,7 @@ const items = computed<MenuItem[]>(() => [
       {
         key: 'libraries',
         label: t('entities.libraries'),
-        icon: BuildingLibraryIcon,
+        icon: BookmarkSquareIcon,
         to: { name: 'libraries' },
         active: computed(() => {
           return String(router.currentRoute.value.name).includes('libraries')
@@ -293,10 +295,6 @@ const lgAndLarger = breakpoints.greaterOrEqual('lg')
             @click="collapsed = !collapsed"
           >
             <span />
-            <ChevronDoubleLeftIcon
-              class="w-5 h-5 collapse-icon"
-              :class="[{ collapsed: collapsed && lgAndLarger }]"
-            />
           </Button>
         </div>
         <nav class="mt-6 px-3">
@@ -413,29 +411,6 @@ const lgAndLarger = breakpoints.greaterOrEqual('lg')
 
       <div v-if="$slots.footer" class="shrink-0">
         <slot name="footer" :collapsed="collapsed && lgAndLarger" :collapsible="collapsible" />
-      </div>
-
-      <div
-        class="p-3.5 text-xs flex flex-col gap-1 w-44 box-border text-gray-700 dark:text-gray-400 motion-safe:transition-transform origin-right"
-        :class="[collapsed && lgAndLarger ? '-translate-x-44' : '']"
-      >
-        <a
-          :href="(isDev || isNightly) ? commitLink : releaseLink"
-          target="_blank"
-          :class="[
-            'flex items-center gap-1.5 w-fit rounded',
-            'focus:outline-none focus-visible:ring-2',
-            'motion-safe:transition',
-            'hocus:text-primary-600 dark:hocus:text-primary-500 hocus:underline',
-            'focus-visible:ring-black dark:focus-visible:ring-white/90',
-          ]"
-          :title="isDev ? $t('aside-menu.commit-link') : $t('aside-menu.release-link')"
-          :tabindex="collapsed && lgAndLarger ? '-1' : undefined"
-        >
-          <span>{{ versionString }}</span>
-          <ArrowTopRightOnSquareIcon class="w-3 h-3" />
-        </a>
-        <p>&copy; MSCode</p>
       </div>
     </div>
   </aside>
