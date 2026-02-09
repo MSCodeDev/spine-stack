@@ -43,14 +43,13 @@ Get the tool from our [releases page] or through [Docker].
 ## Getting started
 
 SpineStack isn't ready for normal usage yet. For now, you can follow the
-[Contributing] section to build from source and run locally or try a
-nightly Docker image build.
+[Contributing] section to build from source and run locally or try the latest Docker image build.
 
 [Contributing]: #contributing
 
 ### Running through Docker
 
-The nightly images are available in [Docker Hub] and [GitHub Packages].
+The latest images are available in [GitHub Packages].
 You can run manually by using the `docker` command or by using [Docker Compose].
 
 <details>
@@ -59,13 +58,13 @@ You can run manually by using the `docker` command or by using [Docker Compose].
   1. Pull the Docker image.
 
      ```console
-     $ docker pull mscodedev/spine-stack:nightly
+     $ docker pull mscodedev/spine-stack:latest
      ```
 
      If you want to use the image from [GitHub Packages], use the command below instead.
 
      ```console
-     $ docker pull ghcr.io/mscodedev/spine-stack:nightly
+     $ docker pull ghcr.io/mscodedev/spine-stack:latest
      ```
   2. Start a Docker container in detached mode.
 
@@ -73,7 +72,7 @@ You can run manually by using the `docker` command or by using [Docker Compose].
      $ docker run -d \
          -p 25565:8080 \
          -v /path/to/user_home/.spinestack:/root/.spinestack \
-         mscodedev/spine-stack:nightly
+         mscodedev/spine-stack:latest
      ```
   3. Open http://localhost:25565 on a browser and proceed with the claim setup
      to create the first administrator user.
@@ -89,8 +88,8 @@ You can run manually by using the `docker` command or by using [Docker Compose].
      services:
        spinestack:
          # To use the GitHub Packages image, use the line below instead.
-         # image: ghcr.io/mscodedev/spine-stack:nightly
-         image: mscodedev/spine-stack:nightly
+         # image: ghcr.io/mscodedev/spine-stack:latest
+         image: mscodedev/spine-stack:latest
          ports:
            # SpineStack will be available at port 25565.
            - '25565:8080'

@@ -13,9 +13,7 @@ ENV PATH="${PATH}:${PNPM_HOME}"
 RUN npm install --global pnpm
 
 FROM spinestack-base AS spinestack-build
-ARG NIGHTLY=false
 ENV DOCKER_PIPELINE=true
-ENV DOCKER_NIGHTLY=$NIGHTLY
 WORKDIR /build
 COPY . ./
 RUN ./gradlew copyWebDist bootJar

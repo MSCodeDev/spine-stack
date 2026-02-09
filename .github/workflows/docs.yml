@@ -1,11 +1,11 @@
 name: Deploy docs site to Pages
 
 on:
-  # push:
-  #   branches:
-  #     - main
-  #   paths:
-  #     - 'docs/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
   workflow_dispatch:
 
 permissions:

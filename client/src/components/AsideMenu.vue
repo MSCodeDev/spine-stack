@@ -251,9 +251,8 @@ const allowedItems = computed(() => {
 const appVersion = import.meta.env.APP_VERSION
 const gitShortHash = import.meta.env.GIT_SHORT_HASH
 const isDev = import.meta.env.DEV
-const isNightly = import.meta.env.NIGHTLY
 
-const versionString = (isDev || isNightly) ? gitShortHash : `v${appVersion}`
+const versionString = isDev ? gitShortHash : `v${appVersion}`
 const commitLink = `https://github.com/mscodedev/spinestack/commit/${gitShortHash}`
 const releaseLink = `https://github.com/mscodedev/spinestack/releases/tag/v${appVersion}`
 

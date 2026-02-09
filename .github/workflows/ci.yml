@@ -6,12 +6,12 @@ on:
       - 'client/locales/*'
       - '**.md'
       - 'docs/**'
-  # push:
-  #   branches-ignore:
-  #     - 'dependabot/**'
-  #   paths-ignore:
-  #     - 'client/locales/*'
-  #     - 'docs/**'
+    push:
+      branches-ignore:
+        - 'dependabot/**'
+      paths-ignore:
+        - 'client/locales/*'
+        - 'docs/**'
   workflow_dispatch:
 
 env:
@@ -112,12 +112,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
@@ -130,10 +124,9 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=nightly
+            type=raw,value=latest
             type=sha,prefix=,format=short
           labels: |
             org.opencontainers.image.title=SpineStack
@@ -145,5 +138,3 @@ jobs:
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
-          build-args: |
-            NIGHTLY=true

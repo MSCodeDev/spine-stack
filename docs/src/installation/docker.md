@@ -16,7 +16,7 @@ This image provides various versions that are available via tags.
 
 | Tag       | Description     |
 | --------- | --------------- |
-| `nightly` | latest commit   |
+| `latest`  | latest commit   |
 | `x.y.z`   | version `x.y.z` |
 | `hash`    | specific commit |
 
@@ -32,7 +32,7 @@ $ docker create \
     -p 25565:8080 \
     -v /path/to/user_home/.spinestack:/root/.spinestack \
     --restart unless-stopped \
-    mscodedev/spinestack:nightly
+    mscodedev/spinestack:latest
 ```
 
 Then start the container:
@@ -47,7 +47,7 @@ $ docker start spinestack -d
 version: '3.9'
 services:
   spinestack:
-    image: mscodedev/spinestack:nightly
+    image: mscodedev/spinestack:latest
     container_name: spinestack
     ports:
       # SpineStack will be available at port 25565.
@@ -115,7 +115,7 @@ Below are the instructions for updating containers.
 1. Update the image.
 
    ```console
-   $ docker pull mscodedev/spinestack:nightly
+   $ docker pull mscodedev/spinestack:latest
    ```
 2. Stop the running container.
 

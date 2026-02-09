@@ -14,6 +14,12 @@ usage() {
   echo ""
   echo "Commands:"
   echo "  init            Initialize dependencies (Java, Node.js, pnpm, and install client packages)"
+  echo "  test:backend    Run backend tests (server build and tests)"
+  echo "  test:frontend   Run frontend tests (install, build, and test client)"
+  echo "  build:backend   Build backend for production (creates JAR)"
+  echo "  build:frontend  Build frontend for production"
+  echo "  build:docs      Build documentation site"
+  echo "  build           Build both backend and frontend for production"
   echo "  start:backend   Start only the backend server"
   echo "  start:frontend  Start only the frontend dev server"
   echo "  start           Start both backend and frontend dev servers"
@@ -41,6 +47,125 @@ init() {
   pnpm --dir client install
 
   echo -e "${GREEN}Done. You can run './run start' to start the development servers.${NC}"
+}
+
+test_backend() {
+  echo "Running backend tests..."
+
+  # Ensure JAVA_HOME is valid. If not set or invalid, try to detect from `java`.
+  if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}" ]; then
+    detected_java_home=$(java -XshowSettings:properties -version 2>&1 | sed -n 's/^[ \t]*java.home = //p' || true)
+    if [ -n "$detected_java_home" ] && [ -d "$detected_java_home" ]; then
+      export JAVA_HOME="$detected_java_home"
+      echo "Detected and set JAVA_HOME=$JAVA_HOME"
+    fi
+  fi
+
+  ./gradlew build
+
+  if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Backend tests passed!${NC}"
+  else
+    echo -e "${RED}Backend tests failed!${NC}"
+    exit 1
+  fi
+}
+
+test_frontend() {
+  echo "Running frontend tests..."
+
+  echo "Installing client dependencies..."
+  pnpm --dir client install
+
+  echo "Building client..."
+  pnpm --dir client build
+
+  echo "Running client tests..."
+  pnpm --dir client test
+
+  if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Frontend tests passed!${NC}"
+  else
+    echo -e "${RED}Frontend tests failed!${NC}"
+    exit 1
+  fi
+}
+
+build_backend() {
+  echo "Building backend for production..."
+
+  # Ensure JAVA_HOME is valid. If not set or invalid, try to detect from `java`.
+  if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}" ]; then
+    detected_java_home=$(java -XshowSettings:properties -version 2>&1 | sed -n 's/^[ \t]*java.home = //p' || true)
+    if [ -n "$detected_java_home" ] && [ -d "$detected_java_home" ]; then
+      export JAVA_HOME="$detected_java_home"
+      echo "Detected and set JAVA_HOME=$JAVA_HOME"
+    fi
+  fi
+
+  ./gradlew bootJar
+
+  if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Backend build successful! Output: ./server/build/libs/spinestack.jar${NC}"
+  else
+    echo -e "${RED}Backend build failed!${NC}"
+    exit 1
+  fi
+}
+
+build_frontend() {
+  echo "Building frontend for production..."
+
+  echo "Installing client dependencies..."
+  pnpm --dir client install
+
+  echo "Building client..."
+  pnpm --dir client build
+
+  if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Frontend build successful!${NC}"
+  else
+    echo -e "${RED}Frontend build failed!${NC}"
+    exit 1
+  fi
+}
+
+build() {
+  echo "Building both frontend and backend for production..."
+
+  # Ensure JAVA_HOME is valid. If not set or invalid, try to detect from `java`.
+  if [ -z "${JAVA_HOME:-}" ] || [ ! -d "${JAVA_HOME}" ]; then
+    detected_java_home=$(java -XshowSettings:properties -version 2>&1 | sed -n 's/^[ \t]*java.home = //p' || true)
+    if [ -n "$detected_java_home" ] && [ -d "$detected_java_home" ]; then
+      export JAVA_HOME="$detected_java_home"
+      echo "Detected and set JAVA_HOME=$JAVA_HOME"
+    fi
+  fi
+
+  # Build frontend first
+  build_frontend || exit 1
+
+  # Then build backend (which copies web dist to resources)
+  build_backend || exit 1
+
+  echo -e "${GREEN}All production builds completed successfully!${NC}"
+}
+
+build_docs() {
+  echo "Building documentation site..."
+
+  echo "Installing docs dependencies..."
+  pnpm --dir docs install
+
+  echo "Building docs..."
+  pnpm --dir docs docs:build
+
+  if [ $? -eq 0 ]; then
+    echo -e "${GREEN}Documentation build successful! Output: ./docs/.vitepress/dist${NC}"
+  else
+    echo -e "${RED}Documentation build failed!${NC}"
+    exit 1
+  fi
 }
 
 start_backend() {
@@ -112,6 +237,24 @@ fi
 case "$1" in
   init)
     init
+    ;;
+  test:backend)
+    test_backend
+    ;;
+  test:frontend)
+    test_frontend
+    ;;
+  build:backend)
+    build_backend
+    ;;
+  build:frontend)
+    build_frontend
+    ;;
+  build:docs)
+    build_docs
+    ;;
+  build)
+    build
     ;;
   start:backend)
     start_backend
