@@ -5,9 +5,9 @@ import io.github.mscodedev.spinestack.domain.model.ContributorRole
 import io.github.mscodedev.spinestack.domain.model.Person
 import io.github.mscodedev.spinestack.domain.model.Publisher
 import io.github.mscodedev.spinestack.domain.model.Series
+import io.github.mscodedev.spinestack.domain.model.SpineStackUser
 import io.github.mscodedev.spinestack.domain.model.Store
 import io.github.mscodedev.spinestack.domain.model.Tag
-import io.github.mscodedev.spinestack.domain.model.SpineStackUser
 import io.github.mscodedev.spinestack.domain.model.makeLibrary
 import io.github.mscodedev.spinestack.domain.persistence.BookRepository
 import io.github.mscodedev.spinestack.domain.persistence.CollectionRepository
@@ -16,9 +16,9 @@ import io.github.mscodedev.spinestack.domain.persistence.LibraryRepository
 import io.github.mscodedev.spinestack.domain.persistence.PersonRepository
 import io.github.mscodedev.spinestack.domain.persistence.PublisherRepository
 import io.github.mscodedev.spinestack.domain.persistence.SeriesRepository
+import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
 import io.github.mscodedev.spinestack.domain.persistence.StoreRepository
 import io.github.mscodedev.spinestack.domain.persistence.TagRepository
-import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll

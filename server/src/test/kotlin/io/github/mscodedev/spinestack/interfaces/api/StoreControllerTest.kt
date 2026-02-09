@@ -1,12 +1,12 @@
 package io.github.mscodedev.spinestack.interfaces.api
 
 import io.github.mscodedev.spinestack.domain.model.ROLE_ADMIN
-import io.github.mscodedev.spinestack.domain.model.Store
 import io.github.mscodedev.spinestack.domain.model.SpineStackUser
+import io.github.mscodedev.spinestack.domain.model.Store
 import io.github.mscodedev.spinestack.domain.model.makeLibrary
 import io.github.mscodedev.spinestack.domain.persistence.LibraryRepository
-import io.github.mscodedev.spinestack.domain.persistence.StoreRepository
 import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
+import io.github.mscodedev.spinestack.domain.persistence.StoreRepository
 import io.github.mscodedev.spinestack.domain.service.StoreLifecycle
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach

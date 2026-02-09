@@ -14,8 +14,8 @@ import io.github.mscodedev.spinestack.domain.model.Person
 import io.github.mscodedev.spinestack.domain.model.Publisher
 import io.github.mscodedev.spinestack.domain.model.RelationIdDoesNotExistException
 import io.github.mscodedev.spinestack.domain.model.RelationIsNotFromSameLibraryException
-import io.github.mscodedev.spinestack.domain.model.Tag
 import io.github.mscodedev.spinestack.domain.model.SpineStackUser
+import io.github.mscodedev.spinestack.domain.model.Tag
 import io.github.mscodedev.spinestack.domain.model.UserDoesNotHaveAccessException
 import io.github.mscodedev.spinestack.domain.model.Weight
 import io.github.mscodedev.spinestack.infrastructure.datasource.SqliteUdfDataSource

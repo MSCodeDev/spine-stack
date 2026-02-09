@@ -7,9 +7,9 @@ import io.github.mscodedev.spinestack.domain.persistence.LibraryRepository
 import io.github.mscodedev.spinestack.domain.persistence.PersonRepository
 import io.github.mscodedev.spinestack.domain.persistence.PublisherRepository
 import io.github.mscodedev.spinestack.domain.persistence.SeriesRepository
+import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
 import io.github.mscodedev.spinestack.domain.persistence.StoreRepository
 import io.github.mscodedev.spinestack.domain.persistence.TagRepository
-import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
 import io.github.mscodedev.spinestack.infrastructure.image.BookCoverLifecycle
 import io.github.mscodedev.spinestack.infrastructure.image.PersonPictureLifecycle
 import io.github.mscodedev.spinestack.infrastructure.image.PublisherPictureLifecycle

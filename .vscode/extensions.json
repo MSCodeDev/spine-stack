@@ -6,6 +6,7 @@
     "dbaeumer.vscode-eslint",
     "kotlinlang.kotlin",
     "visualstudioexptteam.vscodeintellicode",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "rnoro.vscode-ktlint-formatter"
   ]
 }

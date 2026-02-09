@@ -1,7 +1,7 @@
 package io.github.mscodedev.spinestack.infrastructure.jooq
 
-import io.github.mscodedev.spinestack.domain.model.Tag
 import io.github.mscodedev.spinestack.domain.model.SpineStackUser
+import io.github.mscodedev.spinestack.domain.model.Tag
 import io.github.mscodedev.spinestack.domain.model.makeLibrary
 import io.github.mscodedev.spinestack.domain.persistence.LibraryRepository
 import io.github.mscodedev.spinestack.domain.persistence.SpineStackUserRepository
