@@ -1,13 +1,26 @@
-FROM ubuntu:kinetic AS spinestack-base
-RUN apt update
-RUN apt install git gnupg ca-certificates curl -y
-RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list
-RUN apt update
-RUN apt install zulu17-jdk -y
-RUN curl -sL https://deb.nodesource.com/setup_19.x -o /tmp/nodesource_setup.sh
-RUN bash /tmp/nodesource_setup.sh
-RUN apt install nodejs -y
+FROM ubuntu:noble AS spinestack-base
+
+# Install base dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    gnupg \
+    ca-certificates \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Zulu JDK
+RUN curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends zulu17-jdk \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install pnpm
 ENV PNPM_HOME="/root/.local/share/pnpm"
 ENV PATH="${PATH}:${PNPM_HOME}"
 RUN npm install --global pnpm
