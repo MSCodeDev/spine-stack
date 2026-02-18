@@ -66,6 +66,8 @@ class SecurityConfiguration(
         auth
           .requestMatchers("/api/**")
           .hasRole(ROLE_USER)
+
+        auth.anyRequest().permitAll()
       }
       .headers {
         it.cacheControl().disable()
