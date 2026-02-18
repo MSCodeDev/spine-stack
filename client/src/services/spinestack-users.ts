@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios'
 import { api } from '@/modules/api'
 import { SpineStackApiError } from '@/types/spinestack-response'
 import type { EntityResponse, ErrorResponse, PaginatedResponse } from '@/types/spinestack-response'
-import type { EmailAvailability, UserCreation, UserEntity, UserIncludes, UserSort, UserSuccessResponse, UserUpdate } from '@/types/spinestack-user'
+import type { EmailAvailability, PasswordUpdate, UserCreation, UserEntity, UserIncludes, UserSort, UserSuccessResponse, UserUpdate } from '@/types/spinestack-user'
 import type { Paginated } from '@/types/spinestack-api'
 import type { AuthenticationActivityEntity, AuthenticationActivitySort } from '@/types/spinestack-authentication-activity'
 
@@ -205,6 +205,18 @@ export async function updateUser(user: UserUpdate): Promise<void> {
 export async function deleteOneUser(userId: string): Promise<void> {
   try {
     await api.delete(`users/${userId}`)
+  } catch (e) {
+    if (isAxiosError<ErrorResponse>(e) && e.response?.data) {
+      throw new SpineStackApiError(e.response.data)
+    }
+
+    throw e
+  }
+}
+
+export async function updatePassword({ userId, password }: PasswordUpdate): Promise<void> {
+  try {
+    await api.patch(`users/${userId}/password`, { password })
   } catch (e) {
     if (isAxiosError<ErrorResponse>(e) && e.response?.data) {
       throw new SpineStackApiError(e.response.data)

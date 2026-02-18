@@ -39,3 +39,8 @@ export interface UserUpdate {
   biography: string
   roles: UserRole[]
 }
+
+export interface PasswordUpdate {
+  userId: string
+  password: string
+}

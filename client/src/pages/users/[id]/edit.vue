@@ -7,6 +7,7 @@ import type { SpineStackApiError } from '@/types/spinestack-response'
 import UserMetadataForm from '@/components/users/UserMetadataForm.vue'
 import type { Avatar } from '@/components/users/UserAvatarForm.vue'
 import UserAvatarForm from '@/components/users/UserAvatarForm.vue'
+import UserPasswordForm from '@/components/users/UserPasswordForm.vue'
 import type { UserUpdate } from '@/types/spinestack-user'
 
 const { t } = useI18n()
@@ -19,10 +20,11 @@ const userStore = useUserStore()
 const isAdmin = computed(() => userStore.isAdmin)
 
 const { mutateAsync: editUser, isLoading: isEditingUser } = useUpdateUserMutation()
+const { mutateAsync: changePassword, isLoading: isChangingPassword } = useUpdatePasswordMutation()
 const { mutateAsync: uploadAvatar, isLoading: isUploadingAvatar } = useUploadUserAvatarMutation()
 const { mutateAsync: deleteAvatar, isLoading: isDeletingAvatar } = useDeleteUserAvatarMutation()
 
-const isEditing = logicOr(isEditingUser, isUploadingAvatar, isDeletingAvatar)
+const isEditing = logicOr(isEditingUser, isUploadingAvatar, isDeletingAvatar, isChangingPassword)
 
 const { data: user, isLoading } = useUserQuery({
   userId,
@@ -40,18 +42,22 @@ const { data: user, isLoading } = useUserQuery({
 
 const metadataForm = ref<InstanceType<typeof UserMetadataForm>>()
 const avatarForm = ref<InstanceType<typeof UserAvatarForm>>()
+const passwordForm = ref<InstanceType<typeof UserPasswordForm>>()
 
 const metadataInvalid = computed(() => metadataForm.value?.v$.$error ?? false)
 const avatarInvalid = computed(() => avatarForm.value?.v$.$error ?? false)
+const passwordInvalid = computed(() => passwordForm.value?.v$.$error ?? false)
 
 const tabs = [
   { key: '0', text: 'users.metadata' },
   { key: '1', text: 'users.avatar' },
+  { key: '2', text: 'users.password' },
 ]
 
 const invalidTabs = computed(() => [
   metadataInvalid.value,
   avatarInvalid.value,
+  passwordInvalid.value,
 ])
 
 const updatedUser = reactive<UserUpdate>({
@@ -127,6 +133,25 @@ watch(updatedUser, (newUpdatedUser) => {
 useBeforeUnload({ enabled: userWasModified })
 
 const userAvatar = computed(() => getRelationship(user.value, 'AVATAR'))
+
+async function handleChangePassword() {
+  const isValid = await passwordForm.value!.v$.$validate()
+
+  if (!isValid) {
+    return
+  }
+
+  try {
+    await changePassword({ userId: userId.value, password: passwordForm.value!.password })
+    passwordForm.value!.reset()
+    await notificator.success({ title: t('users.password-changed-with-success') })
+  } catch (error) {
+    await notificator.failure({
+      title: t('users.password-changed-with-failure'),
+      body: (error as SpineStackApiError | Error).message,
+    })
+  }
+}
 </script>
 
 <template>
@@ -229,6 +254,25 @@ const userAvatar = computed(() => getRelationship(user.value, 'AVATAR'))
               "
               :disabled="isLoading || isEditing"
             />
+          </TabPanel>
+          <TabPanel :unmount="false">
+            <Block :title="$t('users.password')">
+              <UserPasswordForm
+                ref="passwordForm"
+                :disabled="isLoading || isEditing"
+              />
+              <div class="mt-4 flex justify-end">
+                <Button
+                  kind="primary"
+                  :disabled="isLoading || isEditing"
+                  :loading="isChangingPassword"
+                  @click="handleChangePassword"
+                >
+                  <CheckIcon class="w-5 h-5" />
+                  <span>{{ $t('common-actions.save') }}</span>
+                </Button>
+              </div>
+            </Block>
           </TabPanel>
         </TabPanels>
       </div>
