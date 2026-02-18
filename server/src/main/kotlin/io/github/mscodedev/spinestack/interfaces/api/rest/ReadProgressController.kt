@@ -72,7 +72,7 @@ class ReadProgressController(
     @RequestParam(required = false, defaultValue = "") includes: Set<ReferenceExpansionReadProgress> = emptySet(),
     @Parameter(hidden = true) page: Pageable,
   ): SuccessPaginatedCollectionResponseDto<ReadProgressEntityDto> {
-    val user = libraryRepository.findByIdOrNull(userId)
+    val user = userRepository.findByIdOrNull(userId)
       ?: throw IdDoesNotExistException("User not found")
 
     if (user.id != principal.user.id && !principal.user.isAdmin) {

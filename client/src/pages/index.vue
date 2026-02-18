@@ -3,7 +3,6 @@ import {
   ArrowDownOnSquareIcon,
   BookOpenIcon,
   BookmarkIcon,
-  FolderIcon,
   PlusIcon,
   QueueListIcon,
 } from '@heroicons/vue/24/outline'
@@ -51,6 +50,13 @@ const { data: collections } = useLibraryCollectionsQuery({
   enabled: computed(() => !!libraryId.value),
 })
 
+const { data: people } = useLibraryPeopleQuery({
+  libraryId,
+  page: ref(0),
+  size: ref(1),
+  enabled: computed(() => !!libraryId.value),
+})
+
 const { data: series } = useLibrarySeriesQuery({
   libraryId,
   page: ref(0),
@@ -60,6 +66,8 @@ const { data: series } = useLibrarySeriesQuery({
 
 const totalBooks = computed(() => allBooks.value?.pagination?.totalElements ?? 0)
 const totalCollections = computed(() => collections.value?.pagination?.totalElements ?? 0)
+const totalAuthors = computed(() => people.value?.pagination?.totalElements ?? 0)
+const totalCollectionsAndAuthors = computed(() => totalCollections.value + totalAuthors.value)
 const totalSeries = computed(() => series.value?.pagination?.totalElements ?? 0)
 
 const hasBooks = computed(() => totalBooks.value > 0)
@@ -111,12 +119,12 @@ meta:
         </StatisticCard>
 
         <StatisticCard
-          :title="$t('dashboard.total-collections')"
-          :value="totalCollections"
+          :title="$t('dashboard.collections')"
+          :value="totalCollectionsAndAuthors"
           unit="count"
         >
           <template #icon>
-            <FolderIcon class="w-5 h-5 text-primary-600 dark:text-primary-400" />
+            <BookmarkIcon class="w-5 h-5 text-primary-600 dark:text-primary-400" />
           </template>
         </StatisticCard>
 

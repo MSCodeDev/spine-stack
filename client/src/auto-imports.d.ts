@@ -383,6 +383,7 @@ declare global {
   const useUpdateCollectionMutation: typeof import('./mutations/collection/useUpdateCollectionMutation')['default']
   const useUpdateContributorRoleMutation: typeof import('./mutations/contributor-role/useUpdateContributorRoleMutation')['default']
   const useUpdateLibraryMutation: typeof import('./mutations/library/useUpdateLibraryMutation')['default']
+  const useUpdatePasswordMutation: typeof import('./mutations/user/useUpdatePasswordMutation')['default']
   const useUpdatePersonMutation: typeof import('./mutations/person/useUpdatePersonMutation')['default']
   const useUpdatePublisherMutation: typeof import('./mutations/publisher/useUpdatePublisherMutation')['default']
   const useUpdateReadProgressMutation: typeof import('./mutations/read-progress/useUpdateReadProgressMutation')['default']
@@ -404,6 +405,7 @@ declare global {
   const useUserPreference: typeof import('./composables/useUserPreference')['default']
   const useUserPreferencesQuery: typeof import('./queries/user/useUserPreferencesQuery')['default']
   const useUserQuery: typeof import('./queries/user/useUserQuery')['default']
+  const useUserReadProgressesQuery: typeof import('./queries/read-progress/useUserReadProgressesQuery')['default']
   const useUserStore: typeof import('./stores/user')['useUserStore']
   const useUsersQuery: typeof import('./queries/user/useUsersQuery')['default']
   const useVModel: typeof import('@vueuse/core')['useVModel']
@@ -847,6 +849,7 @@ declare module 'vue' {
     readonly useUpdateCollectionMutation: UnwrapRef<typeof import('./mutations/collection/useUpdateCollectionMutation')['default']>
     readonly useUpdateContributorRoleMutation: UnwrapRef<typeof import('./mutations/contributor-role/useUpdateContributorRoleMutation')['default']>
     readonly useUpdateLibraryMutation: UnwrapRef<typeof import('./mutations/library/useUpdateLibraryMutation')['default']>
+    readonly useUpdatePasswordMutation: UnwrapRef<typeof import('./mutations/user/useUpdatePasswordMutation')['default']>
     readonly useUpdatePersonMutation: UnwrapRef<typeof import('./mutations/person/useUpdatePersonMutation')['default']>
     readonly useUpdatePublisherMutation: UnwrapRef<typeof import('./mutations/publisher/useUpdatePublisherMutation')['default']>
     readonly useUpdateReadProgressMutation: UnwrapRef<typeof import('./mutations/read-progress/useUpdateReadProgressMutation')['default']>
@@ -868,6 +871,7 @@ declare module 'vue' {
     readonly useUserPreference: UnwrapRef<typeof import('./composables/useUserPreference')['default']>
     readonly useUserPreferencesQuery: UnwrapRef<typeof import('./queries/user/useUserPreferencesQuery')['default']>
     readonly useUserQuery: UnwrapRef<typeof import('./queries/user/useUserQuery')['default']>
+    readonly useUserReadProgressesQuery: UnwrapRef<typeof import('./queries/read-progress/useUserReadProgressesQuery')['default']>
     readonly useUserStore: UnwrapRef<typeof import('./stores/user')['useUserStore']>
     readonly useUsersQuery: UnwrapRef<typeof import('./queries/user/useUsersQuery')['default']>
     readonly useVModel: UnwrapRef<typeof import('@vueuse/core')['useVModel']>

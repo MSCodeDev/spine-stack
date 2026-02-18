@@ -55,29 +55,12 @@ meta:
     </Header>
 
     <div class="max-w-7xl mx-auto p-4 sm:p-6">
-      <ViewControls v-if="library">
-        <div>
-          <label class="sr-only" for="search-collection">
-            {{ $t('collections.search') }}
-          </label>
-          <BasicTextInput
-            id="search-collection"
-            v-model="search"
-            class="w-48"
-            size="small"
-            type="search"
-            :placeholder="$t('common-placeholders.search')"
-          >
-            <template #left-icon>
-              <MagnifyingGlassIcon class="w-4 h-4" />
-            </template>
-          </BasicTextInput>
-        </div>
-      </ViewControls>
+      <h2 class="text-md sm:text-lg font-medium font-display dark:text-gray-100 mb-4">
+        {{ $t('collections.manual-collections') }}
+      </h2>
 
       <CollectionsTable
         v-if="library"
-        class="mt-4 sm:mt-6"
         :library-id="library.id"
         :search="searchTerm"
       >
@@ -103,6 +86,11 @@ meta:
           </EmptyState>
         </template>
       </CollectionsTable>
+
+      <AuthorCollections
+        v-if="library"
+        :library-id="library.id"
+      />
     </div>
 
     <CollectionCreateDialog

@@ -14,6 +14,7 @@ const bookId = useRouteParams<string | undefined>('id', undefined)
 const notificator = useToaster()
 
 const { mutate: deleteBook, isLoading: isDeleting, isSuccess: isDeleted } = useDeleteBookMutation()
+const showDeleteDialog = ref(false)
 
 const queryEnabled = computed(() => {
   return !!bookId.value && !isDeleting.value && !isDeleted.value && route.name === 'books-id'
@@ -154,6 +155,7 @@ function handleEditReadProgress(readProgress: ReadProgressUpdate) {
 }
 
 const readProgressToDelete = ref<ReadProgressEntity>()
+const showDeleteReadProgressDialog = ref(false)
 const { mutate: deleteReadProgress, isLoading: isDeletingReadProgress } = useDeleteReadProgressMutation()
 
 const isEditingReadProgress = logicOr(
@@ -164,10 +166,16 @@ const isEditingReadProgress = logicOr(
 
 function handleDeleteReadProgress(readProgress: ReadProgressEntity) {
   readProgressToDelete.value = readProgress
+  showDeleteReadProgressDialog.value = true
+}
 
-  deleteReadProgress(readProgress.id, {
+function confirmDeleteReadProgress() {
+  if (!readProgressToDelete.value) return
+
+  deleteReadProgress(readProgressToDelete.value.id, {
     onSuccess: async () => {
       readProgressToDelete.value = undefined
+      showDeleteReadProgressDialog.value = false
       await notificator.success({ title: t('read-progresses.deleted-with-success') })
     },
     onError: async (error) => {
@@ -238,7 +246,7 @@ function handleDeleteReadProgress(readProgress: ReadProgressEntity) {
             :loading="!showBookInfo"
             :book="book"
             :editing="isDeleting || isEditingReadProgress"
-            @click:delete="handleDelete"
+            @click:delete="showDeleteDialog = true"
           />
           <Button
             v-else
@@ -350,6 +358,28 @@ function handleDeleteReadProgress(readProgress: ReadProgressEntity) {
       @submit="handleEditReadProgress"
       @close="showEditReadProgressDialog = false"
     />
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.book')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.book').toLowerCase()]) }}
+    </ConfirmationDialog>
+
+    <ConfirmationDialog
+      :is-open="showDeleteReadProgressDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.read-progress')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeletingReadProgress"
+      @close="showDeleteReadProgressDialog = false; readProgressToDelete = undefined"
+      @confirm="confirmDeleteReadProgress"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.read-progress').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 

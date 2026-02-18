@@ -17,6 +17,7 @@ export interface BooksListViewerProps {
   loading: boolean
   unpaged?: boolean
   viewModeKey: string
+  withControls?: boolean
   withSearch?: boolean
 }
 
@@ -38,6 +39,7 @@ const props = withDefaults(defineProps<BooksListViewerProps>(), {
     pageCount: false,
   }),
   unpaged: false,
+  withControls: true,
   withSearch: true,
 })
 
@@ -125,7 +127,7 @@ function handleSortChange(newSort: Sort<BookSort>[]) {
 
 <template>
   <div>
-    <ViewControls>
+    <ViewControls v-if="withControls">
       <div v-if="withSearch">
         <label class="sr-only" for="search-publisher">
           {{ $t('books.search') }}
@@ -181,7 +183,7 @@ function handleSortChange(newSort: Sort<BookSort>[]) {
         v-if="viewMode === 'table'"
         v-model:page="page"
         v-model:size="size"
-        class="mt-4 sm:mt-6"
+        :class="withControls ? 'mt-4 sm:mt-6' : ''"
         :books="books"
         :loading="loading"
         :search="searchTerm"
@@ -196,7 +198,7 @@ function handleSortChange(newSort: Sort<BookSort>[]) {
         v-else
         v-model:page="page"
         v-model:size="size"
-        class="mt-4 sm:mt-6"
+        :class="withControls ? 'mt-4 sm:mt-6' : ''"
         :books="books"
         :loading="loading"
         :search="searchTerm"

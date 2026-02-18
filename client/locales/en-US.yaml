@@ -5,6 +5,8 @@ common-fields:
   name: Name
   email: E-mail
   password: Password
+  new-password: New password
+  confirm-password: Confirm password
   remember-me: Remember me
   description: Description
   role: Role
@@ -91,6 +93,13 @@ common-actions:
   columns: Columns
   clear-field: Clear
 
+confirmation-dialog:
+  confirm: Confirm
+  cancel: Cancel
+  default-body: This action cannot be undone.
+  delete-title: Delete {0}
+  delete-body: Are you sure you want to delete this {0}? This action cannot be undone.
+
 common-values:
   true-value: 'True'
   false-value: 'False'
@@ -168,6 +177,7 @@ validation:
   integer: It should be a valid integer.
   decimal: It should be a valid decimal.
   unique: It can not contains repeated values.
+  passwords-dont-match: The passwords do not match.
   repeated-positions: 'Repeated positions: {0}'
   durational-start: It should be less or equal than the finish date
   durational-finish: It should be greater or equal than the start date
@@ -180,16 +190,26 @@ validation:
 
 entities:
   users: Users
+  user: User
   libraries: Libraries
+  library: Library
   publishers: Publishers
+  publisher: Publisher
   people: People
+  person: Person
   collections: Collections
+  collection: Collection
   stores: Stores
+  store: Store
   contributor-roles: Roles
+  contributor-role: Role
   series: Series
   tags: Tags
+  tag: Tag
   books: Books
+  book: Book
   book-contributors: Contributors
+  read-progress: Read progress
 
 errors:
   general-error-title: An error occurred
@@ -247,7 +267,7 @@ libraries:
 dashboard:
   title: Dashboard
   total-books: Total Books
-  total-collections: Collections
+  collections: Collections
   total-series: Series
   recent-books: Recently Added
   view-all-books: View all books
@@ -257,6 +277,7 @@ dashboard:
 
 settings:
   title: Settings
+  system-settings: System Settings
   language-title: Language
   language-description: The language will also be used to format numbers and dates.
   theme-title: Theme
@@ -308,6 +329,9 @@ users:
   information: Information
   metadata: Metadata
   avatar: Avatar
+  password: Password
+  password-changed-with-success: Password changed successfully
+  password-changed-with-failure: There was an error while changing the password
 
 pagination:
   items-per-page: Items per page
@@ -371,6 +395,11 @@ collections:
   empty-search-description: Matches not found for “{0}”
   search: Search into collections
   select: Select a collection
+  manual-collections: Manual Collections
+  author-collections: Author Collections
+  author-collections-empty: No authors found
+  author-collections-empty-description: You haven't created any person yet
+  author-collections-book-count: Books
 
 series:
   fetch-failure: There was an error while fetching the series

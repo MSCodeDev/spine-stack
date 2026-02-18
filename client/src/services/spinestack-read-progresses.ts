@@ -5,6 +5,7 @@ import type {
   CollectionResponse,
   EntityResponse,
   ErrorResponse,
+  PaginatedResponse,
 } from '@/types/spinestack-response'
 import type {
   ReadProgressCreation,
@@ -16,7 +17,7 @@ import type {
 import type { Sort } from '@/types/spinestack-api'
 
 type ReadProgressOnly = EntityResponse<ReadProgressEntity>
-type ReadProgressCollection = CollectionResponse<ReadProgressEntity>
+type ReadProgressCollection = PaginatedResponse<ReadProgressEntity>
 
 export interface GetReadProgressesByBookParameters {
   bookId: string
@@ -60,7 +61,10 @@ export async function getReadProgressesByUser(options: GetReadProgressesByUserPa
 
   try {
     const { data: readProgresses } = await api.get<ReadProgressCollection>(`users/${userId}/read-progresses`, {
-      params: { includes: includes?.join(',') },
+      params: {
+        includes: includes?.join(','),
+        size: 1,
+      },
     })
 
     return readProgresses
