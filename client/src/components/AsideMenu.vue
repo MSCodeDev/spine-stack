@@ -11,6 +11,7 @@ import {
   BuildingStorefrontIcon,
   ChevronDoubleLeftIcon,
   ChevronRightIcon,
+  Cog8ToothIcon,
   HomeIcon,
   PaintBrushIcon,
   QueueListIcon,
@@ -404,6 +405,37 @@ const lgAndLarger = breakpoints.greaterOrEqual('lg')
                 </ul>
               </li>
             </template>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="shrink-0 px-3 pb-3 pt-2 border-t border-gray-200 dark:border-gray-800">
+        <nav>
+          <ul>
+            <li class="w-full">
+              <RouterLink
+                v-slot="{ href, isActive, isExactActive, navigate, route }"
+                custom
+                :to="{ name: 'settings' }"
+              >
+                <AsideButton
+                  :item="{
+                    key: 'settings',
+                    label: t('settings.system-settings'),
+                    icon: Cog8ToothIcon,
+                    to: { name: 'settings' },
+                  }"
+                  :href="href"
+                  :active="active(
+                    computed(() => String(router.currentRoute.value.name) === 'settings'),
+                    false,
+                    isExactActive,
+                    isActive,
+                  )"
+                  @click="handleNavigation(route, $event)"
+                />
+              </RouterLink>
+            </li>
           </ul>
         </nav>
       </div>
