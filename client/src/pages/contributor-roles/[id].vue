@@ -37,6 +37,7 @@ function handleDelete() {
   })
 }
 
+const showDeleteDialog = ref(false)
 const showEditDialog = ref(false)
 
 function handleEditContributorRole(contributorRole: ContributorRoleUpdate) {
@@ -80,7 +81,7 @@ function handleEditContributorRole(contributorRole: ContributorRoleUpdate) {
             :disabled="isEditing"
             :loading="isDeleting"
             :title="$t('common-actions.delete')"
-            @click="handleDelete"
+            @click="showDeleteDialog = true"
           >
             <span class="sr-only">{{ $t('common-actions.delete') }}</span>
             <TrashIcon class="w-6 h-6" />
@@ -103,6 +104,17 @@ function handleEditContributorRole(contributorRole: ContributorRoleUpdate) {
       @submit="handleEditContributorRole"
       @close="showEditDialog = false"
     />
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.contributor-role')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.contributor-role').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 

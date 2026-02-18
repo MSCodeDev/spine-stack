@@ -42,6 +42,7 @@ function handleDelete() {
   })
 }
 
+const showDeleteDialog = ref(false)
 const showEditDialog = ref(false)
 
 function handleEditTag(tag: TagUpdate) {
@@ -85,7 +86,7 @@ function handleEditTag(tag: TagUpdate) {
             :disabled="isEditing"
             :loading="isDeleting"
             :title="$t('common-actions.delete')"
-            @click="handleDelete"
+            @click="showDeleteDialog = true"
           >
             <span class="sr-only">{{ $t('common-actions.delete') }}</span>
             <TrashIcon class="w-6 h-6" />
@@ -108,6 +109,17 @@ function handleEditTag(tag: TagUpdate) {
       @submit="handleEditTag"
       @close="showEditDialog = false"
     />
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.tag')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.tag').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 

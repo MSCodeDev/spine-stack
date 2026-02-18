@@ -15,6 +15,7 @@ const publisherId = useRouteParams<string | undefined>('id', undefined)
 const notificator = useToaster()
 
 const { mutate: deletePublisher, isLoading: isDeleting, isSuccess: isDeleted } = useDeletePublisherMutation()
+const showDeleteDialog = ref(false)
 
 const queryEnabled = computed(() => {
   return !!publisherId.value && !isDeleting.value && !isDeleted.value && route.name === 'publishers-id'
@@ -163,7 +164,7 @@ const activeTab = computed({
               size="small"
               :loading="isDeleting"
               :title="$t('common-actions.delete')"
-              @click="handleDelete"
+              @click="showDeleteDialog = true"
             >
               <span class="sr-only">{{ $t('common-actions.delete') }}</span>
               <TrashIcon class="w-5 h-5" />
@@ -222,6 +223,17 @@ const activeTab = computed({
         </div>
       </TabGroup>
     </div>
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.publisher')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.publisher').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 

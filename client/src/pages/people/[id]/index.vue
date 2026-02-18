@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import { PaintBrushIcon } from '@heroicons/vue/24/outline'
-import { BookOpenIcon, InformationCircleIcon } from '@heroicons/vue/20/solid'
 import { getRelationship } from '@/utils/api'
 import type { Sort } from '@/types/spinestack-api'
 import type { BookSort } from '@/types/spinestack-book'
-import type { PillTab } from '@/components/PillTabsList.vue'
-import { safeNumber } from '@/utils/route'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -15,6 +12,7 @@ const personId = useRouteParams<string | undefined>('id', undefined)
 const notificator = useToaster()
 
 const { mutate: deletePerson, isLoading: isDeleting, isSuccess: isDeleted } = useDeletePersonMutation()
+const showDeleteDialog = ref(false)
 
 const queryEnabled = computed(() => {
   return !!personId.value && !isDeleting.value && !isDeleted.value && route.name === 'people-id'
@@ -64,20 +62,6 @@ function handleDelete() {
 }
 
 useHead({ title: () => person.value?.attributes.name ?? '' })
-
-const tabs: PillTab[] = [
-  { key: '0', text: 'people.information', icon: InformationCircleIcon },
-  { key: '1', text: 'entities.books', icon: BookOpenIcon },
-]
-
-const activeTabHash = useRouteQuery('tab', '0', { transform: v => safeNumber(v, 0, { min: 0, max: tabs.length - 1 }) })
-const activeTab = computed({
-  get: () => {
-    const index = Number(activeTabHash.value)
-    return tabs[index] ?? tabs[0]
-  },
-  set: newTab => activeTabHash.value = Number(newTab.key),
-})
 </script>
 
 <template>
@@ -99,12 +83,7 @@ const activeTab = computed({
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 z-10 pt-20 pb-6 relative">
-      <TabGroup
-        as="div"
-        class="person-grid"
-        :selected-index="Number(activeTab.key)"
-        @change="activeTab = tabs[$event]"
-      >
+      <div class="person-grid">
         <ImageCover
           class="person-picture"
           version="256"
@@ -131,13 +110,7 @@ const activeTab = computed({
           :person="person"
         />
 
-        <div class="person-buttons pt-1.5 flex items-center justify-between">
-          <PillTabsList
-            v-model="activeTab"
-            :tabs="tabs"
-            :disabled="isLoading"
-          />
-
+        <div class="person-buttons pt-1.5 flex items-center justify-end">
           <div
             v-if="isLoading"
             class="flex justify-center sm:justify-start items-center gap-2"
@@ -163,7 +136,7 @@ const activeTab = computed({
               size="small"
               :loading="isDeleting"
               :title="$t('common-actions.delete')"
-              @click="handleDelete"
+              @click="showDeleteDialog = true"
             >
               <span class="sr-only">{{ $t('common-actions.delete') }}</span>
               <TrashIcon class="w-5 h-5" />
@@ -171,23 +144,21 @@ const activeTab = computed({
           </Toolbar>
         </div>
 
-        <TabPanels class="person-tabs">
-          <TabPanel class="flex flex-col gap-4 sm:gap-6 -mb-4 sm:mb-0">
-            <BlockMarkdown
-              :loading="isLoading"
-              :markdown="person?.attributes?.description"
-              :title="$t('common-fields.description')"
-            />
+        <div class="person-content flex flex-col gap-4 sm:gap-6">
+          <BlockMarkdown
+            :loading="isLoading"
+            :markdown="person?.attributes?.description"
+            :title="$t('common-fields.description')"
+          />
 
-            <EntityExternalLinks
-              :links="(person?.attributes?.links as Record<string, string | null> | undefined)"
-              :loading="isLoading"
-            />
-          </TabPanel>
+          <EntityExternalLinks
+            :links="(person?.attributes?.links as Record<string, string | null> | undefined)"
+            :loading="isLoading"
+          />
 
-          <TabPanel :unmount="false">
-            <BooksListViewer
+          <BooksListViewer
               v-model:sort="sort"
+              :with-controls="false"
               column-order-key="person_books_column_order"
               column-visibility-key="person_books_column_visibility"
               view-mode-key="person_books_view_mode"
@@ -210,8 +181,7 @@ const activeTab = computed({
               :loading="isLoadingBooks || isLoading"
               :with-search="false"
             />
-          </TabPanel>
-        </TabPanels>
+        </div>
 
         <div class="person-attributes">
           <PersonAttributes
@@ -220,8 +190,19 @@ const activeTab = computed({
             :person="person"
           />
         </div>
-      </TabGroup>
+      </div>
     </div>
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.person')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.person').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 
@@ -238,7 +219,7 @@ meta:
   grid-template-areas:
     'picture name'
     'buttons buttons'
-    'tabs tabs'
+    'content content'
     'attributes attributes';
   grid-template-columns: 6rem 1fr;
 
@@ -248,7 +229,7 @@ meta:
       'picture name'
       'picture buttons'
       'picture padding'
-      'attributes tabs';
+      'attributes content';
     grid-template-columns: 12rem 1fr;
   }
 
@@ -264,8 +245,8 @@ meta:
     grid-area: name / name / name / name;
   }
 
-  .person-tabs {
-    grid-area: tabs / tabs / tabs / tabs;
+  .person-content {
+    grid-area: content / content / content / content;
   }
 
   .person-attributes {

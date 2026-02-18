@@ -48,6 +48,7 @@ function handleDelete() {
   })
 }
 
+const showDeleteDialog = ref(false)
 const showEditDialog = ref(false)
 
 function handleEditLibrary(library: LibraryUpdate) {
@@ -94,7 +95,7 @@ useHead({ title: () => library.value?.attributes?.name ?? '' })
             :disabled="isEditing || !canDelete"
             :loading="isDeleting"
             :title="$t('common-actions.delete')"
-            @click="handleDelete"
+            @click="showDeleteDialog = true"
           >
             <span class="sr-only">{{ $t('common-actions.delete') }}</span>
             <TrashIcon class="w-6 h-6" />
@@ -111,6 +112,17 @@ useHead({ title: () => library.value?.attributes?.name ?? '' })
       @submit="handleEditLibrary"
       @close="showEditDialog = false"
     />
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.library')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.library').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 

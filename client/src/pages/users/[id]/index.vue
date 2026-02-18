@@ -21,6 +21,7 @@ const userId = computed(() => {
 })
 
 const { mutate: deleteUser, isLoading: isDeleting, isSuccess: isDeleted } = useDeleteUserMutation()
+const showDeleteDialog = ref(false)
 
 const queryEnabled = computed(() => {
   return !!userId.value && !isDeleting.value && !isDeleted.value && route.name === 'users-id'
@@ -174,7 +175,7 @@ const activeTab = computed({
               size="small"
               :loading="isDeleting"
               :title="$t('common-actions.delete')"
-              @click="handleDelete"
+              @click="showDeleteDialog = true"
             >
               <span class="sr-only">{{ $t('common-actions.delete') }}</span>
               <TrashIcon class="w-5 h-5" />
@@ -222,6 +223,17 @@ const activeTab = computed({
         </div>
       </TabGroup>
     </div>
+
+    <ConfirmationDialog
+      :is-open="showDeleteDialog"
+      :title="$t('confirmation-dialog.delete-title', [$t('entities.user')])"
+      :confirm-text="$t('common-actions.delete')"
+      :loading="isDeleting"
+      @close="showDeleteDialog = false"
+      @confirm="handleDelete"
+    >
+      {{ $t('confirmation-dialog.delete-body', [$t('entities.user').toLowerCase()]) }}
+    </ConfirmationDialog>
   </div>
 </template>
 
