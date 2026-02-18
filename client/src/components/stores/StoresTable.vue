@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ColumnOrderState, PaginationState, SortingState } from '@tanstack/vue-table'
 import { createColumnHelper } from '@tanstack/vue-table'
-import { EllipsisHorizontalIcon, PlusIcon } from '@heroicons/vue/20/solid'
+import { ArrowTopRightOnSquareIcon, PlusIcon } from '@heroicons/vue/20/solid'
 import { BuildingStorefrontIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { BuildingStorefrontIcon as BuildingStorefrontSolidIcon } from '@heroicons/vue/24/solid'
 import Avatar from '@/components/Avatar.vue'
@@ -194,7 +194,7 @@ const columns = [
       {
         default: () => [
           h('span', { class: 'sr-only', text: () => t('common-actions.view-details') }),
-          h(EllipsisHorizontalIcon, { class: 'w-5 h-5' }),
+          h(ArrowTopRightOnSquareIcon, { class: 'w-5 h-5' }),
         ],
       },
     ),

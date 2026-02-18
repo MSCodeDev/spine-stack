@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ColumnSort, PaginationState, SortingState } from '@tanstack/vue-table'
 import { createColumnHelper } from '@tanstack/vue-table'
-import { EllipsisHorizontalIcon } from '@heroicons/vue/20/solid'
+import { ArrowTopRightOnSquareIcon } from '@heroicons/vue/20/solid'
 import BasicCheckbox from '@/components/form/BasicCheckbox.vue'
 import Button from '@/components/form/Button.vue'
 import type { TagEntity, TagSort } from '@/types/spinestack-tag'
@@ -93,7 +93,7 @@ const columns = [
       {
         default: () => [
           h('span', { class: 'sr-only', text: () => t('common-actions.view-details') }),
-          h(EllipsisHorizontalIcon, { class: 'w-5 h-5' }),
+          h(ArrowTopRightOnSquareIcon, { class: 'w-5 h-5' }),
         ],
       },
     ),
